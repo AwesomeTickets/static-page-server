@@ -4,6 +4,7 @@
 前端使用gulp自动构建工具，并使用了jade、sass、jQuery等。  
 
 启动方式  
+> gulp clean   
 > gulp
 
 6.jpg: #D0EAE1  
