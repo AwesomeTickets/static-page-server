@@ -2,7 +2,7 @@
   "name": "big_proj_distributed_computing",
   "version": "1.0.0",
   "description": "2016~2017,大三第一学期分布式期末大作业",
-  "main": "index.js",
+  "main": "home.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
