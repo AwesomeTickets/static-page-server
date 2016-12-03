@@ -9,21 +9,21 @@ block content
 		div.input-container-left.mt-200.w-530.h-490.text-bold
 			form.form-horizontal.mt-50.ml-20.mr-20(role="form" method="get" action="../index.html")
 				div.form-group.ml-0.mr-0
-					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputName") 姓名:
+					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputNameSignup") 姓名:
 					div.col-sm-9.col-xs-9
-						input#inputName.form-control.h-40.fs-16(type="text" placeholder="姓名")
+						input#inputNameSignup.form-control.h-40.fs-16(type="text" placeholder="姓名")
 				div.form-group.ml-0.mr-0
-					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputSex") 性别:
+					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputSexSignup") 性别:
 					div.col-sm-9.col-xs-9
-						input#inputSex.form-control.h-40.fs-16(type="text" placeholder="性别")
+						input#inputSexSignup.form-control.h-40.fs-16(type="text" placeholder="性别")
 				div.form-group.ml-0.mr-0
-					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputPhone") 电话:
+					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputPhoneSignup") 电话:
 					div.col-sm-9.col-xs-9
-						input#inputPhone.form-control.h-40.fs-16(type="text" placeholder="电话")
+						input#inputPhoneSignup.form-control.h-40.fs-16(type="text" placeholder="电话")
 				div.form-group.ml-0.mr-0
-					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputAddress") 地址:
+					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputAddressSignup") 地址:
 					div.col-sm-9.col-xs-9
-						input#inputAddress.form-control.h-40.fs-16(type="text" placeholder="地址")
+						input#inputAddressSignup.form-control.h-40.fs-16(type="text" placeholder="地址")
 				div.form-group.ml-0.mr-0
 					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputUsernameSignup") 用户名:
 					div.col-sm-9.col-xs-9
@@ -32,7 +32,8 @@ block content
 					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputPasswordSignup") 密码:
 					div.col-sm-9.col-xs-9
 						input#inputPasswordSignup.form-control.h-40.fs-16(type="" placeholder="密码")
-				div.form-group.mt-30
+				div#signupErrorMessage.fs-16.jian.ml-40.h-30
+				div.form-group
 					div.col-sm-offset-6.col-sm-2.col-xs-offset-6.col-xs-2
 						button#returnToSignin.btn.btn-info.h-50.fs-22(type="button") 登录
 					div.col-sm-offset-1.col-sm-3.col-xs-offset-1.col-xs-3
