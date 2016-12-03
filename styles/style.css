@@ -16,6 +16,8 @@ h-          :height
 text-bold   :font-weight bold
 float-right :float:right
 float-left  :float:left
+color-white :color:#FFFFFF
+color-black :color:#000000
 以后添加新的类名时，记得在上面做好注释*/
 .fs-0 {
   font-size: 0px !important; }
@@ -18964,3 +18966,9 @@ float-left  :float:left
 
 .float-left {
   float: left !important; }
+
+.color-white {
+  color: #FFFFFF; }
+
+.color-black {
+  color: #000000; }

@@ -1,0 +1,19 @@
+.food-list {
+	background-color: #FFFFFF;
+}
+
+.store-title {
+	border: 2px #FFFFFF solid;
+	text-align: center;
+	border-radius: 10px;
+}
+
+.button-minus, .button-plus {
+	width: 30px;
+	height: 30px;
+	background-color: #ffff00;
+	border-radius: 30px;
+	border: 0;
+	color: #000000;
+	font-size: 20px;
+}

@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+	div.home-page-container.bg-color-store.m-0
+
+		div.logo
+			img(src="../static/pictures/logo.jpg")
+
+		div.logo-b-left
+			div.logo2-left
+				img(src="../static/pictures/logo2.jpg")
+			div.logo3-left
+				img(src="../static/pictures/logo3.jpg")
+
+		div.input-container-right.mt-200.w-700.h-800.text-bold
+			div.store-logo.w-140.h-140.m-0.float-left
+				img.img-circle.w-80.h-80.m-30(alt="Brand" src="../static/pictures/10.jpg")
+			div.store-title.mr-30.ml-140.mt-30.w-526.h-45.fs-30 美味蛋糕店
+			div.mt-15.mb-25.ml-140.mr-30.h-25.w-530.fs-20
+				span 508m
+				span.float-right 37分钟
+			div.food-list.w-640.h-630.ml-30.mr-30.mb-30
+				table.table
+					tbody
+						tr
+						
+
+				div
+					button#returnToStore.btn.btn-primary.ml-30.mt-30.w-80.h-55.fs-25(type="button") 返回
+					button#pay.btn.btn-danger.float-right.mr-30.mt-30.w-150.h-55.fs-25(type="button") 确认付款

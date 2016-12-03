@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-	div.home-page-container.bg-color-home.m-0
+	div.home-page-container.bg-color-store.m-0
 
 		div.logo
 			img(src="../static/pictures/logo.jpg")
@@ -13,6 +13,52 @@ block content
 				img(src="../static/pictures/logo3.jpg")
 
 		div.input-container-right.mt-200.w-700.h-800.text-bold
-			div.list-title.fs-40.w-200.mt-20.mb-20 商家列表
-
+			div.store-logo.w-140.h-140.m-0.float-left
+				img.img-circle.w-80.h-80.m-30(alt="Brand" src="../static/pictures/10.jpg")
+			div.store-title.mr-30.ml-140.mt-30.w-526.h-45.fs-30 美味蛋糕店
+			div.mt-15.mb-25.ml-140.mr-30.h-25.w-530.fs-20
+				span 508m
+				span.float-right 37分钟
+			div.food-list.w-640.h-630.ml-30.mr-30.mb-30
+				table.table
+					tbody
+						tr
+							img.img-circle.w-100.h-100.m-30.float-left(alt="Brand" src="../static/pictures/2.jpg")
+							div.food-information.w-200.pt-30.mb-40.float-left
+								div.fs-27 双层牛肉汉堡
+								div.fs-15.mt-5 月售263
+								div.fs-15.mt-5
+									span.jian ￥12
+									span /1份
+							div.count.float-right.mr-30.mt-90.mb-40
+								button.button-minus(type="button") -
+								span.ml-10.mr-10.fs-20 2
+								button.button-plus(type="button") +
+						tr
+							img.img-circle.w-100.h-100.m-30.float-left(alt="Brand" src="../static/pictures/4.jpg")
+							div.food-information.w-200.pt-30.mb-40.float-left
+								div.fs-27 特制小龙虾
+								div.fs-15.mt-5 月售380
+								div.fs-15.mt-5
+									span.jian ￥35
+									span /1份
+							div.count.float-right.mr-30.mt-90.mb-40
+								button.button-minus(type="button") -
+								span.ml-10.mr-10.fs-20 0
+								button.button-plus(type="button") +
+						tr
+							img.img-circle.w-100.h-100.m-30.float-left(alt="Brand" src="../static/pictures/5.jpg")
+							div.food-information.w-200.pt-30.mb-40.float-left
+								div.fs-27 双蛋三明治
+								div.fs-15.mt-5 月售220
+								div.fs-15.mt-5
+									span.jian ￥8
+									span /1份
+							div.count.float-right.mr-30.mt-90.mb-40
+								button.button-minus(type="button") -
+								span.ml-10.mr-10.fs-20 1
+								button.button-plus(type="button") +
+				div
+					button#returnToHome.btn.btn-primary.ml-30.mt-30.w-80.h-55.fs-25(type="button") 返回
+					button#goToPay.btn.btn-danger.float-right.mr-30.mt-30.w-80.h-55.fs-25(type="button") 购买
 
