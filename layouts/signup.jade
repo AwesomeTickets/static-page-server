@@ -1,31 +1,31 @@
 extends ../layout
 
 block content
-	div.home-page-container.m-0
+	div.home-page-container.bg-color-signup.m-0
 
 		div.logo
 			img(src="../static/pictures/logo.jpg")
 
-		div.input-container.mt-200.w-530.h-490.text-bold
-			form.form-horizontal.mt-50.ml-20.mr-20(role="form")
+		div.input-container-left.mt-200.w-530.h-490.text-bold
+			form.form-horizontal.mt-50.ml-20.mr-20(role="form" method="get" action="../index.html")
 				div.form-group.ml-0.mr-0
-					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputName") 姓名
+					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputName") 姓名:
 					div.col-sm-9.col-xs-9
 						input#inputName.form-control.h-40.fs-16(type="text" placeholder="姓名")
 				div.form-group.ml-0.mr-0
-					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputSex") 性别
+					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputSex") 性别:
 					div.col-sm-9.col-xs-9
 						input#inputSex.form-control.h-40.fs-16(type="text" placeholder="性别")
 				div.form-group.ml-0.mr-0
-					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputPhone") 电话
+					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputPhone") 电话:
 					div.col-sm-9.col-xs-9
 						input#inputPhone.form-control.h-40.fs-16(type="text" placeholder="电话")
 				div.form-group.ml-0.mr-0
-					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputAddress") 地址
+					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputAddress") 地址:
 					div.col-sm-9.col-xs-9
 						input#inputAddress.form-control.h-40.fs-16(type="text" placeholder="地址")
 				div.form-group.ml-0.mr-0
-					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputUsernameSignup") 用户名
+					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputUsernameSignup") 用户名:
 					div.col-sm-9.col-xs-9
 						input#inputUsernameSignup.form-control.h-40.fs-16(type="text" placeholder="用户名")
 				div.form-group.ml-0.mr-0
@@ -34,12 +34,12 @@ block content
 						input#inputPasswordSignup.form-control.h-40.fs-16(type="" placeholder="密码")
 				div.form-group
 					div.col-sm-offset-6.col-sm-2.col-xs-offset-6.col-xs-2
-						button.btn.btn-success.h-50.fs-22(type="submit") 注册
+						button#signup.btn.btn-success.h-50.fs-22(type="submit") 注册
 					div.col-sm-offset-1.col-sm-3.col-xs-offset-1.col-xs-3
-						button#signin.btn.btn-info.h-50.fs-22(type="button") 登录
+						button#returnToSignin.btn.btn-info.h-50.fs-22(type="button") 登录
 		
-		div.logo-right
-			div.logo2
+		div.logo-b-right
+			div.logo2-right
 				img(src="../static/pictures/logo2.jpg")
-			div.logo3
+			div.logo3-right
 				img(src="../static/pictures/logo3.jpg")

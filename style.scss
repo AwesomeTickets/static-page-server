@@ -13,6 +13,8 @@ pb-         :padding-bottom
 w-          :width
 h-          :height
 text-bold   :font-weight bold
+float-right :float:right
+float-left  :float:left
 以后添加新的类名时，记得在上面做好注释*/
 
 // font-size helpers
@@ -108,5 +110,13 @@ text-bold   :font-weight bold
 
 // text-bold helpers
 .text-bold {
-  font-weight: bold;
+  font-weight: bold !important;
+}
+
+.float-right {
+    float: right !important;
+}
+
+.float-left {
+    float: left !important;
 }
