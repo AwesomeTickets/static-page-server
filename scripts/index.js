@@ -15,6 +15,8 @@ $(document).ready(function() {
 			$("#signinErrorMessage").text("用户名不正确");
 		} else {
 			$("#signinErrorMessage").text("");
+			// console.log("aaa");
+			// window.location = "layouts/home.html";
 		}
 	});
 });

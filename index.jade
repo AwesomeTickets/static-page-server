@@ -7,15 +7,15 @@ block content
 			img(src="static/pictures/logo.jpg")
 
 		div.input-container-left.mt-200.w-530.h-300.text-bold
-			form.form-horizontal.mt-50.ml-20.mr-20(role="form" method="get" action="layouts/home.html")
+			form.form-horizontal.mt-50.ml-20.mr-20(role="form" method="post" action="/signin")
 				div.form-group.ml-0.mr-0
 					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputUsernameSignin") 用户名:
 					div.col-sm-9.col-xs-9
-						input#inputUsernameSignin.form-control.h-40.fs-16(type="text" placeholder="用户名")
+						input#inputUsernameSignin.form-control.h-40.fs-16(type="text" placeholder="用户名" name="inputUsernameSignin")
 				div.form-group.ml-0.mr-0
 					label.col-sm-3.col-xs-3.control-label.fs-20(for="inputPasswordSignin") 密码:
 					div.col-sm-9.col-xs-9
-						input#inputPasswordSignin.form-control.h-40.fs-16(type="password" placeholder="密码")
+						input#inputPasswordSignin.form-control.h-40.fs-16(type="password" placeholder="密码" name="inputPasswordSignin")
 				//- div.form-group.ml-0.mr-0
 				//- 	div.col-sm-offset-3.col-sm-9.col-xs-offset-3.col-xs-9
 				//- 		div.checkbox.fs-18
