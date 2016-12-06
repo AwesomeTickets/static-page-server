@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("#logout").click(function() {
+	$("#returnHome").click(function() {
 		window.location = "../index.html";
 	});
 });

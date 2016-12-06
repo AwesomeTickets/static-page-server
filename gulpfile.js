@@ -36,7 +36,7 @@ gulp.task('js', function() {
 });
 
 gulp.task('static', function() {
-	gulp.src(['static/pictures/*.jpg', 'static/pictures/*.JPG', 'static/pictures/*.png', 'static/pictures/*.PNG', 'static/pictures/*.gif'])
+	gulp.src(['static/pictures/*.jpg', 'static/pictures/*.JPG', 'static/pictures/*.png', 'static/pictures/*.PNG', 'static/pictures/*.gif', 'static/pictures/*.jpeg'])
 		.pipe(gulp.dest('tmp/static/pictures'));
 })
 
