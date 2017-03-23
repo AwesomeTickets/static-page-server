@@ -1,7 +1,13 @@
 extends layout
 
+block links
+	link(rel="stylesheet" href="/styles/index.css")
+
 block content
 	div.fs-30.lallana hello world
 	div
 		img(src="/static/pictures/08685344-11d9-426d-a204-ccabbf7049ba-2060x1236.jpeg")
 	button#next.btn.btn-info.h-50.fs-22(type="button") 去下个页面
+
+block scripts
+	script(type="text/javascript" src="/scripts/index.js")

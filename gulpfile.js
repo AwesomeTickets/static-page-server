@@ -46,22 +46,23 @@ gulp.task('staticFiles', function() {
 		.pipe(gulp.dest('tmp/static'));
 })
 
-gulp.task('inject', ['sass', 'css', 'js'], function() {
-	var target = gulp.src('./layout.jade');
-	var sources = gulp.src(['./styles/*.css', './scripts/*.js'], {read: false});
-	return target.pipe(inject(sources))
-				.pipe(gulp.dest('./'));	
-});
+// gulp-inject自动注入依赖，这个项目中赞不需要
+// gulp.task('inject', ['sass', 'css', 'js'], function() {
+// 	var target = gulp.src('./layout.jade');
+// 	var sources = gulp.src(['./styles/*.css', './scripts/*.js'], {read: false});
+// 	return target.pipe(inject(sources))
+// 				.pipe(gulp.dest('./'));	
+// });
 
 //index.jade预编译为tmp/index.html
-gulp.task('index', ['inject'], function() {
+gulp.task('index', function() {
 	gulp.src('index.jade')
 		.pipe(jade())
 		.pipe(gulp.dest('tmp'))
 		.pipe(connect.reload());
 });
 
-gulp.task('jade', ['inject'], function() {
+gulp.task('jade', function() {
 	gulp.src('layouts/*.jade')
 		.pipe(jade())
 		.pipe(gulp.dest('tmp/layouts'))
@@ -76,4 +77,4 @@ gulp.task('watch', function() {
 	gulp.watch('./style.scss', ['sass']);
 });
 
-gulp.task('default', ['webserver', 'clean', 'sass', 'css', 'js', 'staticPics', 'staticFiles', 'inject', 'index', 'jade', 'watch']);
+gulp.task('default', ['webserver', 'clean', 'sass', 'css', 'js', 'staticPics', 'staticFiles', 'index', 'jade', 'watch']);
