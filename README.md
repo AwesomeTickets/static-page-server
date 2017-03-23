@@ -4,12 +4,16 @@
 该项目包使用gulp进行自动化构建。   
 
 ## 启动方式     
-> npm install  
-> gulp clean   
-> gulp
+在执行下面命令之前，先确保电脑上已装好较新版本的node.js和npm   
 
-> 在浏览器中打开 http://localhost:8080/
-> 我设置了自动刷新功能，更改代码保存之后页面就会自动刷新了，方便开发。若出现未自动刷新的情况，可手动刷新。若是向项目中添加了新文件或对文件重命名等非更改代码操作，需要重新执行 gulp clean 和 gulp 指令。
+> 在Tickets-Client文件夹根目录下执行以下命令：
+> npm install    
+> npm install gulp -g   
+> gulp clean     
+> gulp     
+
+> 在浏览器中打开 http://localhost:8080/     
+> 我设置了自动刷新功能，更改代码保存之后页面就会自动刷新了，方便开发。若出现未自动刷新的情况，可手动刷新。若是向项目中添加了新文件或对文件重命名等非更改代码操作，需要重新执行 gulp clean 和 gulp 指令。   
 
 ## 目录结构   
  -  layouts/：各页面内容部分，放置各.jade文件   
@@ -64,5 +68,5 @@ sass是css的预处理语言，有时间也可以学一下，内容不多。但�
 
 ## 团队成员   
 [李为：https://github.com/Liveipool](https://github.com/Liveipool)   
-[黄炜：https://github.com/winnieWinne](https://github.com/winnieWinne)
+[黄炜：https://github.com/winnieWinne](https://github.com/winnieWinne)   
 （添加个人github网址之后push给我）   
