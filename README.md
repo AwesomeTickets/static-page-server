@@ -1,4 +1,4 @@
-# Tickets-Client   
+﻿# Tickets-Client   
 2016～2017学年下半学期系统分析与设计课程大作业的电影购票系统的前端代码。   
 
 该项目包使用gulp进行自动化构建。   
@@ -23,7 +23,7 @@
  -  styles/：放置各页面对应的.css文件   
  -  gulpfile.js：gulp的配置文件   
  -  index.jade：系统首页   
-c'y -  layout.jade：系统的整体结构布局文件   
+ -  layout.jade：系统的整体结构布局文件   
  -  package.json：项目包各依赖等信息   
  -  style.scss：全局样式文件，放置一些常用的全局样式等   
 
@@ -69,6 +69,6 @@ sass是css的预处理语言，有时间也可以学一下，内容不多。但�
 
 ## 团队成员   
 [李为：https://github.com/Liveipool](https://github.com/Liveipool)   
-[黄炜：https://github.com/winnieWinne](https://github.com/winnieWinne)
-[陈昱宪：https://github.com/chenyuxian0602](https://github.com/chenyuxian0602)
+[黄炜：https://github.com/winnieWinne](https://github.com/winnieWinne)   
+[陈昱宪：https://github.com/chenyuxian0602](https://github.com/chenyuxian0602)   
 （添加个人github网址之后push给我）   
