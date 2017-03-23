@@ -3,8 +3,3 @@ $(document).ready(function() {
 		window.location = "../index.html";
 	});
 });
-
-// export default function a() {
-// 	console.log('lala')
-// }
-

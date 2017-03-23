@@ -31,6 +31,7 @@ gulp.task('css', ['sass'], function() {   //['sass']指sass这个task完成之�
 		.pipe(connect.reload());
 });
 
+// 加入了babel和browserify，可以编写ES6
 gulp.task('js', function() {
 	gulp.src('scripts/*.js')
 		.pipe(babel({
@@ -42,14 +43,20 @@ gulp.task('js', function() {
 });
 
 //目前支持.jpg .JPG .jpeg .png .PNG .gif，若还有其他格式文件再添加
+gulp.task('staticFiles', function() {
+	gulp.src(['static/*'])
+		.pipe(gulp.dest('tmp/static'));
+})
+
 gulp.task('staticPics', function() {
-	gulp.src(['static/pictures/*.jpg', 'static/pictures/*.JPG', 'static/pictures/*.png', 'static/pictures/*.PNG', 'static/pictures/*.gif', 'static/pictures/*.jpeg'])
+	gulp.src(['static/pictures/*'])
 		.pipe(gulp.dest('tmp/static/pictures'));
 })
 
-gulp.task('staticFiles', function() {
-	gulp.src(['static/*.js', 'static/*.css'])
-		.pipe(gulp.dest('tmp/static'));
+
+gulp.task('staticFonts', function() {
+	gulp.src(['static/fonts/*'])
+		.pipe(gulp.dest('tmp/fonts'));
 })
 
 // gulp-inject自动注入依赖，这个项目中赞不需要
@@ -83,4 +90,4 @@ gulp.task('watch', function() {
 	gulp.watch('./style.scss', ['sass']);
 });
 
-gulp.task('default', ['webserver', 'clean', 'sass', 'css', 'js', 'staticPics', 'staticFiles', 'index', 'jade', 'watch']);
+gulp.task('default', ['webserver', 'clean', 'sass', 'css', 'js', 'staticFiles', 'staticPics', 'staticFonts', 'index', 'jade', 'watch']);
