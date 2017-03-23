@@ -4,6 +4,8 @@ var inject = require('gulp-inject');
 var del = require('del');  //用来删除文件的
 var sass = require('gulp-sass');
 var jade = require('gulp-jade');
+var babel = require('gulp-babel');
+var browserify = require('gulp-browserify');
 
 gulp.task('webserver', function() {
 	connect.server({
@@ -31,6 +33,10 @@ gulp.task('css', ['sass'], function() {   //['sass']指sass这个task完成之�
 
 gulp.task('js', function() {
 	gulp.src('scripts/*.js')
+		.pipe(babel({
+				presets: ['es2015']
+		}))
+		.pipe(browserify())
 		.pipe(gulp.dest('tmp/scripts'))
 		.pipe(connect.reload());
 });

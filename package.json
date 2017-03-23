@@ -1,24 +1,27 @@
 {
-  "name": "big_proj_distributed_computing",
+  "name": "Tickets-Client",
   "version": "1.0.0",
-  "description": "2016~2017,大三第一学期分布式期末大作业",
-  "main": "home.js",
+  "description": "2016~2017学年第二学期系统分析与设计课程大作业",
+  "main": "/scripts/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Liveipool/Big_Proj_Distributed_Computing.git"
+    "url": "git+https://github.com/Liveipool/Tickets-Client.git"
   },
   "author": "liveipool",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Liveipool/Big_Proj_Distributed_Computing/issues"
+    "url": "https://github.com/Liveipool/Tickets-Client/issues"
   },
-  "homepage": "https://github.com/Liveipool/Big_Proj_Distributed_Computing#readme",
+  "homepage": "https://github.com/Liveipool/Tickets-Client#readme",
   "devDependencies": {
+    "babel-preset-es2015": "^6.24.0",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-browserify": "^0.5.1",
     "gulp-connect": "^5.0.0",
     "gulp-inject": "^4.1.0",
     "gulp-jade": "^1.1.0",
