@@ -6,7 +6,7 @@
 ## 启动方式     
 在执行下面命令之前，先确保电脑上已装好较新版本的node.js和npm   
 
-> 在Tickets-Client文件夹根目录下执行以下命令：
+> 在Tickets-Client文件夹根目录下执行以下命令：   
 > npm install    
 > npm install gulp -g   
 > gulp clean     
