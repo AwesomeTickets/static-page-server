@@ -1,5 +1,6 @@
 # Tickets-Client   
 2016～2017学年下半学期系统分析与设计课程大作业的电影购票系统的前端代码。   
+[Dashboard](http://stevennl.com/post/dashboard-of-tickets-system/) [Server](https://github.com/stevennl/Tickets-Server)    
 
 该项目包使用gulp进行自动化构建。   
 
@@ -65,8 +66,3 @@ sass是css的预处理语言，有时间也可以学一下，内容不多。但�
 
 #### 关于响应式   
 因为使用bootstrap很容易实现响应式，所以我们做页面时要考虑到在PC、平板电脑、手机等设备上都要良好的呈现信息。   
-
-## 团队成员   
-[李为：https://github.com/Liveipool](https://github.com/Liveipool)   
-[黄炜：https://github.com/winnieWinne](https://github.com/winnieWinne)   
-（添加个人github网址之后push给我）   
