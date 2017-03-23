@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
-var inject = require('gulp-inject');
+// var inject = require('gulp-inject');
 var del = require('del');  //用来删除文件的
 var sass = require('gulp-sass');
 var jade = require('gulp-jade');
@@ -25,7 +25,8 @@ gulp.task('sass', function() {
 		.pipe(connect.reload());  //用来实现更改自动刷新
 });
 
-gulp.task('css', ['sass'], function() {   //['sass']指sass这个task完成之后再执行css这个task。
+//['sass']指sass这个task完成之后再执行css这个task。
+gulp.task('css', ['sass'], function() {   
 	gulp.src('styles/*.css')
 		.pipe(gulp.dest('tmp/styles'))
 		.pipe(connect.reload());
@@ -42,9 +43,8 @@ gulp.task('js', function() {
 		.pipe(connect.reload());
 });
 
-//目前支持.jpg .JPG .jpeg .png .PNG .gif，若还有其他格式文件再添加
 gulp.task('staticFiles', function() {
-	gulp.src(['static/*'])
+	gulp.src(['static/*.js', 'static/*.css', 'static/*.map'])
 		.pipe(gulp.dest('tmp/static'));
 })
 
