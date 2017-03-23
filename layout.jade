@@ -8,7 +8,8 @@ html
 	link(rel="stylesheet", href="/styles/layout.css")
 	link(rel="stylesheet", href="/styles/style.css")
 	//- endinject 
-	script(type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js")
+	script(type="text/javascript" src="/static/jquery-3.1.1.min.js")
+	link(rel="stylesheet", href="/static/bootstrap.min.css")
 
 	body
 		block content
@@ -18,10 +19,4 @@ html
 	script(src="/scripts/index.js")
 	script(src="/scripts/next.js")
 	//- endinject
-	
-	//- 新 Bootstrap 核心 CSS 文件
-	link(rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css")
-	//- jQuery文件。务必在bootstrap.min.js 之前引入
-	script(src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js")
-	//- 最新的 Bootstrap 核心 JavaScript 文件
-	script(src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js")
+	script(type="text/javascript" src="/static/bootstrap.min.js")
