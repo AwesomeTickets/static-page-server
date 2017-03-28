@@ -8,40 +8,17 @@ block content
   +on_show
   +coming_soon
 
+  //- 顶部电影热图 部分
   mixin head
-    div head!!
+    img#popular(src="/static/pictures/resource/banner/1.png")
 
+  //- 正在上映 部分
   mixin on_show
-    div on_show!!
+    div#on_show 正在上映 部分
 
+  //- 即将上映 部分
   mixin coming_soon
-    div coming_soon!!
-
-  //- div#carousel-example-generic.carousel.slide(data-ride="carousel")
-  //- 	ol.carousel-indicators
-  //- 		li.active(data-target="#carousel-example-generic" data-slide-to="0")
-  //- 		li(data-target="#carousel-example-generic" data-slide-to="1")
-  //- 		li(data-target="#carousel-example-generic" data-slide-to="2")
-
-  //- 	div.carousel-inner(role="listbox")
-  //- 		div.item.active
-  //- 			img(src="/static/pictures/poster2.jpg" alt="poster2")
-  //- 			div.carousel-caption
-  //- 		div.item
-  //- 			img(src="/static/pictures/poster3.jpg" alt="poster3")
-  //- 			div.carousel-caption
-  //- 		div.item
-  //- 			img(src="/static/pictures/poster1.jpg" alt="poster1")
-  //- 			div.carousel-caption
-
-  //- 	a.left.carousel-control(href="#carousel-example-generic" role="button" data-slide="prev")
-  //- 		span.glyphicon.glyphicon-chevron-left(aria-hidden="true")
-  //- 		span.sr-only Previous
-  //- 	a.right.carousel-control(href="#carousel-example-generic" role="button" data-slide="next")
-  //- 		span.glyphicon.glyphicon-chevron-right(aria-hidden="true")
-  //- 		span.sr-only Next
-
-  //- button#next.btn.btn-info.h-50.fs-22(type="button") 去下个页面
+    div#coming_soon 即将上映 部分
 
 block scripts
   script(type="text/javascript" src="/scripts/index.js")

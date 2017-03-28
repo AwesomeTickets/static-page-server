@@ -49,7 +49,7 @@ gulp.task('staticFiles', function() {
 })
 
 gulp.task('staticPics', function() {
-	gulp.src(['static/pictures/*'])
+	gulp.src(['static/pictures/**'])
 		.pipe(gulp.dest('tmp/static/pictures'));
 })
 
