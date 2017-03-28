@@ -49,8 +49,8 @@ sass是css的预处理语言，有时间也可以学一下，内容不多。但�
 ## 注意事项   
 因为项目不算太大，因此也不需要太详细的编码规范，下面是一些值得注意的点。   
 
-#### 文件命名   
-当文件名中有多个单词时，采用下划线命名法，如next_page.js等。   
+#### 文件及其他命名   
+当文件名或id名或变量名等各种名字中有多个单词时，采用下划线命名法，如next_page.js等。   
 
 #### Javascript   
 如果使用过ES6，尽量用ES6来写。ES6编程风格参照：[http://es6.ruanyifeng.com/#docs/style](http://es6.ruanyifeng.com/#docs/style)   
