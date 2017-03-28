@@ -8,17 +8,20 @@ block content
   +on_show
   +coming_soon
 
+  //- 注意id、class等的命名前要加上自己对应部分的前缀避免冲突
+  //- 例：head_popular_images、on_show_button、coming_soon_icons
+
   //- 顶部电影热图 部分
   mixin head
-    img#popular(src="/static/pictures/resource/banner/1.png")
+    img#head_popular_images(src="/static/pictures/resource/banner/1.png")
 
   //- 正在热映 部分
   mixin on_show
-    div#on_show 正在热映 部分
+    div#on_show_hint 正在热映 部分
 
   //- 即将上映 部分
   mixin coming_soon
-    div#coming_soon 即将上映 部分
+    div#coming_soon_hint 即将上映 部分
 
 block scripts
   script(type="text/javascript" src="/scripts/index.js")
