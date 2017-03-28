@@ -1,20 +1,20 @@
 #carousel-example-generic {
-	width: 1500px;
-	height: 610px;
-	margin: 80px auto 0 auto;
+  width: 1500px;
+  height: 610px;
+  margin: 80px auto 0 auto;
 }
 
 .carousel-inner, .item, img {
-	width: 1500px;
-	height: 610px;
+  width: 1500px;
+  height: 610px;
 }
 
 .carousel-indicators li.active,
 .carousel-indicators li {
-	margin-left: 10px;
+  margin-left: 10px;
 }
 
 #next {
-	display: block;
-	margin: 80px auto 0 auto;
+  display: block;
+  margin: 80px auto 0 auto;
 }
