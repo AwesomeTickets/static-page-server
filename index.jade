@@ -1,34 +1,64 @@
 extends layout
 
 block links
-	link(rel="stylesheet" href="/styles/index.css")
+  link(rel="stylesheet" href="/styles/index.css")
+  link(rel="stylesheet" href="/static/slick/slick.css")
 
 block content
-	div#carousel-example-generic.carousel.slide(data-ride="carousel")
-		ol.carousel-indicators
-			li.active(data-target="#carousel-example-generic" data-slide-to="0")
-			li(data-target="#carousel-example-generic" data-slide-to="1")
-			li(data-target="#carousel-example-generic" data-slide-to="2")
+  +head
+  +on_show
+  +coming_soon
 
-		div.carousel-inner(role="listbox")
-			div.item.active
-				img(src="/static/pictures/poster2.jpg" alt="poster2")
-				div.carousel-caption
-			div.item
-				img(src="/static/pictures/poster3.jpg" alt="poster3")
-				div.carousel-caption
-			div.item
-				img(src="/static/pictures/poster1.jpg" alt="poster1")
-				div.carousel-caption
+  //- 注意id、class等的命名前要加上自己对应部分的前缀避免冲突
+  //- 例：head_popular_images、on_show_button、coming_soon_icons
 
-		a.left.carousel-control(href="#carousel-example-generic" role="button" data-slide="prev")
-			span.glyphicon.glyphicon-chevron-left(aria-hidden="true")
-			span.sr-only Previous
-		a.right.carousel-control(href="#carousel-example-generic" role="button" data-slide="next")
-			span.glyphicon.glyphicon-chevron-right(aria-hidden="true")
-			span.sr-only Next
+  //- 顶部电影热图 部分
+  mixin head
+    img#head_popular_images(src="/static/pictures/resource/banner/1.png")
 
-	button#next.btn.btn-info.h-50.fs-22(type="button") 去下个页面
+  //- 正在热映 部分
+  mixin on_show
+    div#on_show_hint 正在热映
+      div.on_show_slick
+        section#features
+        div.content
+          div.slider.lazy
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot1.jpg" ult="")
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot2.jpg" ult="")
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot3.jpg" ult="")
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot4.jpg" ult="")
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot5.jpg" ult="")
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot6.jpg" ult="")
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot7.jpg" ult="")
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot8.jpg" ult="")
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot9.jpg" ult="")
+
+
+  //- 即将上映 部分
+  mixin coming_soon
+    div#coming_soon_hint 即将上映 部分
+      
 
 block scripts
-	script(type="text/javascript" src="/scripts/index.js")
+  script(type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js")
+  script(type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js")
+  script(type="text/javascript" src="/static/slick/slick.min.js")
+  script(type="text/javascript" src="/scripts/index.js")
