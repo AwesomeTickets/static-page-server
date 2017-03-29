@@ -1,20 +1,40 @@
-#carousel-example-generic {
-	width: 1500px;
-	height: 610px;
-	margin: 80px auto 0 auto;
+/*顶部电影热图 样式部分开始*/
+#head_popular_images {
+  width: 100%;
+  height: 420px;
 }
+/*顶部电影热图 样式部分结束*/
 
-.carousel-inner, .item, img {
-	width: 1500px;
-	height: 610px;
-}
 
-.carousel-indicators li.active,
-.carousel-indicators li {
-	margin-left: 10px;
+/*正在热映 样式部分开始*/
+/*设计图上忘记标注了 各小图宽为160px，高为224px*/
+#on_show_hint {
+  margin: 16px 24px 0 24px;
+  padding: 10px;
+  border: 1px solid #fff;
+  height: 290px;
+  color: #fff;
+  font-size: 25px;
 }
+.content{margin:auto; }
+.features{display:block;padding:0;text-align:center;}
+.slick-slide .image{padding:5px;}
+.slick-slide img{display:block; width:160px; height:224px;}
+.slick-slide img.slick-loading{border:0 }
+.slick-slider{margin:auto}
+section{width:100%;}
+/*正在热映 样式部分结束*/
 
-#next {
-	display: block;
-	margin: 80px auto 0 auto;
+
+/*即将上映 样式部分开始*/
+/*设计图上忘记标注了 各小图宽为160px，高为224px*/
+#coming_soon_hint {
+  margin: 32px 24px 0 24px;
+  padding: 10px;
+  border: 1px solid #fff;
+  height: 270px;
+  color: #fff;
+  font-size: 25px;
 }
+/*即将上映 样式部分结束*/
+
