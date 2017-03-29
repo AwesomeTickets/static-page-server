@@ -2,6 +2,46 @@
 #head_popular_images {
   width: 100%;
   height: 420px;
+  background-repeat: no-repeat;
+  background-size: 100% 420px;
+  background-image: url("/static/pictures/resource/banner/1.png");
+}
+
+#head_logo_white {
+  margin: 16px 48px 0 24px;
+}
+
+#head_location {
+  position: relative;
+  top: 11px;
+}
+
+#head_location,
+#head_location > glyphicon-triangle-bottom,
+#head_search,
+#head_user {
+  color: #fff;
+  font-size: 16px;
+}
+
+#head_logo_white,
+#head_location,
+#head_search,
+#head_user {
+  display: inline-block;
+}
+
+#head_search,
+#head_user {
+  float: right;
+}
+
+#head_search {
+  margin: 24px 56px 0 0;
+}
+
+#head_user {
+  margin: 24px 24px 0 0;
 }
 /*顶部电影热图 样式部分结束*/
 
