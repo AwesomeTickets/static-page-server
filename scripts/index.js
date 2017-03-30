@@ -5,7 +5,42 @@ $(document).ready(function() {
   // 例： var head_count = 0; const on_show_name = 'movie'; function coming_soon_find_movie() {}
 
   /*顶部电影热图 js代码部分开始*/
-  // 你的代码
+  const head_popular_movies = {
+    "count": 3,
+    "subjects": [
+        {
+            "id": 154685,
+            "posterURL": "/static/pictures/resource/banner/1.png"
+        },
+        {
+            "id": 164597,
+            "posterURL": "/static/pictures/resource/banner/2.png"
+        },
+        {
+            "id": 197682,
+            "posterURL": "/static/pictures/resource/banner/3.png"
+        },
+    ],
+  }
+
+  let head_popular_images = document.getElementById("head_popular_images"),
+    head_change_count = 1;
+
+  console.log(head_popular_images.clientWidth);
+  console.log(head_popular_images.style);
+  head_popular_images.addEventListener('animationend', function() {
+    head_popular_images.style.backgroundImage = 'url(' + head_popular_movies.subjects[1].posterURL + '),url(' + head_popular_movies.subjects[2].posterURL + ')';
+    console.log(head_popular_images.style.backgroundImage);    
+  })
+  // 每隔四秒一次变化
+  setTimeout(function head_change_popular_images() {
+
+    head_change_count++;
+    if (head_change_count == 3) {
+      head_change_count = 0;
+    }
+    // setTimeout(head_change_popular_images, 4000, head_change_count, head_popular_movies);
+  }, 4000, head_change_count, head_popular_movies)
   /*顶部电影热图 js代码部分结束*/
 
   /*正在热映 js代码部分开始*/
