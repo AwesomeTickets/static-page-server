@@ -13,42 +13,42 @@ color-black :color:#000000
 
 // font-size helpers
 @for $i from 10 through 50 {
-    .fs-#{$i} {
-        font-size: #{$i + 'px'} !important;
-    }
+  .fs-#{$i} {
+      font-size: #{$i + 'px'} !important;
+  }
 }
 
 // width helpers
 @for $i from 0 through 200 {
-    .w-#{$i} {
-        width: #{$i + 'px'} !important;
-    }
+  .w-#{$i} {
+      width: #{$i + 'px'} !important;
+  }
 }
 
 // height helpers
 @for $i from 0 through 200 {
-    .h-#{$i} {
-        height: #{$i + 'px'} !important;
-    }
+  .h-#{$i} {
+      height: #{$i + 'px'} !important;
+  }
 }
 
 // text-bold helpers
 .text-bold {
-  font-weight: bold !important;
+font-weight: bold !important;
 }
 
 .float-right {
-    float: right !important;
+  float: right !important;
 }
 
 .float-left {
-    float: left !important;
+  float: left !important;
 }
 
 .color-white {
-    color: #FFFFFF;
+  color: #FFFFFF;
 }
 
 .color-black {
-    color: #000000;
+  color: #000000;
 }
