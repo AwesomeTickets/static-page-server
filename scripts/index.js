@@ -5,7 +5,7 @@ $(document).ready(function() {
   // 例： var head_count = 0; const on_show_name = 'movie'; function coming_soon_find_movie() {}
 
   /*顶部电影热图 js代码部分开始*/
-  const head_popular_movies = {
+  const head_popular_movies_properties = {
     "count": 3,
     "subjects": [
         {
@@ -23,24 +23,28 @@ $(document).ready(function() {
     ],
   }
 
-  let head_popular_images = document.getElementById("head_popular_images"),
-    head_change_count = 1;
+  let head_popular_images = document.getElementById('head_popular_images'),
+    head_popular_movies = document.getElementById('head_popular_movies'),
+    head_popular_movies_children = head_popular_movies.childNodes,
+    head_change_count = 0;
 
-  console.log(head_popular_images.clientWidth);
-  console.log(head_popular_images.style);
-  head_popular_images.addEventListener('animationend', function() {
-    head_popular_images.style.backgroundImage = 'url(' + head_popular_movies.subjects[1].posterURL + '),url(' + head_popular_movies.subjects[2].posterURL + ')';
-    console.log(head_popular_images.style.backgroundImage);    
+  head_popular_images.addEventListener('animationiteration', function() {
+    console.log(head_popular_movies_children[0].src);
+    console.log(head_popular_movies_children[1].src);
+    console.log(head_change_count);
+    head_popular_movies.style.animationPlayState = 'paused';
+    head_popular_movies_children[1].style.display = 'none';
+    head_popular_movies_children[0].src = head_popular_movies_properties.subjects[head_change_count + 1 == 3 ? 0 : head_change_count + 1].posterURL;
+    head_popular_movies_children[1].src = head_popular_movies_properties.subjects[head_change_count == 0 ? 2 : head_change_count - 1].posterURL;
+    head_change_count = head_change_count + 1 == 3 ? 0 : head_change_count + 1;
   })
+
   // 每隔四秒一次变化
   setTimeout(function head_change_popular_images() {
-
-    head_change_count++;
-    if (head_change_count == 3) {
-      head_change_count = 0;
-    }
-    // setTimeout(head_change_popular_images, 4000, head_change_count, head_popular_movies);
-  }, 4000, head_change_count, head_popular_movies)
+    head_popular_movies.style.animationPlayState = 'running';
+    head_popular_movies_children[1].style.display = 'inline';
+    setTimeout(head_change_popular_images, 4000);
+  }, 4000)
   /*顶部电影热图 js代码部分结束*/
 
   /*正在热映 js代码部分开始*/
