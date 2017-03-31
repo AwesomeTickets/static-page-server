@@ -14,7 +14,28 @@ block content
 
   //- 顶部电影热图 部分
   mixin head
-    img#head_popular_images(src="/static/pictures/resource/banner/1.png")
+    div#head_popular_images
+      
+      div#carousel-example-generic.carousel.slide.head_popular_movies(data-ride="carousel" data-interval="4000")
+        ol.carousel-indicators
+          li.head_select_item.active(data-target="#carousel-example-generic" data-slide-to="0")
+          li.head_select_item(data-target="#carousel-example-generic" data-slide-to="1")
+          li.head_select_item(data-target="#carousel-example-generic" data-slide-to="2")
+        div.carousel-inner(role="listbox")
+          div.item.active
+            img.head_popular_movies_img(src="/static/pictures/resource/banner/1.png" alt="1.png")
+          div.item
+            img.head_popular_movies_img(src="/static/pictures/resource/banner/2.png" alt="2.png")
+          div.item
+            img.head_popular_movies_img(src="/static/pictures/resource/banner/3.png" alt="3.png")
+      //- 上面这部分的id和class名因为都是使用bootstrap里的功能因此未加head前缀，但这些id和class名不会出现在index.css中因此不影响
+
+      div#head_logo_white
+        img(src="/static/pictures/export/logo_white.png")
+      div#head_location 广州 
+        span.glyphicon.glyphicon-triangle-bottom
+      div#head_user 账户
+      div#head_search 搜索
 
   //- 正在热映 部分
   mixin on_show
