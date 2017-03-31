@@ -2,6 +2,7 @@ extends layout
 
 block links
   link(rel="stylesheet" href="/styles/index.css")
+  link(rel="stylesheet" href="/static/slick/slick.css")
 
 block content
   +head
@@ -38,11 +39,47 @@ block content
 
   //- 正在热映 部分
   mixin on_show
-    div#on_show_hint 正在热映 部分
+    div#on_show_hint 正在热映
+      div.on_show_slick
+        section#features
+        div.content
+          div.slider.lazy
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot1.jpg" ult="")
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot2.jpg" ult="")
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot3.jpg" ult="")
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot4.jpg" ult="")
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot5.jpg" ult="")
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot6.jpg" ult="")
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot7.jpg" ult="")
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot8.jpg" ult="")
+            div
+              div.image
+                img(data-lazy="/static/pictures/resource/poster/on_show/hot9.jpg" ult="")
+
 
   //- 即将上映 部分
   mixin coming_soon
     div#coming_soon_hint 即将上映 部分
+      
 
 block scripts
+  script(type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js")
+  script(type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js")
+  script(type="text/javascript" src="/static/slick/slick.min.js")
   script(type="text/javascript" src="/scripts/index.js")
