@@ -28,6 +28,12 @@ $(document).ready(function() {
 
   /*正在热映 js代码部分开始*/
   // 你的代码
+    $('.lazy').slick({
+        lazyLoad: 'ondemand',
+        slidesToShow: 7,
+        slidesToScroll: 1,
+        infinite:false
+    });
   /*正在热映 js代码部分结束*/
 
   /*即将上映 js代码部分开始*/
