@@ -4,30 +4,35 @@
   height: 420px;
 }
 
-#head_popular_movies {
-  animation-name: head_change_popular_images;
-  animation-duration: 1s;
-  /*animation-delay: 2s;*/
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-play-state: paused;
-}
-
-#head_popular_movies,
-#head_popular_movies > img {
+.head_popular_movies {
   position: absolute;
   width: 100%;
   height: 420px;
   z-index: 1;
 }
 
-#head_popular_movies > img:nth-child(2) {
-  display: none;
-  left: 100%;
+.head_popular_movies > div,
+.head_popular_movies > div > .item,
+.head_popular_movies_img {
+  width: 100%;
+  height: 420px !important;
 }
-/*#head_popular_movies > img:nth-child(3) {
-  left: 200%;
-}*/
+
+.head_popular_movies > .carousel-indicators {
+  margin-bottom: -10px !important;
+}
+
+.head_select_item {
+  width: 56px !important;
+  height: 8px !important;
+  margin: 0 8px 0 0 !important;
+  border-radius: 2px !important;
+  background-color: rgba(255, 255, 255, .20) !important;
+}
+
+.head_select_item.active {
+  background-color: rgba(255, 255, 255, .80) !important;
+}
 
 #head_logo_white,
 #head_logo_white > img {
@@ -72,15 +77,6 @@
 
 #head_user {
   margin: 24px 24px 0 0;
-}
-
-@keyframes head_change_popular_images {
-  0% {
-    left: 0;
-  }
-  100% {
-    left: -100%;
-  }
 }
 /*顶部电影热图 样式部分结束*/
 
