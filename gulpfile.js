@@ -48,11 +48,20 @@ gulp.task('staticFiles', function() {
 		.pipe(gulp.dest('tmp/static'));
 })
 
-gulp.task('staticPics', function() {
-	gulp.src(['static/pictures/*'])
-		.pipe(gulp.dest('tmp/static/pictures'));
+
+gulp.task('staticSlick', function() {
+	gulp.src(['static/slick/*.css', 'static/slick/*.js', 'static/slick/*.gif'])
+		.pipe(gulp.dest('tmp/static/slick'));
 })
 
+gulp.task('staticPicsExport', function() {
+	gulp.src(['static/pictures/export/*'])
+		.pipe(gulp.dest('tmp/static/pictures/export'));
+})
+gulp.task('staticPicsResource', function() {
+	gulp.src(['static/pictures/resource/*/*', 'static/pictures/resource/*/*/*'])
+		.pipe(gulp.dest('tmp/static/pictures/resource'));
+})
 
 gulp.task('staticFonts', function() {
 	gulp.src(['static/fonts/*'])
@@ -90,4 +99,4 @@ gulp.task('watch', function() {
 	gulp.watch('./style.scss', ['sass']);
 });
 
-gulp.task('default', ['webserver', 'clean', 'sass', 'css', 'js', 'staticFiles', 'staticPics', 'staticFonts', 'index', 'jade', 'watch']);
+gulp.task('default', ['webserver', 'clean', 'sass', 'css', 'js', 'staticFiles', 'staticPicsExport', 'staticPicsResource', 'staticFonts', 'index', 'jade', 'watch', 'staticSlick']);

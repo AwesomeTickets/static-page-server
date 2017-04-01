@@ -1,20 +1,115 @@
-#carousel-example-generic {
-	width: 1500px;
-	height: 610px;
-	margin: 80px auto 0 auto;
+/*顶部电影热图 样式部分开始*/
+#head_popular_images {
+  width: 100%;
+  height: 420px;
 }
 
-.carousel-inner, .item, img {
-	width: 1500px;
-	height: 610px;
+.head_popular_movies {
+  position: absolute;
+  width: 100%;
+  height: 420px;
+  z-index: 1;
 }
 
-.carousel-indicators li.active,
-.carousel-indicators li {
-	margin-left: 10px;
+.head_popular_movies > div,
+.head_popular_movies > div > .item,
+.head_popular_movies_img {
+  width: 100%;
+  height: 420px !important;
 }
 
-#next {
-	display: block;
-	margin: 80px auto 0 auto;
+.head_popular_movies > .carousel-indicators {
+  margin-bottom: -10px !important;
 }
+
+.head_select_item {
+  width: 56px !important;
+  height: 8px !important;
+  margin: 0 8px 0 0 !important;
+  border-radius: 2px !important;
+  background-color: rgba(255, 255, 255, .20) !important;
+}
+
+.head_select_item.active {
+  background-color: rgba(255, 255, 255, .80) !important;
+}
+
+#head_logo_white,
+#head_logo_white > img {
+  position: relative;
+  z-index: 2;
+} 
+
+#head_logo_white {
+  margin: 16px 48px 0 24px;
+}
+
+#head_location {
+  top: 11px;
+}
+
+#head_location,
+#head_location > glyphicon-triangle-bottom {
+  color: #fff;
+  font-size: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+#head_logo_white,
+#head_location {
+  display: inline-block;
+}
+
+#head_search,
+#head_user {
+  display: inline-block;
+  float: right;
+  color: #fff;
+  font-size: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+#head_search {
+  margin: 24px 56px 0 0;
+}
+
+#head_user {
+  margin: 24px 24px 0 0;
+}
+/*顶部电影热图 样式部分结束*/
+
+
+/*正在热映 样式部分开始*/
+/*设计图上忘记标注了 各小图宽为160px，高为224px*/
+#on_show_hint {
+  margin: 16px 24px 0 24px;
+  padding: 10px;
+  border: 1px solid #fff;
+  height: 290px;
+  color: #fff;
+  font-size: 25px;
+}
+.content{margin:auto; }
+.features{display:block;padding:0;text-align:center;}
+.slick-slide .image{padding:5px;}
+.slick-slide img{display:block; width:160px; height:224px;}
+.slick-slide img.slick-loading{border:0 }
+.slick-slider{margin:auto}
+section{width:100%;}
+/*正在热映 样式部分结束*/
+
+
+/*即将上映 样式部分开始*/
+/*设计图上忘记标注了 各小图宽为160px，高为224px*/
+#coming_soon_hint {
+  margin: 32px 24px 0 24px;
+  padding: 10px;
+  border: 1px solid #fff;
+  height: 270px;
+  color: #fff;
+  font-size: 25px;
+}
+/*即将上映 样式部分结束*/
+
