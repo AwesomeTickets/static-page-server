@@ -30,7 +30,7 @@ $(document).ready(function() {
   // 你的代码
     $('.lazy').slick({
         lazyLoad: 'ondemand',
-        slidesToShow: 7,
+        slidesToShow: 6,
         slidesToScroll: 1,
         infinite:false
     });
