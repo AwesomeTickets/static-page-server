@@ -5,14 +5,32 @@ $(document).ready(function() {
   // 例： var head_count = 0; const on_show_name = 'movie'; function coming_soon_find_movie() {}
 
   /*顶部电影热图 js代码部分开始*/
-  // 你的代码
+  const head_popular_movies_properties = {
+    "count": 3,
+    "subjects": [
+        {
+            "id": 154685,
+            "posterURL": "/static/pictures/resource/banner/1.png"
+        },
+        {
+            "id": 164597,
+            "posterURL": "/static/pictures/resource/banner/2.png"
+        },
+        {
+            "id": 197682,
+            "posterURL": "/static/pictures/resource/banner/3.png"
+        },
+    ],
+  }
+
+  let head_popular_images = document.getElementById('head_popular_images');
   /*顶部电影热图 js代码部分结束*/
 
   /*正在热映 js代码部分开始*/
   // 你的代码
     $('.lazy').slick({
         lazyLoad: 'ondemand',
-        slidesToShow: 7,
+        slidesToShow: 6,
         slidesToScroll: 1,
         infinite:false
     });
