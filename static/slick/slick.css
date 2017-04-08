@@ -23,7 +23,7 @@
 
 /* Icons */
 /* Arrows */
-.slick-prev, .slick-next { position: absolute; display: block; cursor: pointer; background: transparent; color: transparent; margin-top: -230px; padding: 0; border: none; outline: none; }
+.slick-prev, .slick-next { position: absolute; display: block; cursor: pointer; background: transparent; color: transparent; margin-top: -230px; padding: 0; border: none; outline: none; width: 112px;}
 .slick-prev:focus, .slick-next:focus { outline: none; }
 .slick-prev.slick-disabled:before, .slick-next.slick-disabled:before { display: none; }
 
@@ -33,7 +33,7 @@
 .slick-prev:before { content: url("/static/pictures/export/left.png"); }
 .slick-prev:hover:before { content: url("/static/pictures/export/left_hover.png"); }
 
-.slick-next { right: -35px; }
+.slick-next { right: -5px; }
 .slick-next:before { content: url("/static/pictures/export/right.png"); }
 .slick-next:hover:before { content: url("/static/pictures/export/right_hover.png"); }
 
