@@ -48,7 +48,7 @@ $(document).ready(function() {
   function slick_temp(i) { 
       return "<div>"+
         "<div class=\"on_show_hover\" class=\"image\">"+
-          "<span>123</br><button>goto buy</button></span>"+
+          "<span>text</br><button>goto buy</button></span>"+
           "<img class=\"on_show_img\" data-lazy=\"\" ult=\"123\" >"+
         "</div>"+
       "</div>";
@@ -66,15 +66,14 @@ $(document).ready(function() {
     i++;
   });
   $(".on_show_hover").each(function() {
-    $(this).bind("mouseover", function(i) {
+    $(this).bind("mouseover", function() {
       $(this).find("span").css("display", "block").css("z-index", 9);
       $(this).find("img").css("opacity", "0.4");
     });
-    $(this).bind("mouseout", function(i) {
+    $(this).bind("mouseout", function() {
       $(this).find("span").css("display", "none").css("z-index", 0);
       $(this).find("img").css("opacity", "1");
     });
-    i++;
   });
 
 
