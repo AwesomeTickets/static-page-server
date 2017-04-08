@@ -23,11 +23,11 @@ block content
           li.head_select_item(data-target="#carousel-example-generic" data-slide-to="2")
         div.carousel-inner(role="listbox")
           div.item.active
-            img.head_popular_movies_img(src="/static/pictures/resource/banner/1.png" alt="1.png")
+            img.head_popular_movies_img(alt="1.png")
           div.item
-            img.head_popular_movies_img(src="/static/pictures/resource/banner/2.png" alt="2.png")
+            img.head_popular_movies_img(alt="2.png")
           div.item
-            img.head_popular_movies_img(src="/static/pictures/resource/banner/3.png" alt="3.png")
+            img.head_popular_movies_img(alt="3.png")
       //- 上面这部分的id和class名因为都是使用bootstrap里的功能因此未加head前缀，但这些id和class名不会出现在index.css中因此不影响
 
       div#head_logo_white
@@ -41,36 +41,8 @@ block content
   mixin on_show
     div#on_show_hint 正在热映
       div.on_show_slick
-        section#features
         div.content
-          div.slider.lazy
-            div
-              div.image
-                img(data-lazy="/static/pictures/resource/poster/on_show/hot1.jpg" ult="")
-            div
-              div.image
-                img(data-lazy="/static/pictures/resource/poster/on_show/hot2.jpg" ult="")
-            div
-              div.image
-                img(data-lazy="/static/pictures/resource/poster/on_show/hot3.jpg" ult="")
-            div
-              div.image
-                img(data-lazy="/static/pictures/resource/poster/on_show/hot4.jpg" ult="")
-            div
-              div.image
-                img(data-lazy="/static/pictures/resource/poster/on_show/hot5.jpg" ult="")
-            div
-              div.image
-                img(data-lazy="/static/pictures/resource/poster/on_show/hot6.jpg" ult="")
-            div
-              div.image
-                img(data-lazy="/static/pictures/resource/poster/on_show/hot7.jpg" ult="")
-            div
-              div.image
-                img(data-lazy="/static/pictures/resource/poster/on_show/hot8.jpg" ult="")
-            div
-              div.image
-                img(data-lazy="/static/pictures/resource/poster/on_show/hot9.jpg" ult="")
+          div.slider.lazy.on_show
 
 
   //- 即将上映 部分
