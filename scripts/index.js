@@ -4,8 +4,20 @@ $(document).ready(function() {
   // 在创建变量或函数时需要加上自己部分的前缀名: head、on_show、coming_soon
   // 例： var head_count = 0; const on_show_name = 'movie'; function coming_soon_find_movie() {}
 
-  /*顶部电影热图 js代码部分开始*/
+  const build_api = {
+    head: 'http://192.168.199.105/resource/movie/popular?count=3',
+    on_show: 'http://192.168.199.105/resource/movie/on_show',
+    coming_soon: 'http://192.168.199.105/resource/movie/coming_soon',
+  }
 
+  const global_api = {
+    head: 'http://120.25.76.106/resource/movie/popular?count=3',
+    on_show: 'http://120.25.76.106/resource/movie/on_show',
+    coming_soon: 'http://120.25.76.106/resource/movie/coming_soon',
+  }
+  /*顶部电影热图 js代码部分开始*/
+  let head_popular_images = $('.head_popular_movies_img');
+  
   /*模拟api动态添加图片*/
   const head_popular_movies_properties = {
     "count":3,
@@ -25,16 +37,13 @@ $(document).ready(function() {
     ],
   }
 
-  let head_popular_images = $('.head_popular_movies_img');
   for (let i = 0; i < 3; i++) {
     head_popular_images[i].src = head_popular_movies_properties.data[i].uri;
   }
   /*模拟api动态添加图片*/
 
   /*使用ajax根据api来拿照片信息*/
-  // $.get('http://120.25.76.106/resource/movie/popular?count=3', function(data, textStatus) {
-  //   console.log("textStatus: ", textStatus);
-  //   console.log("data: ", data);
+  // $.get(build_api.head, function(data, textStatus) {
   //   for (let i = 0; i < 3; i++) {
   //     head_popular_images[i].src = data.data[i].uri;
   //   }
@@ -46,7 +55,7 @@ $(document).ready(function() {
 
   /*使用ajax根据api来拿照片信息*/
   // var on_show_data;
-  // $.get('http://120.25.76.106/resource/movie/on_show', function(data, textStatus) {
+  // $.get(build_api.on_show, function(data, textStatus) {
   //   console.log("data: ", data);
   //   on_show_data = data;
   // })
@@ -104,7 +113,7 @@ $(document).ready(function() {
 
   /*使用ajax根据api来拿照片信息*/
   // var coming_soon_data;
-  // $.get('http://120.25.76.106/resource/movie/coming_soon', function(data, textStatus) {
+  // $.get(build_api.coming_soon, function(data, textStatus) {
   //   console.log("data: ", data);
   //   coming_soon_data = data;
   // })
