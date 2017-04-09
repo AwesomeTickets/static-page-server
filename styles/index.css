@@ -97,6 +97,7 @@
 .slick-slide img.slick-loading{border:0 }
 .slick-slider{margin:auto}
 section{width:100%;}
+.on_show_hover span, .coming_soon_hover span { width : 160px; height: 224px; position: absolute; left: 5px; z-index: 0; display: none; }
 /*正在热映 样式部分结束*/
 
 
