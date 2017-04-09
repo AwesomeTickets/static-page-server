@@ -53,14 +53,6 @@ $(document).ready(function() {
 
   /*正在热映 js代码部分开始*/
 
-  /*使用ajax根据api来拿照片信息*/
-  // var on_show_data;
-  // $.get(build_api.on_show, function(data, textStatus) {
-  //   console.log("data: ", data);
-  //   on_show_data = data;
-  // })
-  /*使用ajax根据api来拿照片信息*/
-
   // 模拟api接口
   var on_show_data = {
     "count": 9,
@@ -110,14 +102,6 @@ $(document).ready(function() {
   /*正在热映 js代码部分结束*/
 
   /*即将上映 js代码部分开始*/
-
-  /*使用ajax根据api来拿照片信息*/
-  // var coming_soon_data;
-  // $.get(build_api.coming_soon, function(data, textStatus) {
-  //   console.log("data: ", data);
-  //   coming_soon_data = data;
-  // })
-  /*使用ajax根据api来拿照片信息*/  
 
   // 模拟api接口
   var coming_soon_data = {
