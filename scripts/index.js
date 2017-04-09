@@ -5,6 +5,8 @@ $(document).ready(function() {
   // 例： var head_count = 0; const on_show_name = 'movie'; function coming_soon_find_movie() {}
 
   /*顶部电影热图 js代码部分开始*/
+
+  /*模拟api动态添加图片*/
   const head_popular_movies_properties = {
     "count":3,
     "data":[
@@ -27,6 +29,9 @@ $(document).ready(function() {
   for (let i = 0; i < 3; i++) {
     head_popular_images[i].src = head_popular_movies_properties.data[i].uri;
   }
+  /*模拟api动态添加图片*/
+
+  /*使用ajax根据api来拿照片信息*/
   // $.get('http://120.25.76.106/resource/movie/popular?count=3', function(data, textStatus) {
   //   console.log("textStatus: ", textStatus);
   //   console.log("data: ", data);
@@ -34,10 +39,18 @@ $(document).ready(function() {
   //     head_popular_images[i].src = data.data[i].uri;
   //   }
   // })
+  /*使用ajax根据api来拿照片信息*/
   /*顶部电影热图 js代码部分结束*/
 
   /*正在热映 js代码部分开始*/
-  // 你的代码
+
+  /*使用ajax根据api来拿照片信息*/
+  // var on_show_data;
+  // $.get('http://120.25.76.106/resource/movie/on_show', function(data, textStatus) {
+  //   console.log("data: ", data);
+  //   on_show_data = data;
+  // })
+  /*使用ajax根据api来拿照片信息*/
 
   // 模拟api接口
   var on_show_data = {
@@ -88,8 +101,15 @@ $(document).ready(function() {
   /*正在热映 js代码部分结束*/
 
   /*即将上映 js代码部分开始*/
-  // 你的代码
-  
+
+  /*使用ajax根据api来拿照片信息*/
+  // var coming_soon_data;
+  // $.get('http://120.25.76.106/resource/movie/coming_soon', function(data, textStatus) {
+  //   console.log("data: ", data);
+  //   coming_soon_data = data;
+  // })
+  /*使用ajax根据api来拿照片信息*/  
+
   // 模拟api接口
   var coming_soon_data = {
     "count": 9,
