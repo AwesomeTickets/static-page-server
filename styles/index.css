@@ -86,7 +86,6 @@
 #on_show_hint {
   margin: 16px 24px 0 24px;
   padding: 10px;
-  border: 1px solid #fff;
   height: 290px;
   color: #fff;
   font-size: 25px;
@@ -106,7 +105,6 @@ section{width:100%;}
 #coming_soon_hint {
   margin: 32px 24px 0 24px;
   padding: 10px;
-  border: 1px solid #fff;
   height: 290px;
   color: #fff;
   font-size: 25px;
