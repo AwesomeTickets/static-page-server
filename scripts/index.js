@@ -4,55 +4,24 @@ $(document).ready(function() {
   // 在创建变量或函数时需要加上自己部分的前缀名: head、on_show、coming_soon
   // 例： var head_count = 0; const on_show_name = 'movie'; function coming_soon_find_movie() {}
 
-  const build_api = {
-    head: 'http://192.168.199.105/resource/movie/popular?count=3',
-    on_show: 'http://192.168.199.105/resource/movie/on_show',
-    coming_soon: 'http://192.168.199.105/resource/movie/coming_soon',
-  }
-
   const global_api = {
     head: 'http://120.25.76.106/resource/movie/popular?count=3',
     on_show: 'http://120.25.76.106/resource/movie/on_show',
     coming_soon: 'http://120.25.76.106/resource/movie/coming_soon',
   }
+
   /*顶部电影热图 js代码部分开始*/
   let head_popular_images = $('.head_popular_movies_img');
-  
-  /*模拟api动态添加图片*/
-  const head_popular_movies_properties = {
-    "count":3,
-    "data":[
-      {
-        "id":1,
-        "uri":"https://raw.githubusercontent.com/AwesomeTickets/Dashboard/master/img/poster/large/1.png"
-      },
-      {
-        "id":2,
-        "uri":"https://raw.githubusercontent.com/AwesomeTickets/Dashboard/master/img/poster/large/2.png"
-      },
-      {
-        "id":3,
-        "uri":"https://raw.githubusercontent.com/AwesomeTickets/Dashboard/master/img/poster/large/3.png"
-      },
-    ],
-  }
-
-  for (let i = 0; i < 3; i++) {
-    head_popular_images[i].src = head_popular_movies_properties.data[i].uri;
-  }
-  /*模拟api动态添加图片*/
 
   /*使用ajax根据api来拿照片信息*/
-  // $.get(build_api.head, function(data, textStatus) {
-  //   for (let i = 0; i < 3; i++) {
-  //     head_popular_images[i].src = data.data[i].uri;
-  //   }
-  // })
-  /*使用ajax根据api来拿照片信息*/
+  $.get(global_api.head, function(data, textStatus) {
+    for (let i = 0; i < 3; i++) {
+      head_popular_images[i].src = data.data[i].uri;
+    }
+  })
   /*顶部电影热图 js代码部分结束*/
 
   /*正在热映 js代码部分开始*/
-
   // 模拟api接口
   var on_show_data = {
     "count": 9,
