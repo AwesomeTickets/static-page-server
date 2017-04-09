@@ -8,6 +8,8 @@ if (len(sys.argv) == 1):
 else:
     path = sys.argv[1] + "src/main/webapp"
     filename = "tmp.tar.gz"
+    os.system("gulp clean")
+    os.system("gulp build")
     os.system("tar -zcvf %s tmp/" % filename)
     os.system("mv tmp.tar.gz %s" % path)
     os.system("tar -zxvf %s/%s --directory=%s --strip-components 1" % (path, filename, path))
