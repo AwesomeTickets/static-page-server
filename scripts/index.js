@@ -4,41 +4,24 @@ $(document).ready(function() {
   // 在创建变量或函数时需要加上自己部分的前缀名: head、on_show、coming_soon
   // 例： var head_count = 0; const on_show_name = 'movie'; function coming_soon_find_movie() {}
 
-  /*顶部电影热图 js代码部分开始*/
-  const head_popular_movies_properties = {
-    "count":3,
-    "data":[
-      {
-        "id":1,
-        "uri":"https://raw.githubusercontent.com/AwesomeTickets/Dashboard/master/img/poster/large/1.png"
-      },
-      {
-        "id":2,
-        "uri":"https://raw.githubusercontent.com/AwesomeTickets/Dashboard/master/img/poster/large/2.png"
-      },
-      {
-        "id":3,
-        "uri":"https://raw.githubusercontent.com/AwesomeTickets/Dashboard/master/img/poster/large/3.png"
-      },
-    ],
+  const global_api = {
+    head: 'http://120.25.76.106/resource/movie/popular?count=3',
+    on_show: 'http://120.25.76.106/resource/movie/on_show',
+    coming_soon: 'http://120.25.76.106/resource/movie/coming_soon',
   }
 
+  /*顶部电影热图 js代码部分开始*/
   let head_popular_images = $('.head_popular_movies_img');
-  for (let i = 0; i < 3; i++) {
-    head_popular_images[i].src = head_popular_movies_properties.data[i].uri;
-  }
-  // $.get('http://120.25.76.106/resource/movie/popular?count=3', function(data, textStatus) {
-  //   console.log("textStatus: ", textStatus);
-  //   console.log("data: ", data);
-  //   for (let i = 0; i < 3; i++) {
-  //     head_popular_images[i].src = data.data[i].uri;
-  //   }
-  // })
+
+  /*使用ajax根据api来拿照片信息*/
+  $.get(global_api.head, function(data, textStatus) {
+    for (let i = 0; i < 3; i++) {
+      head_popular_images[i].src = data.data[i].uri;
+    }
+  })
   /*顶部电影热图 js代码部分结束*/
 
   /*正在热映 js代码部分开始*/
-  // 你的代码
-
   // 模拟api接口
   var on_show_data = {
     "count": 9,
@@ -85,7 +68,70 @@ $(document).ready(function() {
       $(this).find("img").css("opacity", "1");
     });
   });
+  /*正在热映 js代码部分结束*/
 
+  /*即将上映 js代码部分开始*/
+
+  // 模拟api接口
+  var coming_soon_data = {
+    "count": 9,
+    "data": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  };
+  var coming_soon_pic = [
+    "p1596755313",
+    "p2256580955",
+    "p2441815392",
+    "p2443765210",
+    "p2445601403",
+    "p2446525065",
+    "p2448692606",
+    "p2450444730",
+    "p2450800270"
+  ]
+  function coming_soon_obj(_id) {
+    this.id = _id;
+    this.title = "";
+    this.pubdate = "";
+  };
+  var coming_soon_set = new Array();
+  for (var i = 0; i < coming_soon_data.count; i++)
+    coming_soon_set.push(new coming_soon_obj(i+1));
+
+  //  动态添加海报
+  var coming_soon_pic_num = coming_soon_data.count;
+  function coming_soon_slick_temp(i) { 
+      return "<div>"+
+        "<div class=\"coming_soon_hover\" class=\"image\">"+
+          "<span>text</br><button>goto buy</button></span>"+
+          "<img class=\"coming_soon_img\" data-lazy=\"\" ult=\"123\" >"+
+        "</div>"+
+      "</div>";
+    };
+  var coming_soon_html = "";
+  for(var i = 0; i < coming_soon_pic_num; i++)
+    coming_soon_html += coming_soon_slick_temp(i+1);
+  $(".coming_soon").html(coming_soon_html);
+
+//  动态修改海报地址
+  var coming_soon_location = "/static/pictures/resource/poster/coming_soon/";
+  var i = 0;
+  $(".coming_soon_img").each(function(){
+    $(this).attr("data-lazy", coming_soon_location + coming_soon_pic[i] + ".jpg");
+    i++;
+  });
+  $(".coming_soon_hover").each(function() {
+    $(this).bind("mouseover", function() {
+      $(this).find("span").css("display", "block").css("z-index", 9);
+      $(this).find("img").css("opacity", "0.4");
+    });
+    $(this).bind("mouseout", function() {
+      $(this).find("span").css("display", "none").css("z-index", 0);
+      $(this).find("img").css("opacity", "1");
+    });
+  });
+
+  
+  /*即将上映 js代码部分结束*/
 
   //  滑动组件
   $('.lazy').slick({
@@ -94,9 +140,5 @@ $(document).ready(function() {
     slidesToScroll: 1,
     infinite:false
   });
-  /*正在热映 js代码部分结束*/
 
-  /*即将上映 js代码部分开始*/
-  // 你的代码
-  /*即将上映 js代码部分结束*/
 });

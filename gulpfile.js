@@ -99,4 +99,5 @@ gulp.task('watch', function() {
 	gulp.watch('./style.scss', ['sass']);
 });
 
-gulp.task('default', ['webserver', 'clean', 'sass', 'css', 'js', 'staticFiles', 'staticPicsExport', 'staticPicsResource', 'staticFonts', 'index', 'jade', 'watch', 'staticSlick']);
+gulp.task('default', ['webserver', 'clean', 'sass', 'css', 'js', 'staticFiles', 'staticSlick', 'staticPicsExport', 'staticPicsResource', 'staticFonts', 'index', 'jade', 'watch']);
+gulp.task('build', ['clean', 'sass', 'css', 'js', 'staticFiles', 'staticSlick', 'staticPicsExport', 'staticPicsResource', 'staticFonts', 'index', 'jade']);
