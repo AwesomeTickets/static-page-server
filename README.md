@@ -11,7 +11,8 @@
 > npm install    
 > npm install gulp -g   
 > gulp clean     
-> gulp     
+> gulp (开发时执行此命令)      
+> gulp build (运行时，即只输出tmp文件夹时执行此命令)           
 
 > 在浏览器中打开 http://localhost:8080/     
 > 我设置了自动刷新功能，更改代码保存之后页面就会自动刷新了，方便开发。若出现未自动刷新的情况，可手动刷新。若是向项目中添加了新文件或对文件重命名等非更改代码操作，需要重新执行 gulp clean 和 gulp 指令。   

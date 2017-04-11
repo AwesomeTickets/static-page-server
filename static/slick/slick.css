@@ -23,13 +23,13 @@
 
 /* Icons */
 /* Arrows */
-.slick-prev, .slick-next { position: absolute; display: block; cursor: pointer; background: transparent; color: transparent; margin-top: -230px; padding: 0; border: none; outline: none; width: 112px;}
+.slick-prev, .slick-next { position: absolute; display: block; cursor: pointer; background: transparent; color: transparent; margin-top: -224px; padding: 0; border: none; outline: none; width: 112px;}
 .slick-prev:focus, .slick-next:focus { outline: none; }
 .slick-prev.slick-disabled:before, .slick-next.slick-disabled:before { display: none; }
 
 .slick-prev:before, .slick-next:before { opacity: 0.85; }
 
-.slick-prev { left: 5px; }
+.slick-prev { left: 0px; }
 .slick-prev:before { content: url("/static/pictures/export/left.png"); }
 .slick-prev:hover:before { content: url("/static/pictures/export/left_hover.png"); }
 
