@@ -86,19 +86,36 @@
 #on_show_hint {
   margin: 16px 24px 0 24px;
   padding: 10px;
-  border: 1px solid #fff;
   height: 290px;
   color: #fff;
   font-size: 25px;
 }
+
+.on_show_poster_hint { width: 160px; height: 92px; position: absolute; bottom: 0px; z-index: 8; background: url("/static/pictures/export/background2.png");}
+.on_show_movie_name, .on_show_movie_score { bottom: 0px; position: absolute; }
+.on_show_movie_name { left: 8px; font-size: 13px; width: 110px; margin-bottom: 0px; height: 30px;}
+.on_show_movie_score { right: 8px; }
+
 .content{margin:auto; }
 .features{display:block;padding:0;text-align:center;}
 .slick-slide .image{padding:5px;}
-.slick-slide img{display:block; width:160px; height:224px;}
+.slick-slide img{display:block; width:160px; height:224px; }
 .slick-slide img.slick-loading{border:0 }
 .slick-slider{margin:auto}
 section{width:100%;}
-.on_show_hover span, .coming_soon_hover span { width : 160px; height: 224px; position: absolute; left: 5px; z-index: 0; display: none; }
+.coming_soon_hover span { width : 160px; height: 224px; position: absolute; left: 5px; z-index: 0; display: none; }
+
+.on_show_hover_info { width : 160px; height: 0px; display: block; position: relative;  top: -224px; display: none;}
+.on_show_hover_info div { position: absolute; padding: 0; margin: 0; }
+.on_show_hover_title { left: 16px; top: 16px; font-size: 16px;}
+.on_show_hover_rating { right: 8px; top: 16px; font-size: 16px;}
+.on_show_hover_type { left: 16px; top: 38px; font-size: 10px; }
+.on_show_hover_style { left: 16px; top: 72px; font-size: 10px; opacity: 0.64;}
+.on_show_hover_CAndL { left: 16px; top: 88px; font-size: 10px; opacity: 0.64;}
+.on_show_hover_pubdate { left: 16px; top: 104px; font-size: 10px; opacity: 0.64;}
+
+.on_show_hover_info button { position: absolute; top:156px; left: 50px; width: 64px; height: 32px; font-size: 16px; border: none; border-radius: 2px; background-color: #E84A3A;}
+.on_show_hover_info button:hover {background-color: #E76456; }
 /*正在热映 样式部分结束*/
 
 
@@ -107,7 +124,6 @@ section{width:100%;}
 #coming_soon_hint {
   margin: 32px 24px 0 24px;
   padding: 10px;
-  border: 1px solid #fff;
   height: 290px;
   color: #fff;
   font-size: 25px;
