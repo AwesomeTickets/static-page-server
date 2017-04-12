@@ -60,7 +60,7 @@ $(document).ready(function() {
     on_show_temp.find(".on_show_hover_type").html(data.movieType);
     var string = "";
     for (var i = 0; i < data.movieStyle.length; i++)
-      string = string + data.movieStyle[i] + "&nbsp;/&nbsp;";
+      string = string + data.movieStyle[i] + (i == data.movieStyle.length-1 ? "" : "&nbsp;/&nbsp;");
     on_show_temp.find(".on_show_hover_style").html(string);
     on_show_temp.find(".on_show_hover_CAndL").html(data.country + "&nbsp;/&nbsp;" +data.length +"分钟");
     on_show_temp.find(".on_show_hover_pubdate").html(data.pubdate+"&nbsp;上映");
@@ -114,64 +114,96 @@ $(document).ready(function() {
 
   /*即将上映 js代码部分开始*/
 
-  // 模拟api接口
-  global_flag++;
-  var coming_soon_data = {
-    "count": 9,
-    "data": [1, 2, 3, 4, 5, 6, 7, 8, 9]
-  };
-  var coming_soon_pic = [
-    "p1596755313",
-    "p2256580955",
-    "p2441815392",
-    "p2443765210",
-    "p2445601403",
-    "p2446525065",
-    "p2448692606",
-    "p2450444730",
-    "p2450800270"
-  ]
-  function coming_soon_obj(_id) {
-    this.id = _id;
-    this.title = "";
-    this.pubdate = "";
-  };
-  var coming_soon_set = new Array();
-  for (var i = 0; i < coming_soon_data.count; i++)
-    coming_soon_set.push(new coming_soon_obj(i+1));
+  // 获取海报数据
+  $.get(global_api.coming_soon, function(data, textStatus) {
+    console.log(textStatus);
+    if (textStatus != "success")alert("服务器雪崩");
+    coming_soon_add_img(data.count);
 
-  //  动态添加海报
-  var coming_soon_pic_num = coming_soon_data.count;
-  function coming_soon_slick_temp(i) { 
+    var coming_soon_global_temp = 0, coming_soon_num = data.count;
+    var coming_soon_resourse = "http://120.25.76.106/resource/movie/";
+    for(var i = 0; i < data.count; i++) {
+      $.get(coming_soon_resourse+data.data[i], function(data, textStatus) {
+        coming_soon_set_poster_resource(data.posterSmall, coming_soon_global_temp);
+        coming_soon_set_info(data, coming_soon_global_temp);
+        coming_soon_set_hover_info(data, coming_soon_global_temp);
+        coming_soon_global_temp++;
+        if (coming_soon_global_temp == coming_soon_num) {
+          if (global_flag == 1){slick_func();}
+          else global_flag++;
+        }
+      });
+    }
+    coming_soon_set_hover();
+  });
+
+  function coming_soon_add_img(coming_soon_poster_num) {
+    var coming_soon_html = "";
+    for(var i = 0; i < coming_soon_poster_num; i++)
+      coming_soon_html += coming_soon_slick_temp(i);
+    $(".coming_soon").html(coming_soon_html);
+  }
+
+  function coming_soon_slick_temp(i) {
       return "<div>"+
         "<div class=\"coming_soon_hover\" class=\"image\">"+
-          "<span>text</br><button>goto buy</button></span>"+
-          "<img class=\"coming_soon_img\" data-lazy=\"\" ult=\"123\" >"+
+          "<div class=\"coming_soon_poster_hint\">"+
+          "<div id=\"coming_soon_poster_hint_name"+i+"\" class=\"coming_soon_movie_name\">"+
+          "</div>"+"</div>"+
+          "<img id=\"coming_soon_img"+i+"\" data-lazy=\"\" ult=\"123\" >"+
+          "<div id=\"coming_soon_hover_info"+i+"\" class=\"coming_soon_hover_info\">"+
+            "<div class=\"coming_soon_hover_title\"></div>"+
+            "<div class=\"coming_soon_hover_type\"></div>"+
+            "<div class=\"coming_soon_hover_style\"></div>"+
+            "<div class=\"coming_soon_hover_CAndL\"></div>"+
+            "<div class=\"coming_soon_hover_pubdate\"></div>"+
+            "<button>预售</button>"+
+          "</div>"+
         "</div>"+
       "</div>";
-    };
-  var coming_soon_html = "";
-  for(var i = 0; i < coming_soon_pic_num; i++)
-    coming_soon_html += coming_soon_slick_temp(i+1);
-  $(".coming_soon").html(coming_soon_html);
+    }
 
-//  动态修改海报地址
-  var coming_soon_location = "/static/pictures/resource/poster/coming_soon/";
-  var i = 0;
-  $(".coming_soon_img").each(function(){
-    $(this).attr("data-lazy", coming_soon_location + coming_soon_pic[i] + ".jpg");
-    i++;
-  });
-  $(".coming_soon_hover").each(function() {
-    $(this).bind("mouseover", function() {
-      $(this).find("span").css("display", "block").css("z-index", 9);
-      $(this).find("img").css("opacity", "0.4");
+    function coming_soon_set_poster_resource(resource, i) {
+      $("#coming_soon_img"+i).attr("data-lazy", resource);
+    }
+
+    function coming_soon_set_info(data, i) {
+      var temp = data.title.substring(0, 6);
+      if (data.title.substring(6, 7) != "") {temp += "...";}
+      $("#coming_soon_poster_hint_name"+i).html(temp);
+    }
+
+    function coming_soon_set_hover_info(data, i) {
+      var temp = data.title.substring(0, 6);
+      if (data.title.substring(6, 7) != "") {temp += "...";}
+      var coming_soon_temp = $("#coming_soon_hover_info"+i);
+      coming_soon_temp.find(".coming_soon_hover_title").html(temp);
+      coming_soon_temp.find(".coming_soon_hover_type").html(data.movieType);
+      var string = "";
+      for (var i = 0; i < data.movieStyle.length; i++)
+        string = string + data.movieStyle[i] + (i == data.movieStyle.length-1 ? "" : "&nbsp;/&nbsp;");
+      coming_soon_temp.find(".coming_soon_hover_style").html(string);
+      coming_soon_temp.find(".coming_soon_hover_CAndL").html(data.country + "&nbsp;/&nbsp;" +data.length +"分钟");
+      coming_soon_temp.find(".coming_soon_hover_pubdate").html(data.pubdate+"&nbsp;上映");
+    }
+
+    function coming_soon_set_hover() {
+      $(".coming_soon_hover").each(function() {
+      $(this).bind("mouseover", function() {
+        $(this).find(".coming_soon_hover_info").css("display", "block").css("z-index", 9);
+        $(this).find("img").css("opacity", "0.4");
+        $(this).find(".coming_soon_poster_hint").css("display", "none");
+      });
+      $(this).bind("mouseout", function() {
+        $(this).find(".coming_soon_hover_info").css("display", "none").css("z-index", 0);
+        $(this).find("img").css("opacity", "1");
+        $(this).find(".coming_soon_poster_hint").css("display", "block");
+      });
     });
-    $(this).bind("mouseout", function() {
-      $(this).find("span").css("display", "none").css("z-index", 0);
-      $(this).find("img").css("opacity", "1");
-    });
-  });
+    }
+  // 模拟api接口
+  
+  
 
   
   /*即将上映 js代码部分结束*/
