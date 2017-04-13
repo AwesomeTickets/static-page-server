@@ -84,26 +84,25 @@
 /*正在热映 样式部分开始*/
 /*设计图上忘记标注了 各小图宽为160px，高为224px*/
 #on_show_hint {
-  margin: 16px 24px 0 24px;
-  padding: 10px;
+  margin: 24px 24px 24px 24px;
+  padding: 0px;
   height: 290px;
-  color: #fff;
-  font-size: 25px;
+  color: #ffffff;
+  font-size: 20px;
 }
 
+.on_show_slick, .coming_soon_slick {margin-top: 16px;}
 .on_show_poster_hint { width: 160px; height: 92px; position: absolute; bottom: 0px; z-index: 8; background: url("/static/pictures/export/background2.png");}
 .on_show_movie_name, .on_show_movie_score { bottom: 0px; position: absolute; }
-.on_show_movie_name { left: 8px; font-size: 13px; width: 110px; margin-bottom: 0px; height: 30px;}
+.on_show_movie_name { left: 8px; font-size: 14px; width: 110px; margin-bottom: 0px; height: 25px;}
 .on_show_movie_score { right: 8px; }
 
 .content{margin:auto; }
-.features{display:block;padding:0;text-align:center;}
-.slick-slide .image{padding:5px;}
-.slick-slide img{display:block; width:160px; height:224px; }
+.slick-slide .image{padding:0px;}
+.slick-slide img{display:block; width:160px; height:224px; margin-right: 24px; border-radius: 2px;}
 .slick-slide img.slick-loading{border:0 }
 .slick-slider{margin:auto}
 section{width:100%;}
-.coming_soon_hover span { width : 160px; height: 224px; position: absolute; left: 5px; z-index: 0; display: none; }
 
 .on_show_hover_info { width : 160px; height: 0px; display: block; position: relative;  top: -224px; display: none;}
 .on_show_hover_info div { position: absolute; padding: 0; margin: 0; }
@@ -122,11 +121,25 @@ section{width:100%;}
 /*即将上映 样式部分开始*/
 /*设计图上忘记标注了 各小图宽为160px，高为224px*/
 #coming_soon_hint {
-  margin: 32px 24px 0 24px;
-  padding: 10px;
+  margin: 0px 24px 24px 24px;
+  padding: 0px;
   height: 290px;
   color: #fff;
-  font-size: 25px;
+  font-size: 20px;
 }
+
+.coming_soon_poster_hint { width: 160px; height: 92px; position: absolute; bottom: 0px; z-index: 8; background: url("/static/pictures/export/background2.png"); }
+.coming_soon_movie_name { left: 8px; font-size: 14px; width: 110px; margin-bottom: 0px; height: 25px; bottom: 0px; position: absolute; }
+
+.coming_soon_hover_info { width : 160px; height: 0px; display: block; position: relative;  top: -224px; display: none;}
+.coming_soon_hover_info div { position: absolute; padding: 0; margin: 0; }
+.coming_soon_hover_title { left: 16px; top: 16px; font-size: 16px;}
+.coming_soon_hover_type { left: 16px; top: 38px; font-size: 10px; }
+.coming_soon_hover_style { left: 16px; top: 72px; font-size: 10px; opacity: 0.64;}
+.coming_soon_hover_CAndL { left: 16px; top: 88px; font-size: 10px; opacity: 0.64;}
+.coming_soon_hover_pubdate { left: 16px; top: 104px; font-size: 10px; opacity: 0.64;}
+
+.coming_soon_hover_info button { position: absolute; top:156px; left: 50px; width: 64px; height: 32px; font-size: 16px; border: none; border-radius: 2px; background-color: #E84A3A;}
+.coming_soon_hover_info button:hover {background-color: #E76456; }
 /*即将上映 样式部分结束*/
 
