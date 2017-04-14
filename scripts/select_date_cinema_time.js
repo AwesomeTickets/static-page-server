@@ -6,20 +6,6 @@ $(document).ready(function() {
   /*模拟数据*/
   const movie_id = 1;
 
-  const movie_info = {
-    "id": 1,
-    "title": "美女与野兽",
-    "pubdate": "2017-03-17",
-    "length": 130,
-    "rating": 8.2,
-    "country": "美国",
-    "movieStatus": "on",
-    "movieType": "3D",
-    "movieStyle": ["爱情", "奇幻", "歌舞"],
-    "posterSmall": "http://123.123.123.123/AAA.png",
-    "posterLarge": "http://123.123.123.123/BBB.png"
-  }
-
   const recent = {
     "count": 2,
     "data": [
@@ -35,10 +21,8 @@ $(document).ready(function() {
   }
   /*模拟数据*/
 
+  /*电影信息部分开始*/
   $.get(global_api.movie_info + movie_id, function(data, textStatus) {
-    // console.log('textStatus: ', textStatus);
-    // console.log('data: ', data);
-
     let movie_info_poster = document.getElementById('movie_info_poster'),
       movie_info_title = document.getElementById('movie_info_title'),
       movie_info_rating = document.getElementById('movie_info_rating'),
@@ -63,6 +47,6 @@ $(document).ready(function() {
     movie_info_country.innerHTML = '地区：' + data.country;
     movie_info_length.innerHTML = '时长：' + data.length + '分钟';
   })
-
+  /*电影信息部分结束*/
 
 })
