@@ -82,7 +82,7 @@ $(document).ready(function() {
             "<div class=\"on_show_hover_style\"></div>"+
             "<div class=\"on_show_hover_CAndL\"></div>"+
             "<div class=\"on_show_hover_pubdate\"></div>"+
-            "<button>购票</button>"+
+            "<button id=\"on_show_button"+i+"\">购票</button>"+
           "</div>"+
         "</div>"+
       "</div>";
@@ -213,4 +213,11 @@ $(document).ready(function() {
     });
   }
 
+  const on_show_content = $('.content')[0];
+  on_show_content.addEventListener('click', function(event) {
+    // console.log(event.target.id.slice(0, event.target.id.length - 1));
+    if (event.target.id.slice(0, event.target.id.length - 1) == 'on_show_button') {
+      window.location = './layouts/select_date_cinema_time.html';
+    }
+  })
 });
