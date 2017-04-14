@@ -36,8 +36,32 @@ $(document).ready(function() {
   /*模拟数据*/
 
   $.get(global_api.movie_info + movie_id, function(data, textStatus) {
-    console.log('textStatus: ', textStatus);
-    console.log('data: ', data);
+    // console.log('textStatus: ', textStatus);
+    // console.log('data: ', data);
+
+    let movie_info_poster = document.getElementById('movie_info_poster'),
+      movie_info_title = document.getElementById('movie_info_title'),
+      movie_info_rating = document.getElementById('movie_info_rating'),
+      movie_info_pubdate = document.getElementById('movie_info_pubdate'),
+      movie_info_movie_style = document.getElementById('movie_info_movie_style'),
+      movie_info_movie_type = document.getElementById('movie_info_movie_type'),
+      movie_info_country = document.getElementById('movie_info_country'),
+      movie_info_length = document.getElementById('movie_info_length');
+    movie_info_poster.src = data.posterSmall;
+    movie_info_title.innerHTML = data.title;
+    movie_info_rating.innerHTML = data.rating;
+    movie_info_pubdate.innerHTML = '首映：' + data.pubdate;
+    let movie_info_movie_style_tmp = '';
+    for (let i = 0; i < data.movieStyle.length; i++) {
+      movie_info_movie_style_tmp += data.movieStyle[i];
+      if (i != data.movieStyle.length - 1) {
+        movie_info_movie_style_tmp += ' / ';
+      }
+    }
+    movie_info_movie_style.innerHTML = '类型：' + movie_info_movie_style_tmp;
+    movie_info_movie_type.innerHTML = '版本：' + data.movieType;
+    movie_info_country.innerHTML = '地区：' + data.country;
+    movie_info_length.innerHTML = '时长：' + data.length + '分钟';
   })
 
 
