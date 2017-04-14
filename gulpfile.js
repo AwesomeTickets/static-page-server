@@ -59,7 +59,7 @@ gulp.task('staticPicsExport', function() {
 		.pipe(gulp.dest('tmp/static/pictures/export'));
 })
 gulp.task('staticPicsAssets', function() {
-	gulp.src(['static/pictures/assets/*/*', 'static/pictures/assets/*/*/*'])
+	gulp.src(['static/pictures/assets/*', 'static/pictures/assets/*/*'])
 		.pipe(gulp.dest('tmp/static/pictures/assets'));
 })
 
