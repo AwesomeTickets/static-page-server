@@ -21,6 +21,7 @@ $(document).ready(function() {
   })  
   /*顶部电影热图 js代码部分结束*/
 
+
   /*正在热映 js代码部分开始*/
   var global_flag = 0;
   // get resourse and handle
@@ -109,14 +110,12 @@ $(document).ready(function() {
       });
     });
    }
-  
   /*正在热映 js代码部分结束*/
 
-  /*即将上映 js代码部分开始*/
 
+  /*即将上映 js代码部分开始*/
   // 获取海报数据
   $.get(global_api.coming_soon, function(data, textStatus) {
-    console.log(textStatus);
     if (textStatus != "success")alert("服务器雪崩");
     coming_soon_add_img(data.count);
 
@@ -201,12 +200,8 @@ $(document).ready(function() {
       });
     });
     }
-  // 模拟api接口
-  
-  
-
-  
   /*即将上映 js代码部分结束*/
+
 
   //  滑动组件
   function slick_func() {
