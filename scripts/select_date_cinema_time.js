@@ -11,7 +11,7 @@ $(document).ready(function() {
     "data": [
         {
             "date": "2017-04-04",
-            "cinemaID": [111, 222, 333]
+            "cinemaID": [111, 222, 3, 4, 5]
         },
         {
             "date": "2017-04-05",
