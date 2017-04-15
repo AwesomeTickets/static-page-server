@@ -209,10 +209,20 @@ $(document).ready(function() {
 
   /*进行页面的url hash监控，有变化时就进行选择影院和选择场次的切换 开始*/
   window.onhashchange = function(hashObj) {
-    let newhash = hashObj.newURL.split('#')[1],
-      oldhash = hashObj.oldURL.split('#')[1];
-    document.getElementById(oldhash).style.display = 'none';
-    document.getElementById(newhash).style.display = 'block';
+    // console.log(hashObj);
+    // let newhash = hashObj.newURL.split('#')[1],
+    //   oldhash = hashObj.oldURL.split('#')[1];
+    // document.getElementById(oldhash).style.display = 'none';
+    // document.getElementById(newhash).style.display = 'block';
+    let hashTmp = window.location.hash;
+    // console.log(hashTmp);
+    if (hashTmp == '#select_cinema') {
+       document.getElementById('select_time').style.display = 'none';
+       document.getElementById('select_cinema').style.display = 'block';
+    } else if(hashTmp == '#select_time') {
+       document.getElementById('select_cinema').style.display = 'none';
+       document.getElementById('select_time').style.display = 'block';
+    }
   }
   /*进行页面的url hash监控，有变化时就进行选择影院和选择场次的切换 结束*/
 
