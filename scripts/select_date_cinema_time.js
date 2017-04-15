@@ -12,7 +12,7 @@ $(document).ready(function() {
     "data": [
         {
             "date": "2017-04-04",
-            "cinemaID": [111, 222, 3, 4, 5]
+            "cinemaID": [111, 222, 3, 4]
         },
         {
             "date": "2017-04-05",
@@ -54,6 +54,13 @@ $(document).ready(function() {
   /*模拟数据*/
 
   window.location.hash = 'select_cinema';
+
+  /*点击LOGO回到主页开始*/
+  let head_bar_img = document.getElementById('head_bar_img');
+  head_bar_img.onclick = function() {
+    window.location = '../index.html';
+  }
+  /*点击LOGO回到主页结束*/
 
   /*电影信息部分开始*/
   $.get(global_api.movie_info + movie_id, function(data, textStatus) {
