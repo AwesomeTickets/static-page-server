@@ -21,9 +21,15 @@ $(document).ready(function() {
   }
 
   const cinema = {
-    "cinemaID": 3,
+    "cinemaID": 111,
     "name": "金逸珠江国际影城（大学城店）",
     "location": "番禺区小谷围街贝岗村中二横路1号GOGO新天地商业广场B2B001铺"
+  }
+
+  const cinema2 = {
+    "cinemaID": 444,
+    "name": "万达国际影城（番禺店）",
+    "location": "番禺区南村镇汉溪大道东389号番禺万达广场四楼"
   }
 
   const brief = {
@@ -83,63 +89,79 @@ $(document).ready(function() {
     select_date_fragment.appendChild(button);
   }
   select_date.appendChild(select_date_fragment);
+  /*选择日期部分结束*/
 
+  let select_date_initial_count = 1;
+
+  /*选择影院部分开始*/
+  function select_cinema_add_items() {
+    let select_cinema_count = recent.data[select_date_initial_count - 1].cinemaID.length,
+      select_cinema_fragment = document.createDocumentFragment();
+    for (let i = 1; i <= select_cinema_count; i++) {
+      let select_cinema_item = document.createElement('div');
+      select_cinema_item.id = 'select_cinema_item' + i;
+      select_cinema_item.className = 'select_cinema_item';
+      let select_cinema_item_select_time = document.createElement('button');
+      select_cinema_item_select_time.id = select_cinema_item.id + '_select_time';
+      select_cinema_item_select_time.className = 'select_cinema_item_select_time';
+      select_cinema_item_select_time.innerHTML = '选择场次';
+      let select_cinema_item_min_price = document.createElement('div');
+      select_cinema_item_min_price.className = 'select_cinema_item_min_price';
+      select_cinema_item_min_price.innerHTML = '￥' + brief.min_price;
+      let select_cinema_item_min_price_span = document.createElement('span');
+      select_cinema_item_min_price_span.innerHTML = '起';
+      let select_cinema_item_name = document.createElement('div');
+      select_cinema_item_name.className = 'select_cinema_item_name';
+      select_cinema_item_name.innerHTML = cinema.name;
+      let select_cinema_item_location = document.createElement('div');
+      select_cinema_item_location.className = 'select_cinema_item_location';
+      select_cinema_item_location.innerHTML = cinema.location;
+      select_cinema_item.appendChild(select_cinema_item_select_time);
+      select_cinema_item_min_price.appendChild(select_cinema_item_min_price_span);
+      select_cinema_item.appendChild(select_cinema_item_min_price);
+      select_cinema_item.appendChild(select_cinema_item_name);
+      select_cinema_item.appendChild(select_cinema_item_location);
+      for (let j = 0; j < brief.time.length; j++) {
+        let select_cinema_item_time = document.createElement('div');
+        select_cinema_item_time.className = 'select_cinema_item_time';
+        select_cinema_item_time.innerHTML = brief.time[j].slice(0,5);
+        select_cinema_item.appendChild(select_cinema_item_time);
+      }
+      select_cinema_fragment.appendChild(select_cinema_item);
+    }
+    let select_cinema = document.getElementById('select_cinema');
+    select_cinema.appendChild(select_cinema_fragment);
+  }
+  function select_cinema_remove_items() {
+    let select_cinema = document.getElementById('select_cinema'),
+      lengthTmp = select_cinema.childNodes.length;
+    for (let i = 1; i < lengthTmp; i++) {
+      select_cinema.removeChild(select_cinema.childNodes[1]);
+    }
+  }
+  select_cinema_add_items();
+  // select_cinema_remove_items();
+  /*选择影院部分结束*/
+
+
+  /*更改日期开始*/
   // 找到每个button
   let select_date_documents = {};
   for (let i = 1; i <= recent.count; i++) {
     select_date_documents['select_date_button' + i] = document.getElementById('select_date_button' + i);
   }
 
-  let select_date_initial_count = 1;
   select_date.onclick = function(event) {
-    if (event.target.id.slice(-1) != select_date_initial_count) {
+    if (event.target.id.slice(-1) != select_date_initial_count && event.target.id.slice(0, event.target.id.length - 1) == 'select_date_button') {
       select_date_documents['select_date_button' + select_date_initial_count].className = '';
       select_date_initial_count = event.target.id.slice(-1);
       select_date_documents['select_date_button' + select_date_initial_count].className += 'active';
+      select_cinema_remove_items();
+      select_cinema_add_items();
     }
   }
-  /*选择日期部分结束*/
+  /*更改日期结束*/
 
-
-  /*选择影院部分开始*/
-  let select_cinema_count = recent.data[select_date_initial_count - 1].cinemaID.length,
-    select_cinema_fragment = document.createDocumentFragment();
-  for (let i = 1; i <= select_cinema_count; i++) {
-    let select_cinema_item = document.createElement('div');
-    select_cinema_item.id = 'select_cinema_item' + i;
-    select_cinema_item.className = 'select_cinema_item';
-    let select_cinema_item_select_time = document.createElement('button');
-    select_cinema_item_select_time.id = select_cinema_item.id + '_select_time';
-    select_cinema_item_select_time.className = 'select_cinema_item_select_time';
-    select_cinema_item_select_time.innerHTML = '选择场次';
-    let select_cinema_item_min_price = document.createElement('div');
-    select_cinema_item_min_price.className = 'select_cinema_item_min_price';
-    select_cinema_item_min_price.innerHTML = '￥' + brief.min_price;
-    let select_cinema_item_min_price_span = document.createElement('span');
-    select_cinema_item_min_price_span.innerHTML = '起';
-    let select_cinema_item_name = document.createElement('div');
-    select_cinema_item_name.className = 'select_cinema_item_name';
-    select_cinema_item_name.innerHTML = cinema.name;
-    let select_cinema_item_location = document.createElement('div');
-    select_cinema_item_location.className = 'select_cinema_item_location';
-    select_cinema_item_location.innerHTML = cinema.location;
-    select_cinema_item.appendChild(select_cinema_item_select_time);
-    select_cinema_item_min_price.appendChild(select_cinema_item_min_price_span);
-    select_cinema_item.appendChild(select_cinema_item_min_price);
-    select_cinema_item.appendChild(select_cinema_item_name);
-    select_cinema_item.appendChild(select_cinema_item_location);
-    for (let j = 0; j < brief.time.length; j++) {
-      let select_cinema_item_time = document.createElement('div');
-      select_cinema_item_time.className = 'select_cinema_item_time';
-      select_cinema_item_time.innerHTML = brief.time[j].slice(0,5);
-      select_cinema_item.appendChild(select_cinema_item_time);
-    }
-    select_cinema_fragment.appendChild(select_cinema_item);
-  }
-  let select_cinema = document.getElementById('select_cinema');
-  select_cinema.appendChild(select_cinema_fragment);
-  /*选择影院部分结束*/
-  
   // window.onhashchange = function(hashObj) {
   //   console.log('hashObj: ', hashObj);
   //   let newhash = hashObj.newURL.split('#')[1],
