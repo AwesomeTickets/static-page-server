@@ -6,6 +6,7 @@ $(document).ready(function() {
   /*模拟数据*/
   const movie_id = 1;
 
+  // 获取电影的近期排期
   const recent = {
     "count": 2,
     "data": [
@@ -32,10 +33,24 @@ $(document).ready(function() {
     "location": "番禺区南村镇汉溪大道东389号番禺万达广场四楼"
   }
 
+  // 获取电影的影院日排期摘要
   const brief = {
     "min_price": 38.0,
     "time": ["14:55:00", "18:20:00", "21:25:00"]
   }
+
+  // 获取电影排期（根据电影信息）
+  const movie_on_show = {
+    "movieOnShowID": 222,
+    "movieID": 444,
+    "cinemaHallID": 333,
+    "lang": "国语",
+    "showDate": "2017-04-04",
+    "showTime": "12:35:00",
+    "price": 35.0
+  }
+
+
   /*模拟数据*/
 
   window.location.hash = 'select_cinema';
