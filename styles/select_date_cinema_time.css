@@ -31,7 +31,6 @@
 
 #select {
   float: left;
-  border: 2px solid #ECE7E7; 
   margin-right: 24px;
   margin-left: -24px;
   height: 800px;
@@ -78,3 +77,32 @@
   color: #999999;
 }
 /*电影信息部分结束*/
+
+
+/*选择日期部分开始*/
+#select_date {
+  width: 100%;
+  height: 86px;
+  border-bottom: 4px solid #ECE7E7;
+}
+
+#select_date_title {
+  font-family: PingFangSC-Regular;
+  font-size: 16px;
+  color: #999999;
+}
+
+#select_date button{
+  font-family: PingFangSC-Regular;
+  background-color: #fff;
+  border: 0;
+  padding: 0;
+  margin: 16px 32px 16px 0;
+  font-size: 16px;
+}
+
+.active {
+  color: #E84A3A;
+  font-size: 20px !important;
+}
+/*选择日期部分结束*/

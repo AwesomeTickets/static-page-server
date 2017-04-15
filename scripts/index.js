@@ -217,7 +217,7 @@ $(document).ready(function() {
   on_show_content.addEventListener('click', function(event) {
     // console.log(event.target.id.slice(0, event.target.id.length - 1));
     if (event.target.id.slice(0, event.target.id.length - 1) == 'on_show_button') {
-      window.location = './layouts/select_date_cinema_time.html';
+      window.location = './layouts/select_date_cinema_time.html#A';
     }
   })
 });

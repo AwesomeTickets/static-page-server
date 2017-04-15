@@ -16,6 +16,9 @@ block content
 
   mixin select
     div#select
+      +select_date
+      +select_cinema
+      +select_time
 
   mixin movie_info
     div#movie_info
@@ -27,6 +30,19 @@ block content
       div#movie_info_movie_type
       div#movie_info_country
       div#movie_info_length
+
+  mixin select_date
+    div#select_date
+      div#select_date_title 选择日期
+      //- button#select_date_button1.active 4月4日
+      //- button#select_date_button2 4月5日
+      //- button#select_date_button3 4月6日
+
+  mixin select_cinema
+    div#select_cinema
+
+  mixin select_time
+    div#select_time
 
 block scripts
   script(type="text/javascript" src="/scripts/select_date_cinema_time.js")
