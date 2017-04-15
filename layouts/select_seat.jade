@@ -4,8 +4,32 @@ block links
   link(rel="stylesheet" href="/styles/select_seat.css")
 
 block content
-  div.fs-50 我是选择座位页面
-  button#returnHome.btn.btn-info.h-50.fs-22(type="button") 返回主页面
+  +head_bar
+  div#select_and_movie_info
+    +select
+    +movie_info
+
+  mixin head_bar
+    div#head_bar
+      img(src='/static/pictures/assets/logo_black_clear.png')
+      button#head_bar_count 账户
+
+  mixin select
+    div#select
+      div#select_title 选择座位
+      div#select_seat
+        img#select_seat_screen(src='/static/pictures/assets/selectSeat_screen.png')
+        div#select_seat_dot_line
+      div#select_seat_hint
+        img(src='/static/pictures/assets/seats/available.png') 
+        span 可选
+        img(src='/static/pictures/assets/seats/unavailable.png') 
+        span 不可选
+        img(src='/static/pictures/assets/seats/select.png') 
+        span 已选
+
+  mixin movie_info
+    div#movie_info
 
 block scripts
   script(type="text/javascript" src="/scripts/select_seat.js")

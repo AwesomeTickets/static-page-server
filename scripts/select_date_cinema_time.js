@@ -194,6 +194,9 @@ $(document).ready(function() {
     if (event.target.id == 'select_time_change_cinema') {
       window.location.hash = 'select_cinema';
     }
+    if (event.target.id.slice(-11) == 'select_seat') {
+      window.location = './select_seat.html';
+    }
   }
   /*点击选择场次按钮进行选择影院和选择场次的切换 结束*/
 
