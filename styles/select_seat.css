@@ -72,8 +72,6 @@
   left: 291px;
   top: 45px;
   width: 0px;
-  /*height也要算*/
-  height: 436px;
   border-right: 2px dotted #DF9088;
 }
 
@@ -100,7 +98,10 @@
   width: 24px;
   height: 24px;
   margin-right: 4px;
-  /*background-image: url('/static/pictures/assets/seats/available.png');*/
+}
+
+.select_seat_seats_item_unavailable {
+  background-image: url('/static/pictures/assets/seats/unavailable.png') !important;
 }
 
 #select_seat_hint {
