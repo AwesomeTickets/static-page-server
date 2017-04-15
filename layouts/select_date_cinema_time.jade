@@ -34,12 +34,20 @@ block content
   mixin select_date
     div#select_date
       div#select_date_title 选择日期
-      //- button#select_date_button1.active 4月4日
-      //- button#select_date_button2 4月5日
-      //- button#select_date_button3 4月6日
 
   mixin select_cinema
     div#select_cinema
+      div#select_cinema_title 选择影院
+      div#select_cinema_item1.select_cinema_item
+        button#select_cinema_item1_select_time.select_cinema_item_select_time 选择场次
+        div.select_cinema_item_min_price ￥41
+          span 起
+        div.select_cinema_item_name 金逸珠江国际影城（大学城店）
+        div.select_cinema_item_location 番禺区小谷围街贝岗村中二横路1号GOGO新天地商业广场B2B001铺
+        div.select_cinema_item_time 11:00
+        div.select_cinema_item_time 18:20
+        div.select_cinema_item_time 21:35
+        div.select_cinema_item_time 22:55
 
   mixin select_time
     div#select_time

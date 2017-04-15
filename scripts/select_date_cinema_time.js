@@ -19,6 +19,17 @@ $(document).ready(function() {
         }
     ]
   }
+
+  const cinema = {
+    "cinemaID": 3,
+    "name": "金逸珠江国际影城（大学城店）",
+    "location": "番禺区大学城XXX铺"
+  }
+
+  const brief = {
+    "min_price": 38.0,
+    "time": ["14:55:00", "18:20:00", "21:25:00"]
+  }
   /*模拟数据*/
 
   /*电影信息部分开始*/
