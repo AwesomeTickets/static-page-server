@@ -1,0 +1,127 @@
+/*顶栏样式开始*/
+#head_bar {
+  width: 100%;
+  height: 64px;
+  border-bottom: 2px solid #ECE7E7;
+  margin-bottom: 24px;
+}
+
+#head_bar > img {
+  position: relative;
+  left: 24px;
+  top: 16px;
+}
+
+#head_bar_count {
+  display: inline-block;
+  float: right;
+  margin: 24px 24px 0 0;
+  color: #484848;
+  border: 0;
+  background-color: #fff;
+}
+/*顶栏样式结束*/
+
+
+/*选择部分和电影信息部分的整体布局*/
+#select_and_movie_info {
+  width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#select {
+  display: inline-block;
+  width: 700px;
+}
+
+#movie_info {
+  display: inline-block;
+  float: right;
+  width: 300px;
+  height: 582px;
+  margin-left: 24px;
+  border: 2px solid #ECE7E7;
+  border-radius: 2px;
+}
+/*选择部分和电影信息部分的整体布局*/
+
+
+/*选择座位部分开始*/
+#select_title {
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #999999;
+}
+
+#select_seat {
+  position: relative;
+  width: 588px;
+  margin: 12px auto 0 auto;
+}
+
+#select_seat_screen {
+  display: block;
+  width: 584px;
+  height: 26px;
+  margin: 0 auto 32px auto;
+}
+
+#select_seat_dot_line {
+  position: absolute;
+  left: 291px;
+  top: 45px;
+  width: 0px;
+  /*height也要算*/
+  height: 436px;
+  border-right: 2px dotted #DF9088;
+}
+
+.select_seat_row {
+  width: 100%;
+  height: 24px;
+  margin-bottom: 16px;
+}
+
+.select_seat_row_number {
+  float: left;
+  font-family: HelveticaNeue;
+  font-size: 16px;
+  color: #999999;
+}
+
+.select_seat_seats {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.select_seat_seats_item {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+  /*background-image: url('/static/pictures/assets/seats/available.png');*/
+}
+
+#select_seat_hint {
+  width: 260px;
+  margin: 40px auto 0 auto;
+}
+
+#select_seat_hint span {
+  ont-family: PingFangSC-Regular;
+  font-size: 12px;
+  /*color: #484848;*/
+}
+
+#select_seat_hint span:nth-of-type(1), 
+#select_seat_hint span:nth-of-type(2) {
+  margin-left: 8px;
+  margin-right: 40px;
+}
+
+#select_seat_hint span:nth-of-type(3) {
+  margin-left: 8px;
+}
+
+/*选择座位部分结束*/
