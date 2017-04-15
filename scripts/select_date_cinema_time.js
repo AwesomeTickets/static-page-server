@@ -49,4 +49,58 @@ $(document).ready(function() {
   })
   /*电影信息部分结束*/
 
+  /*选择日期部分开始*/
+
+  // 根据api动态拿排期并添加到DOM中
+  let select_date = document.getElementById('select_date'),
+    select_date_fragment = document.createDocumentFragment();
+  for (let i = 1; i < recent.count + 1; i++) {
+    let button = document.createElement('button');
+    button.id = 'select_date_button' + i;
+    if (i == 1) {
+      button.className += 'active';
+    }
+    let monthTmp = recent.data[i - 1].date.slice(5,7);
+    if (monthTmp.slice(0, 1) == '0') {
+      monthTmp = monthTmp.slice(1, 2);
+    }
+    let dayTmp = recent.data[i - 1].date.slice(8,10);
+    if (dayTmp.slice(0, 1) == '0') {
+      dayTmp = dayTmp.slice(1, 2);
+    }
+    button.innerHTML = monthTmp + '月' + dayTmp + '日';
+    select_date_fragment.appendChild(button);
+  }
+  select_date.appendChild(select_date_fragment);
+
+  // 找到每个button
+  let select_date_documents = {};
+  for (let i = 1; i < recent.count + 1; i++) {
+    select_date_documents['select_date_button' + i] = document.getElementById('select_date_button' + i);
+  }
+
+  let select_date_initial_count = 1;
+  select_date.onclick = function(event) {
+    if (event.target.id.slice(-1) != select_date_initial_count) {
+      select_date_documents['select_date_button' + select_date_initial_count].className = '';
+      select_date_initial_count = event.target.id.slice(-1);
+      select_date_documents['select_date_button' + select_date_initial_count].className += 'active';
+    }
+  }
+  /*选择日期部分结束*/
+
+  // window.onhashchange = function(hashObj) {
+  //   console.log('hashObj: ', hashObj);
+  //   let newhash = hashObj.newURL.split('#')[1],
+  //     oldhash = hashObj.oldURL.split('#')[1];
+  //   document.getElementById(oldhash).style.display = 'none';
+  //   document.getElementById(newhash).style.display = 'block';
+  // }
+
+  // setTimeout(function() {
+  //   window.location.hash = 'B'
+  // }, 4000);
+  // setTimeout(function() {
+  //   window.location.hash = 'C'
+  // }, 8000);
 })
