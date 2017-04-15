@@ -38,6 +38,8 @@ $(document).ready(function() {
   }
   /*模拟数据*/
 
+  window.location.hash = 'select_cinema';
+
   /*电影信息部分开始*/
   $.get(global_api.movie_info + movie_id, function(data, textStatus) {
     let movie_info_poster = document.getElementById('movie_info_poster'),
@@ -91,7 +93,10 @@ $(document).ready(function() {
   select_date.appendChild(select_date_fragment);
   /*选择日期部分结束*/
 
-  let select_date_initial_count = 1;
+  let select_date_initial_count = 1,
+    select = document.getElementById('select'),
+    select_cinema = document.getElementById('select_cinema'),
+    select_time = document.getElementById('select_time');
 
   /*选择影院部分开始*/
   function select_cinema_add_items() {
@@ -129,12 +134,10 @@ $(document).ready(function() {
       }
       select_cinema_fragment.appendChild(select_cinema_item);
     }
-    let select_cinema = document.getElementById('select_cinema');
     select_cinema.appendChild(select_cinema_fragment);
   }
   function select_cinema_remove_items() {
-    let select_cinema = document.getElementById('select_cinema'),
-      lengthTmp = select_cinema.childNodes.length;
+    let lengthTmp = select_cinema.childNodes.length;
     for (let i = 1; i < lengthTmp; i++) {
       select_cinema.removeChild(select_cinema.childNodes[1]);
     }
@@ -162,18 +165,30 @@ $(document).ready(function() {
   }
   /*更改日期结束*/
 
-  // window.onhashchange = function(hashObj) {
-  //   console.log('hashObj: ', hashObj);
-  //   let newhash = hashObj.newURL.split('#')[1],
-  //     oldhash = hashObj.oldURL.split('#')[1];
-  //   document.getElementById(oldhash).style.display = 'none';
-  //   document.getElementById(newhash).style.display = 'block';
-  // }
+  /*点击选择场次按钮进行选择影院和选择场次的切换 开始*/
+  let the_select_cinema_name = '';
+  select_cinema.onclick = function(event) {
+    if (event.target.id.slice(-11) == 'select_time') {
+      the_select_cinema_name = document.getElementById(event.target.id.slice(0, 19)).childNodes[2].innerHTML;
+      window.location.hash = 'select_time';
+    }
 
-  // setTimeout(function() {
-  //   window.location.hash = 'B'
-  // }, 4000);
-  // setTimeout(function() {
-  //   window.location.hash = 'C'
-  // }, 8000);
+  }
+
+  select_time.onclick = function(event) {
+    if (event.target.id == 'select_time_change_cinema') {
+      window.location.hash = 'select_cinema';
+    }
+  }
+  /*点击选择场次按钮进行选择影院和选择场次的切换 结束*/
+
+  /*进行页面的url hash监控，有变化时就进行选择影院和选择场次的切换 开始*/
+  window.onhashchange = function(hashObj) {
+    let newhash = hashObj.newURL.split('#')[1],
+      oldhash = hashObj.oldURL.split('#')[1];
+    document.getElementById(oldhash).style.display = 'none';
+    document.getElementById(newhash).style.display = 'block';
+  }
+  /*进行页面的url hash监控，有变化时就进行选择影院和选择场次的切换 结束*/
+
 })
