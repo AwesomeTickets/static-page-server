@@ -10,6 +10,7 @@
   position: relative;
   left: 24px;
   top: 16px;
+  cursor: pointer;
 }
 
 #head_bar_count {

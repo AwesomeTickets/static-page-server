@@ -13,21 +13,6 @@ $(document).ready(function() {
   const movieID = location.href.split('?')[1].split('#')[0].slice(8);
   /*取下movieID*/
 
-
-  /*模拟数据*/
-
-  // // 获取电影排期（根据电影信息）
-  // const movie_on_show = {
-  //   "movieOnShowID": 222,
-  //   "movieID": 444,
-  //   "cinemaHallID": 333,
-  //   "lang": "国语",
-  //   "showDate": "2017-04-04",
-  //   "showTime": "12:35:00",
-  //   "price": 35.0
-  // }
-  /*模拟数据*/
-
   window.location.hash = '#select_cinema';
 
   /*点击LOGO回到主页开始*/
@@ -83,11 +68,10 @@ $(document).ready(function() {
     select_cinema = document.getElementById('select_cinema'),
     select_time = document.getElementById('select_time');
 
-  /*选择部分*/  
+  /*选择部分 开始*/  
   // 根据api动态拿电影排期
   $.get(global_api.recent, {movieID: movieID}, function(data, textStatus) {
     const recent = data;
-    // console.log('recent: ', recent);
     /*将电影各个排期呈现在页面上*/
     let select_date = document.getElementById('select_date'),
       select_date_fragment = document.createDocumentFragment();
@@ -121,11 +105,9 @@ $(document).ready(function() {
         // 获取电影院日期摘要
         $.get(global_api.brief, {showDate: showDate, cinemaID: cinemaID, movieID: movieID}, function(data, textStatus) {
           const brief = data;
-          // console.log('brief: ', brief);
           // 获取影院信息
           $.get(global_api.cinema + cinemaID, function(data, textStatus) {
             const cinema = data;
-            // console.log('cinema: ', cinema);
             let select_cinema_fragment = document.createDocumentFragment();
             let select_cinema_item = document.createElement('div');
             select_cinema_item.id = 'select_cinema_item' + i;
@@ -159,13 +141,17 @@ $(document).ready(function() {
             select_cinema_fragment.appendChild(select_cinema_item);
             select_cinema.appendChild(select_cinema_fragment);
 
+            let select_time_clicked_cinemaID = '',
+              select_time_clicked_cinema_name = '';
+
             /*点击选择场次按钮进行选择影院和选择场次的切换 开始*/
             select_cinema.onclick = function(event) {
               if (event.target.id.slice(-11) == 'select_time') {
                 window.location.hash = '#select_time';
-                let select_time_clicked_cinemaID = event.target.className.split('_')[event.target.className.split('_').length - 1];
-                let select_time_clicked_cinema_name = event.target.nextSibling.nextSibling.innerHTML;
-                select_time_show_all(select_time_clicked_cinemaID, select_time_clicked_cinema_name);
+                let select_time_clicked_showDate = showDate;
+                select_time_clicked_cinemaID = event.target.className.split('_')[event.target.className.split('_').length - 1];
+                select_time_clicked_cinema_name = event.target.nextSibling.nextSibling.innerHTML;
+                select_time_show_all(showDate, select_time_clicked_cinemaID, select_time_clicked_cinema_name);
               }
             }
             select_time.onclick = function(event) {
@@ -179,7 +165,7 @@ $(document).ready(function() {
             /*点击选择场次按钮进行选择影院和选择场次的切换 结束*/          
               
             /*选择场次 开始*/
-            function select_time_show_all(select_time_clicked_cinemaID, select_time_clicked_cinema_name) {
+            function select_time_show_all(select_time_clicked_showDate, select_time_clicked_cinemaID, select_time_clicked_cinema_name) {
               select_time_remove_items();
               // 将影院名，更改影院按钮等插入DOM中
               let select_time_cinema_info = document.createElement('div');
@@ -199,9 +185,8 @@ $(document).ready(function() {
               select_time.appendChild(select_time_title);
 
               // 获取电影院日排期
-              $.get(global_api.day, {showDate: showDate, cinemaID: select_time_clicked_cinemaID, movieID: movieID}, function(data, textStatus) {
+              $.get(global_api.day, {showDate: select_time_clicked_showDate, cinemaID: select_time_clicked_cinemaID, movieID: movieID}, function(data, textStatus) {
                 const day = data;
-
                 for (let i = 0; i < day.count; i++) {
                   // 获取电影排期（根据日排期）
                   $.get(global_api.day_times + day.data[i], function(data, textStatus) {
@@ -266,13 +251,29 @@ $(document).ready(function() {
             }
             /*选择场次 结束*/
 
-            // div#select_time_item1.select_time_item
-            //   div.select_time_item_show_time 12:35
-            //   div.select_time_item_end_time -14:45
-            //   div.select_time_item_lang_and_movie_type 国语 3D
-            //   div.select_time_item_cinema_hall_name 2号厅
-            //   div.select_time_item_price ￥38
-            //   button#select_time_item1_select_seat.select_time_item_select_seat 选座购票
+            /*更改日期开始*/
+            let select_date_documents = {};
+            for (let i = 1; i <= recent.count; i++) {
+              select_date_documents['select_date_button' + i] = document.getElementById('select_date_button' + i);
+            }
+            select_date.onclick = function(event) {
+              if (event.target.id.slice(event.target.id.length - 1) != select_date_initial_count && event.target.id.slice(0, event.target.id.length - 1) == 'select_date_button') {
+                if (location.hash == '#select_cinema') {
+                  select_date_documents['select_date_button' + select_date_initial_count].className = '';
+                  select_date_initial_count = event.target.id.slice(-1);
+                  select_date_documents['select_date_button' + select_date_initial_count].className += 'active';
+                  select_cinema_remove_items();
+                  select_cinema_add_items();
+                } else if (location.hash == '#select_time') {
+                  select_date_documents['select_date_button' + select_date_initial_count].className = '';
+                  select_date_initial_count = event.target.id.slice(-1);
+                  select_date_documents['select_date_button' + select_date_initial_count].className += 'active';
+                  select_time_show_all(recent.data[select_date_initial_count - 1].showDate, select_time_clicked_cinemaID, select_time_clicked_cinema_name);            
+                }
+
+              }
+            }
+            /*更改日期结束*/
 
           })
         })
@@ -297,25 +298,9 @@ $(document).ready(function() {
     // 初始选择默认日期
     select_cinema_add_items();
     /*选择影院部分结束*/
-
-
-    /*更改日期开始*/
-    let select_date_documents = {};
-    for (let i = 1; i <= recent.count; i++) {
-      select_date_documents['select_date_button' + i] = document.getElementById('select_date_button' + i);
-    }
-    select_date.onclick = function(event) {
-      if (event.target.id.slice(-1) != select_date_initial_count && event.target.id.slice(0, event.target.id.length - 1) == 'select_date_button') {
-        select_date_documents['select_date_button' + select_date_initial_count].className = '';
-        select_date_initial_count = event.target.id.slice(-1);
-        select_date_documents['select_date_button' + select_date_initial_count].className += 'active';
-        select_cinema_remove_items();
-        select_cinema_add_items();
-      }
-    }
-    /*更改日期结束*/
   })
-  /*选择部分*/  
+
+  /*选择部分 结束*/  
 
 
   /*进行页面的url hash监控，有变化时就进行选择影院和选择场次的切换 开始*/
