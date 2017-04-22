@@ -7,7 +7,8 @@ $(document).ready(function() {
   const global_api = {
     head: 'http://120.25.76.106/resource/movie/popular?count=3',
     on_show: 'http://120.25.76.106/resource/movie/on_show',
-    coming_soon: 'http://120.25.76.106/resource/movie/coming_soon',
+    on_show_resourse: 'http://120.25.76.106/resource/movie/',
+    coming_soon: 'http://120.25.76.106/resource/movie/coming_soon', 
   }
 
   /*顶部电影热图 js代码部分开始*/
@@ -16,7 +17,7 @@ $(document).ready(function() {
   /*使用ajax根据api来拿照片信息*/
   $.get(global_api.head, function(data, textStatus) {
     for (let i = 0; i < 3; i++) {
-      head_popular_images[i].src = data.data[i].uri;
+      head_popular_images[i].src = data.data[i].posterLarge;
     }
   })  
   /*顶部电影热图 js代码部分结束*/
@@ -30,9 +31,8 @@ $(document).ready(function() {
     on_show_add_img(data.count);
 
     var on_show_global_temp = 0, on_show_num = data.count;
-    var on_show_resourse = "http://120.25.76.106/resource/movie/";
     for (var i = 0; i < data.count; i++) {
-      $.get(on_show_resourse+data.data[i], function(data, textStatus) {
+      $.get(global_api.on_show_resourse+data.data[i], function(data, textStatus) {
         $("#on_show_img"+on_show_global_temp).attr("data-lazy", data.posterSmall);
         on_show_set_info(data, on_show_global_temp);
         on_show_set_hover_info(data, on_show_global_temp);
@@ -43,6 +43,17 @@ $(document).ready(function() {
         }
       });
     }
+
+    // 添加点击事件，点击进入选择日期、影院、场次页面。
+    const on_show_content = $('.content')[0];
+    on_show_content.addEventListener('click', function(event) {
+      // console.log(event.target.id);
+      if (event.target.id.slice(0, event.target.id.length - 1) == 'on_show_button') {
+        const movieID = data.data[event.target.id.slice(-1)];
+        // console.log(movieID);
+        window.location = './layouts/select_date_cinema_time.html?movieID=' + movieID + '#select_cinema';
+      }
+    })
   });
 
    function on_show_set_info(data, i) {
@@ -212,12 +223,4 @@ $(document).ready(function() {
       infinite:false
     });
   }
-
-  const on_show_content = $('.content')[0];
-  on_show_content.addEventListener('click', function(event) {
-    // console.log(event.target.id.slice(0, event.target.id.length - 1));
-    if (event.target.id.slice(0, event.target.id.length - 1) == 'on_show_button') {
-      window.location = './layouts/select_date_cinema_time.html#select_cinema';
-    }
-  })
 });
