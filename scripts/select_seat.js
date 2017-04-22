@@ -4,6 +4,8 @@ $(document).ready(function() {
     seat_layout: 'http://120.25.76.106/resource/cinema_hall/',
     unavailable: 'http://120.25.76.106/resource/seat/unavailable',
     movie_on_show: 'http://120.25.76.106/resource/movie_on_show',
+    cinema: 'http://120.25.76.106/resource/cinema/',
+    cinema_hall: 'http://120.25.76.106/resource/cinema_hall/',
   }
 
   const cinemaHallID = location.href.split('?')[1].split('&')[0].split('=')[1];
@@ -20,16 +22,76 @@ $(document).ready(function() {
   /*点击LOGO回到主页结束*/
 
   /*电影信息部分 开始*/
+  let movie_info_poster = document.getElementById('movie_info_poster'),
+    movie_info_title = document.getElementById('movie_info_title'),
+    movie_info_lang_and_movie_type = document.getElementById('movie_info_lang_and_movie_type'),
+    movie_info_length = document.getElementById('movie_info_length'),
+    movie_info_cinema_name = document.getElementById('movie_info_cinema_name'),
+    movie_info_cinema_hall_name = document.getElementById('movie_info_cinema_hall_name'),
+    movie_info_show_date = document.getElementById('movie_info_show_date'),
+    movie_info_show_time = document.getElementById('movie_info_show_time'),
+    movie_info_change_show_time_dialog_triangle = document.getElementById('movie_info_change_show_time_dialog_triangle'),
+    movie_info_change_show_time_dialog = document.getElementById('movie_info_change_show_time_dialog'),
+    movie_info_seats = document.getElementById('movie_info_seats'),
+    movie_info_price = document.getElementById('movie_info_price'),
+    movie_info_total_price = document.getElementById('movie_info_total_price');
+
   $.get(global_api.movie_info + movieID, function(data, textStatus) {
     const movie_info = data;
     console.log('movie_info: ', movie_info);
     $.get(global_api.movie_on_show, {movieID: movieID, cinemaHallID: cinemaHallID, showDate: showDate, showTime: showTime}, function(data, textStatus) {
       const movie_on_show = data;
       console.log('movie_on_show: ', movie_on_show);
-      let movie_info_poster = document.getElementById('movie_info_poster');
       movie_info_poster.src = movie_info.posterSmall;
+      movie_info_title.innerHTML = movie_info.title;
+      movie_info_lang_and_movie_type.innerHTML = movie_on_show.lang + ' ' + movie_info.movieType;
+      movie_info_length.innerHTML = movie_info.length + '分钟';
+      $.get(global_api.cinema_hall + cinemaHallID, function(data, textStatus) {
+        const cinema_hall = data;
+        movie_info_cinema_hall_name.innerHTML = cinema_hall.name;
+        $.get(global_api.cinema + cinema_hall.cinemaID, function(data, textStatus) {
+          const cinema = data;
+          movie_info_cinema_name.innerHTML = cinema.name;
+        })
+      })
+      let month_tmp = showDate.split('-')[1],
+        day_tmp = showDate.split('-')[2];
+      if (month_tmp.slice(0, 1) == '0') {
+        month_tmp = month_tmp.slice(1, 2);
+      }
+      if (day_tmp.slice(0, 1) == '0') {
+        day_tmp = day_tmp.slice(1, 2);
+      }
+      movie_info_show_date.innerHTML = month_tmp + '月' + day_tmp + '日';
+      movie_info_show_time.innerHTML = showTime.slice(0,5);
     })
   })
+
+//  img#movie_info_poster
+// div#movie_info_title 金刚狼3：殊死一战
+// div#movie_info_lang_and_movie_type 英文 3D
+// div#movie_info_length 130分钟
+// div#movie_info_cinema_name 金逸珠江国际影城（大学城店）
+// div#movie_info_cinema_hall_name 5号厅
+// div#movie_info_show_date_hint 日期：
+// div#movie_info_show_date 4月4日
+// div#movie_info_show_time_hint 场次：
+// div#movie_info_show_time 13：25
+// button#movie_info_change_show_time 更改场次
+// div#movie_info_change_show_time_dialog_triangle
+// div#movie_info_change_show_time_dialog
+//   div#movie_info_change_show_time_dialog_item1.movie_info_change_show_time_dialog_item 10:35
+//   div#movie_info_change_show_time_dialog_item2.movie_info_change_show_time_dialog_item 12:35
+//   div#movie_info_change_show_time_dialog_item3.movie_info_change_show_time_dialog_item 14:35
+//   div#movie_info_change_show_time_dialog_item4.movie_info_change_show_time_dialog_item 16:35
+//   div#movie_info_change_show_time_dialog_item4.movie_info_change_show_time_dialog_item 17:35
+// div#movie_info_seats_hint 座位：
+// div#movie_info_seats 5排6座 5排7座 5排8座 5排9座
+// div#movie_info_price_hint 价格：
+// div#movie_info_price ￥38 × 4张
+// div#movie_info_total_price_hint 总价：
+// div#movie_info_total_price ￥152
+// button#movie_info_order 确认购票   
   /*电影信息部分 结束*/
 
 
