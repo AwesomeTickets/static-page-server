@@ -141,7 +141,7 @@
 #movie_info_change_show_time_dialog {
   display: none;
   width: 273px;
-  height: 118px;
+  height: 120px;
   background: #FAFAFA;
   border: 1px solid #ECE7E7;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12);
@@ -168,6 +168,7 @@
   border-right: 0;
 }
 .movie_info_change_show_time_dialog_item {
+  cursor: pointer;
   display: inline-block;
   margin: 16px 0 0 24px;
   font-family: Avenir-Heavy;
@@ -187,11 +188,25 @@
   position: relative;
   top: -22px; 
   margin-right: 50px;
+  height: 95px;
+  overflow: auto;
+}
+
+.movie_info_seats_item {
+  display: inline-block;
   font-family: PingFangSC-Regular;
   font-size: 16px;
   color: #484848;
-  height: 65px;
-  overflow: auto;
+  margin-right: 10px;
+}
+
+#movie_info_price_hint,
+#movie_info_price,
+#movie_info_total_price_hint,
+#movie_info_total_price,
+#movie_info_order {
+  position: relative;
+  top: -25px;
 }
 
 #movie_info_price {
@@ -276,6 +291,11 @@
 .select_seat_seats_item_unavailable {
   background-image: url('/static/pictures/assets/seats/unavailable.png') !important;
 }
+
+.select_seat_seats_item_select {
+  background-image: url('/static/pictures/assets/seats/select.png') !important;
+}
+
 
 #select_seat_hint {
   width: 260px;
