@@ -141,29 +141,28 @@ $(document).ready(function() {
             select_cinema_fragment.appendChild(select_cinema_item);
             select_cinema.appendChild(select_cinema_fragment);
 
-            let select_time_clicked_cinemaID = '',
+            let select_time_clicked_showDate = '', 
+              select_time_clicked_cinemaID = '',
               select_time_clicked_cinema_name = '';
 
             /*点击选择场次按钮进行选择影院和选择场次的切换 开始*/
             select_cinema.onclick = function(event) {
               if (event.target.id.slice(-11) == 'select_time') {
                 window.location.hash = '#select_time';
-                let select_time_clicked_showDate = showDate;
+                select_time_clicked_showDate = showDate;
                 select_time_clicked_cinemaID = event.target.className.split('_')[event.target.className.split('_').length - 1];
                 select_time_clicked_cinema_name = event.target.nextSibling.nextSibling.innerHTML;
                 select_time_show_all(showDate, select_time_clicked_cinemaID, select_time_clicked_cinema_name);
               }
             }
-            select_time.onclick = function(event) {
-              if (event.target.id == 'select_time_change_cinema') {
-                window.location.hash = '#select_cinema';
-              }
-              if (event.target.id.slice(-11) == 'select_seat') {
-                window.location = './select_seat.html';
-              }
-            }
             /*点击选择场次按钮进行选择影院和选择场次的切换 结束*/          
               
+            let cinemaHallID = '',
+              movieOnShowID = '',
+              showTime = '';
+
+            // todo: 场次按时间排序，并且现在传到select_seat的showTime有点不对
+
             /*选择场次 开始*/
             function select_time_show_all(select_time_clicked_showDate, select_time_clicked_cinemaID, select_time_clicked_cinema_name) {
               select_time_remove_items();
@@ -191,7 +190,10 @@ $(document).ready(function() {
                   // 获取电影排期（根据日排期）
                   $.get(global_api.day_times + day.data[i], function(data, textStatus) {
                     const day_times = data;
-
+                    cinemaHallID = day_times.cinemaHallID;
+                    movieOnShowID = day_times.movieOnShowID;
+                    showTime = day_times.showTime;
+                    
                     // 获取影厅信息（不含座位布局）
                     $.get(global_api.cinema_hall + day_times.cinemaHallID, function(data, textStatus) {
                       const cinema_hall = data;
@@ -243,8 +245,19 @@ $(document).ready(function() {
                       select_time_item_fragment.appendChild(select_time_item_price);
                       select_time_item_fragment.appendChild(select_time_item_select_seat);
                       select_time_item.appendChild(select_time_item_fragment);
-                      select_time.appendChild(select_time_item);
+                      select_time.appendChild(select_time_item);                    
                     })
+
+                    /*选择场次部分的两个点击事件 开始*/
+                    select_time.onclick = function(event) {
+                      if (event.target.id == 'select_time_change_cinema') {
+                        window.location.hash = '#select_cinema';
+                      }
+                      if (event.target.id.slice(-11) == 'select_seat') {
+                        window.location = './select_seat.html?cinemaHallID=' + cinemaHallID + '&movieOnShowID=' + movieOnShowID + '&movieID=' + movieID + '&showDate=' + select_time_clicked_showDate + '&showTime=' + showTime;
+                      }
+                    }                      
+                    /*选择场次部分的两个点击事件 结束*/
                   })
                 }
               })
