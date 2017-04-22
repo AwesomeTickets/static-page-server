@@ -41,16 +41,15 @@ $(document).ready(function() {
           if (global_flag == 1){slick_func();}
           else global_flag++;
         }
+        $("#on_show_button"+ (on_show_global_temp - 1)).addClass('on_show_img_class_' + data.movieID); 
       });
     }
 
     // 添加点击事件，点击进入选择日期、影院、场次页面。
     const on_show_content = $('.content')[0];
     on_show_content.addEventListener('click', function(event) {
-      // console.log(event.target.id);
       if (event.target.id.slice(0, event.target.id.length - 1) == 'on_show_button') {
-        const movieID = data.data[event.target.id.slice(-1)];
-        // console.log(movieID);
+        const movieID = event.target.className.split('_')[4];
         window.location = './layouts/select_date_cinema_time.html?movieID=' + movieID + '#select_cinema';
       }
     })
