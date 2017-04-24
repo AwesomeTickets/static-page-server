@@ -113,6 +113,7 @@ $(document).ready(function() {
 
         if (select_seat_layout_matrix[i - 1].slice(j - 1, j) == 1) {
           select_seat_seats_item.style.backgroundImage = 'url(\'/static/pictures/assets/seats/available.png\')';
+          select_seat_seats_item.className = 'select_seat_seats_item select_seat_seats_item_avaliable';
         }
         select_seat_seats.appendChild(select_seat_seats_item);
       }
@@ -139,16 +140,16 @@ $(document).ready(function() {
           }
         }
         let tmpArr = Object.keys(tmpObj);
-        document.getElementById('select_seat_' + unavailable.data[i][0] + '_' + (parseInt(tmpArr[unavailable.data[i][1] - 1]) + 1)).className += ' select_seat_seats_item_unavailable';
+        document.getElementById('select_seat_' + unavailable.data[i][0] + '_' + (parseInt(tmpArr[unavailable.data[i][1] - 1]) + 1)).className = 'select_seat_seats_item select_seat_seats_item_unavailable';
       }
     })
 
     // 点击选座位
     select_seat.onclick = function(event) {
-      if (event.target.className == 'select_seat_seats_item' && event.target.id.slice(0, 12) == 'select_seat_') {
+      if (event.target.className == 'select_seat_seats_item select_seat_seats_item_avaliable' && event.target.id.slice(0, 12) == 'select_seat_') {
         if (Object.keys(select_seats).length < 4) {
           if (event.target.style.backgroundImage != '') {
-            event.target.className += ' select_seat_seats_item_select';
+            event.target.className = 'select_seat_seats_item select_seat_seats_item_select';
             select_seats[event.target.id] = event.target.id.split('_')[2] + ' 排 ' + event.target.id.split('_')[3] + ' 座';
             show_select_seats();
             hide_movie_info_change_show_time_dialog();
@@ -159,10 +160,12 @@ $(document).ready(function() {
           hide_movie_info_change_show_time_dialog();  
         }
       } else if (event.target.className == 'select_seat_seats_item select_seat_seats_item_select' && event.target.id.slice(0, 12) == 'select_seat_') {
-        event.target.className = 'select_seat_seats_item';
+        event.target.className = 'select_seat_seats_item select_seat_seats_item_avaliable';
         delete select_seats[event.target.id];
         show_select_seats();
         hide_movie_info_change_show_time_dialog();
+      } else if (event.target.className == 'select_seat_seats_item select_seat_seats_item_unavailable' && event.target.id.slice(0, 12) == 'select_seat_') {
+        event.target.className = 'select_seat_seats_item select_seat_seats_item_unavailable_click';
       }
     }
 
@@ -283,6 +286,7 @@ $(document).ready(function() {
 
                 if (select_seat_layout_matrix[i - 1].slice(j - 1, j) == 1) {
                   select_seat_seats_item.style.backgroundImage = 'url(\'/static/pictures/assets/seats/available.png\')';
+                  select_seat_seats_item.className = 'select_seat_seats_item select_seat_seats_item_avaliable';
                 }
                 select_seat_seats.appendChild(select_seat_seats_item);
               }
@@ -309,7 +313,7 @@ $(document).ready(function() {
                   }
                 }
                 let tmpArr = Object.keys(tmpObj);
-                document.getElementById('select_seat_' + unavailable.data[i][0] + '_' + (parseInt(tmpArr[unavailable.data[i][1] - 1]) + 1)).className += ' select_seat_seats_item_unavailable';
+                document.getElementById('select_seat_' + unavailable.data[i][0] + '_' + (parseInt(tmpArr[unavailable.data[i][1] - 1]) + 1)).className = 'select_seat_seats_item select_seat_seats_item_unavailable';
               }
             })
           })
