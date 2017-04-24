@@ -74,8 +74,8 @@ $(document).ready(function() {
       if (day_tmp.slice(0, 1) == '0') {
         day_tmp = day_tmp.slice(1, 2);
       }
-      movie_info_show_date.innerHTML = month_tmp + '月' + day_tmp + '日';
-      movie_info_show_time.innerHTML = showTime.slice(0,5);
+      movie_info_show_date.innerHTML = month_tmp + ' 月 ' + day_tmp + ' 日';
+      movie_info_show_time.innerHTML = showTime.slice(0,2) + ' : ' + showTime.slice(3, 5);
       global_movie_price = movie_on_show.price;
       movie_info_price.innerHTML = '￥' + global_movie_price + ' × 0张';
       movie_info_total_price.innerHTML = '￥0';
@@ -149,17 +149,20 @@ $(document).ready(function() {
         if (Object.keys(select_seats).length < 4) {
           if (event.target.style.backgroundImage != '') {
             event.target.className += ' select_seat_seats_item_select';
-            select_seats[event.target.id] = event.target.id.split('_')[2] + '排' + event.target.id.split('_')[3] + '座';
+            select_seats[event.target.id] = event.target.id.split('_')[2] + ' 排 ' + event.target.id.split('_')[3] + ' 座';
             show_select_seats();
+            hide_movie_info_change_show_time_dialog();
           }
         } else if (Object.keys(select_seats).length >= 4) { 
           // alert('最多选择四个座位');
           hint_dialog.style.display = 'block';
+          hide_movie_info_change_show_time_dialog();  
         }
       } else if (event.target.className == 'select_seat_seats_item select_seat_seats_item_select' && event.target.id.slice(0, 12) == 'select_seat_') {
         event.target.className = 'select_seat_seats_item';
         delete select_seats[event.target.id];
         show_select_seats();
+        hide_movie_info_change_show_time_dialog();
       }
     }
 
@@ -188,9 +191,14 @@ $(document).ready(function() {
       }
     }
 
-    let showTimeTmp = '',
-      if_time_changed = false,
-      movieOnShowIDTmp = movieOnShowID;
+    // 隐藏更改场次弹框
+    function hide_movie_info_change_show_time_dialog() {
+      movie_info_change_show_time_dialog_triangle.style.display = 'none';
+      movie_info_change_show_time_dialog.style.display = 'none';
+      movie_info_change_show_time.innerHTML = '更改场次';   
+    }
+
+    let showTimeTmp = '';
 
     // 点击更改场次按钮，显示更改场次的框
     movie_info_change_show_time.onclick = function(event) {
@@ -224,79 +232,7 @@ $(document).ready(function() {
           })
         }
       } else if (movie_info_change_show_time.innerHTML == '确定') {
-        if (if_time_changed == true && movieOnShowIDTmp != changedMovieOnShowID) {
-          movieOnShowIDTmp = changedMovieOnShowID;
-          if_time_changed = false;
-          movie_info_show_time.innerHTML = showTimeTmp;
-          show_select_seats();
-          clear_all_seats();
-          clear_all_selected_seats();
-
-          $.get(global_api.movie_on_show + '/' + changedMovieOnShowID, function(data, textStatus) {
-            const movie_on_show = data;
-            changedCinemaHallID = movie_on_show.cinemaHallID;
-            $.get(global_api.seat_layout + changedCinemaHallID + '/seat_layout', function(data, textStatus) {
-              const seat_layout = data;
-              let select_seat_layout_matrix = seat_layout.seatLayout.split(','),
-                select_seat_row_count = select_seat_layout_matrix.length,
-                select_seat_column_count = select_seat_layout_matrix[0].length,
-                select_seat_fragment = document.createDocumentFragment(),
-                select_seat = document.getElementById('select_seat'),
-                select_seat_dot_line = document.getElementById('select_seat_dot_line');
-
-              for (let i = 1; i <= select_seat_row_count; i++) {
-                let select_seat_row = document.createElement('div');
-                select_seat_row.className = 'select_seat_row';
-                let select_seat_row_number = document.createElement('div');
-                select_seat_row_number.className = 'select_seat_row_number';
-                select_seat_row_number.innerHTML = i;
-                let select_seat_seats = document.createElement('div');
-                select_seat_seats.className = 'select_seat_seats';
-                select_seat_seats.style.width = select_seat_column_count * 28 + 'px'; 
-
-                for (let j = 1; j <= select_seat_column_count; j++) {
-                  let select_seat_seats_item = document.createElement('div');
-                  select_seat_seats_item.className = 'select_seat_seats_item';
-                  select_seat_seats_item.id = 'select_seat_' + i + '_' + j;
-
-
-                  if (select_seat_layout_matrix[i - 1].slice(j - 1, j) == 1) {
-                    select_seat_seats_item.style.backgroundImage = 'url(\'/static/pictures/assets/seats/available.png\')';
-                  }
-                  select_seat_seats.appendChild(select_seat_seats_item);
-                }
-                select_seat_row.appendChild(select_seat_row_number);
-                select_seat_row.appendChild(select_seat_seats);
-                select_seat_fragment.appendChild(select_seat_row);
-              }
-
-              select_seat_dot_line.style.height = 40 * select_seat_row_count + 10 + 'px';
-              select_seat.appendChild(select_seat_fragment);
-
-              // 将不可选座位的图标改为红色
-              $.get(global_api.unavailable, {movieOnShowID: changedMovieOnShowID}, function(data, textStatus) {
-                const unavailable = data;
-                for (let i = 0; i < unavailable.data.length; i++) {
-                  let select_seat_this_row_array = [],
-                    tmpObj = {};
-                  for (let k = 0; k < select_seat_layout_matrix[unavailable.data[i][0] - 1].length; k++) {
-                    select_seat_this_row_array.push((select_seat_layout_matrix[unavailable.data[i][0] - 1]).slice(k, k + 1));
-                  }
-                  for (let j = 0; j < select_seat_this_row_array.length; j++) {
-                    if (select_seat_this_row_array[j] == 1) {
-                      tmpObj[j] = '1';
-                    }
-                  }
-                  let tmpArr = Object.keys(tmpObj);
-                  document.getElementById('select_seat_' + unavailable.data[i][0] + '_' + (parseInt(tmpArr[unavailable.data[i][1] - 1]) + 1)).className += ' select_seat_seats_item_unavailable';
-                }
-              })
-            })
-          })
-        }
-        movie_info_change_show_time_dialog_triangle.style.display = 'none';
-        movie_info_change_show_time_dialog.style.display = 'none';
-        movie_info_change_show_time.innerHTML = '更改场次';        
+        hide_movie_info_change_show_time_dialog();        
       }
     }
 
@@ -308,10 +244,76 @@ $(document).ready(function() {
           event.target.parentNode.childNodes[i].className = 'movie_info_change_show_time_dialog_item';
         }
         event.target.className = 'movie_info_change_show_time_dialog_item movie_info_change_show_time_dialog_item_active';
-        if_time_changed = true;
         showTimeTmp = event.target.id.split('_')[7] + ':' + event.target.id.split('_')[8];
         global_movie_price = event.target.id.split('_')[10];
         changedMovieOnShowID = parseInt(event.target.id.split('_')[11]);
+
+        movie_info_show_time.innerHTML = showTimeTmp;
+        show_select_seats();
+        clear_all_seats();
+        clear_all_selected_seats();
+
+        $.get(global_api.movie_on_show + '/' + changedMovieOnShowID, function(data, textStatus) {
+          const movie_on_show = data;
+          changedCinemaHallID = movie_on_show.cinemaHallID;
+          $.get(global_api.seat_layout + changedCinemaHallID + '/seat_layout', function(data, textStatus) {
+            const seat_layout = data;
+            let select_seat_layout_matrix = seat_layout.seatLayout.split(','),
+              select_seat_row_count = select_seat_layout_matrix.length,
+              select_seat_column_count = select_seat_layout_matrix[0].length,
+              select_seat_fragment = document.createDocumentFragment(),
+              select_seat = document.getElementById('select_seat'),
+              select_seat_dot_line = document.getElementById('select_seat_dot_line');
+
+            for (let i = 1; i <= select_seat_row_count; i++) {
+              let select_seat_row = document.createElement('div');
+              select_seat_row.className = 'select_seat_row';
+              let select_seat_row_number = document.createElement('div');
+              select_seat_row_number.className = 'select_seat_row_number';
+              select_seat_row_number.innerHTML = i;
+              let select_seat_seats = document.createElement('div');
+              select_seat_seats.className = 'select_seat_seats';
+              select_seat_seats.style.width = select_seat_column_count * 28 + 'px'; 
+
+              for (let j = 1; j <= select_seat_column_count; j++) {
+                let select_seat_seats_item = document.createElement('div');
+                select_seat_seats_item.className = 'select_seat_seats_item';
+                select_seat_seats_item.id = 'select_seat_' + i + '_' + j;
+
+
+                if (select_seat_layout_matrix[i - 1].slice(j - 1, j) == 1) {
+                  select_seat_seats_item.style.backgroundImage = 'url(\'/static/pictures/assets/seats/available.png\')';
+                }
+                select_seat_seats.appendChild(select_seat_seats_item);
+              }
+              select_seat_row.appendChild(select_seat_row_number);
+              select_seat_row.appendChild(select_seat_seats);
+              select_seat_fragment.appendChild(select_seat_row);
+            }
+
+            select_seat_dot_line.style.height = 40 * select_seat_row_count + 10 + 'px';
+            select_seat.appendChild(select_seat_fragment);
+
+            // 将不可选座位的图标改为红色
+            $.get(global_api.unavailable, {movieOnShowID: changedMovieOnShowID}, function(data, textStatus) {
+              const unavailable = data;
+              for (let i = 0; i < unavailable.data.length; i++) {
+                let select_seat_this_row_array = [],
+                  tmpObj = {};
+                for (let k = 0; k < select_seat_layout_matrix[unavailable.data[i][0] - 1].length; k++) {
+                  select_seat_this_row_array.push((select_seat_layout_matrix[unavailable.data[i][0] - 1]).slice(k, k + 1));
+                }
+                for (let j = 0; j < select_seat_this_row_array.length; j++) {
+                  if (select_seat_this_row_array[j] == 1) {
+                    tmpObj[j] = '1';
+                  }
+                }
+                let tmpArr = Object.keys(tmpObj);
+                document.getElementById('select_seat_' + unavailable.data[i][0] + '_' + (parseInt(tmpArr[unavailable.data[i][1] - 1]) + 1)).className += ' select_seat_seats_item_unavailable';
+              }
+            })
+          })
+        })
       }
     }
 
