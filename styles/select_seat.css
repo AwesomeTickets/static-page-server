@@ -32,6 +32,7 @@
 }
 
 #select {
+  position: relative;
   display: inline-block;
   width: 700px;
 }
@@ -41,7 +42,7 @@
   display: inline-block;
   float: right;
   width: 300px;
-  height: 582px;
+  /*height: 582px;*/
   margin-left: 24px;
   border: 2px solid #ECE7E7;
   border-radius: 2px;
@@ -141,14 +142,13 @@
 #movie_info_change_show_time_dialog {
   display: none;
   width: 273px;
-  height: 120px;
+  /*height: 120px;*/
   background: #FAFAFA;
   border: 1px solid #ECE7E7;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12);
   border-radius: 2px;
   position: absolute;
-  padding: 16px 32px 16px 8px;
-  overflow: auto;
+  padding: 16px 32px 24px 8px;
   top: 308px;
 }
 
@@ -167,6 +167,8 @@
   border-bottom: 0;
   border-right: 0;
 }
+
+
 .movie_info_change_show_time_dialog_item {
   cursor: pointer;
   display: inline-block;
@@ -176,9 +178,25 @@
   color: #484848;
 }
 
+.movie_info_change_show_time_dialog_item:hover {
+  color: #E76456;
+}
+
+.movie_info_change_show_time_dialog_item_active {
+  color: #E84A3A;
+}
+
+
 
 #movie_info_seats_hint,
-#movie_info_seats {
+#movie_info_seats,
+#movie_info_seats_hint,
+#movie_info_seats,
+#movie_info_price_hint,
+#movie_info_price,
+#movie_info_total_price_hint,
+#movie_info_total_price, 
+#movie_info_order {
   z-index: -1;
 }
 
@@ -232,10 +250,49 @@
   border: 1px solid #E84A3A;
   margin-top: 32px;
 }
+
+.nonclickable {
+  border: 1px solid #DF9088 !important;
+  background-color: #DF9088 !important;
+}
 /*电影信息部分 结束*/
 
 
 /*选择座位部分开始*/
+#hint_dialog {
+  display: none;
+  position: absolute;
+  left: 190px;
+  top: 200px;
+  width: 320px;
+  height: 160px;
+  background-color: #FAFAFA;
+  text-align: center;
+  font-family: Avenir-Heavy;
+  font-size: 20px;
+  color: #484848;
+  border: 1px solid #FAFAFA;
+  border-radius: 2px;
+  box-shadow: 4px 4px 8px 4px rgba(0,0,0,0.12);
+  z-index: 9999;
+  padding: 32px 0 24px 0;
+}
+
+#hint_dialog button {
+  width: 80px;
+  height: 30px;
+  background: #E84A3A;
+  border: 1px solid #E84A3A;
+  border-radius: 2px;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #FFFFFF;
+  position: relative;
+  top: 44px;
+  display: block;
+  margin: 0 auto;
+}
+
 #select_title {
   font-family: PingFangSC-Regular;
   font-size: 14px;
@@ -298,7 +355,7 @@
 
 
 #select_seat_hint {
-  width: 260px;
+  width: 270px;
   margin: 40px auto 0 auto;
 }
 
@@ -317,5 +374,4 @@
 #select_seat_hint span:nth-of-type(3) {
   margin-left: 8px;
 }
-
 /*选择座位部分结束*/
