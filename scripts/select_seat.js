@@ -146,7 +146,6 @@ $(document).ready(function() {
       if (event.target.className == 'select_seat_seats_item' && event.target.id.slice(0, 12) == 'select_seat_') {
         // console.log('event.target: ', event.target.style.backgroundImage);
         if (Object.keys(select_seats).length < 4) {
-          set_seats_unavailable(movieOnShowID);
           if (event.target.style.backgroundImage != '') {
             event.target.className += ' select_seat_seats_item_select';
             select_seats[event.target.id] = event.target.id.split('_')[2] + '排' + event.target.id.split('_')[3] + '座';
@@ -231,12 +230,13 @@ $(document).ready(function() {
           movie_info_show_time.innerHTML = showTimeTmp;
           show_select_seats();
           clear_all_seats();
-          
+          clear_all_selected_seats();
+
           $.get(global_api.movie_on_show + '/' + changedMovieOnShowID, function(data, textStatus) {
             const movie_on_show = data;
             console.log('movie_on_show: ', movie_on_show);
             changedCinemaHallID = movie_on_show.cinemaHallID;
-            $.get(global_api.seat_layout + changedMovieOnShowID + '/seat_layout', function(data, textStatus) {
+            $.get(global_api.seat_layout + changedCinemaHallID + '/seat_layout', function(data, textStatus) {
               const seat_layout = data;
               let select_seat_layout_matrix = seat_layout.seatLayout.split(','),
                 select_seat_row_count = select_seat_layout_matrix.length,
@@ -292,8 +292,6 @@ $(document).ready(function() {
               })
             })
           })
-
-
         }
         movie_info_change_show_time_dialog_triangle.style.display = 'none';
         movie_info_change_show_time_dialog.style.display = 'none';
@@ -346,10 +344,23 @@ $(document).ready(function() {
 
     // 清除选座位区的所有座位
     function clear_all_seats() {
-      let lengthTmp = select_seats.childNodes.length;
+      let lengthTmp = select_seat.childNodes.length;
       for (let i = 2; i < lengthTmp; i++) {
-        select_seats.removeChild(select_seats.childNodes[2]);
+        select_seat.removeChild(select_seat.childNodes[2]);
       }
+    }
+
+    // 清除已选座位信息
+    function clear_all_selected_seats() {
+      let lengthTmp = movie_info_seats.childNodes.length;
+      for (let i = 0; i < lengthTmp; i++) {
+        movie_info_seats.removeChild(movie_info_seats.childNodes[0]);
+      }
+      select_seats = {};
+      console.log('select_seats: ', select_seats);
+      movie_info_seats.innerHTML = '未选座';
+      movie_info_price.innerHTML = '￥' + global_movie_price + ' × 0张';
+      movie_info_total_price.innerHTML = '￥0';
     }
 
   })
