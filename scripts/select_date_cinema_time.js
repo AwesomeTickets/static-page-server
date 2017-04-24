@@ -184,15 +184,12 @@ $(document).ready(function() {
               // 获取电影院日排期
               $.get(global_api.day, {showDate: select_time_clicked_showDate, cinemaID: select_time_clicked_cinemaID, movieID: movieID}, function(data, textStatus) {
                 const day = data;
-                // console.log('day: ', day);
                 for (let i = 0; i < day.count; i++) {
                   // 获取电影排期（根据日排期）
                   $.get(global_api.day_times + day.data[i], function(data, textStatus) {
                     const day_times = data;
-                    console.log('i: ', i, 'day_times: ', day_times);
                     // 获取影厅信息（不含座位布局）
                     $.get(global_api.cinema_hall + day_times.cinemaHallID, function(data, textStatus) {
-                      console.log('j: ', i, 'day_times: ', day_times);
                       const cinema_hall = data;
                       // 将该场次的各信息添加到DOM中显示到页面上
                       let select_time_item_fragment = document.createDocumentFragment();
@@ -267,9 +264,10 @@ $(document).ready(function() {
                       let lengthTmp = select_time.childNodes.length,
                         objTmp = {};
                       for (let i = 2; i < lengthTmp; i++) {
-                        objTmp[select_time.childNodes[i].childNodes[0].innerHTML.split(':')[0] + select_time.childNodes[i].childNodes[0].innerHTML.split(':')[1]] = select_time.childNodes[i].id;
+                        objTmp[select_time.childNodes[i].childNodes[0].innerHTML.split(':')[0] + select_time.childNodes[i].childNodes[0].innerHTML.split(':')[1] + i] = select_time.childNodes[i].id;
                       }
                       let arrTmp = Object.keys(objTmp);
+                      console.log(arrTmp);
                       for (let i = 2; i < lengthTmp; i++) {
                         for (let j = 2; j < lengthTmp - 1; j++) {
                           if (select_time.childNodes[j].id == objTmp[arrTmp[i - 2]]) {
