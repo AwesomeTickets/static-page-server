@@ -92,11 +92,11 @@ gulp.task('jade', function() {
 })
 
 gulp.task('watch', function() {
-	gulp.watch('*.jade', ['index']);
+	gulp.watch('index.jade', ['index']);
 	gulp.watch('layouts/*.jade', ['jade']);
 	gulp.watch('styles/*.css', ['css']);
 	gulp.watch('scripts/*.js', ['js']);
-	gulp.watch('./style.scss', ['sass']);
+	gulp.watch('style.scss', ['sass']);
 });
 
 gulp.task('default', ['webserver', 'clean', 'sass', 'css', 'js', 'staticFiles', 'staticSlick', 'staticPicsExport', 'staticPicsAssets', 'staticFonts', 'index', 'jade', 'watch']);

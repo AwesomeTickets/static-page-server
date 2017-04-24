@@ -128,8 +128,11 @@ $(document).ready(function() {
     $.get(global_api.unavailable, {movieOnShowID: movieOnShowID}, function(data, textStatus) {
       const unavailable = data;
       for (let i = 0; i < unavailable.data.length; i++) {
-        let select_seat_this_row_array = [...select_seat_layout_matrix[unavailable.data[i][0] - 1]],
+        let select_seat_this_row_array = [],
           tmpObj = {};
+        for (let k = 0; k < select_seat_layout_matrix[unavailable.data[i][0] - 1].length; k++) {
+          select_seat_this_row_array.push((select_seat_layout_matrix[unavailable.data[i][0] - 1]).slice(k, k + 1));
+        }
         for (let j = 0; j < select_seat_this_row_array.length; j++) {
           if (select_seat_this_row_array[j] == 1) {
             tmpObj[j] = '1';
@@ -274,8 +277,11 @@ $(document).ready(function() {
               $.get(global_api.unavailable, {movieOnShowID: changedMovieOnShowID}, function(data, textStatus) {
                 const unavailable = data;
                 for (let i = 0; i < unavailable.data.length; i++) {
-                  let select_seat_this_row_array = [...select_seat_layout_matrix[unavailable.data[i][0] - 1]],
+                  let select_seat_this_row_array = [],
                     tmpObj = {};
+                  for (let k = 0; k < select_seat_layout_matrix[unavailable.data[i][0] - 1].length; k++) {
+                    select_seat_this_row_array.push((select_seat_layout_matrix[unavailable.data[i][0] - 1]).slice(k, k + 1));
+                  }
                   for (let j = 0; j < select_seat_this_row_array.length; j++) {
                     if (select_seat_this_row_array[j] == 1) {
                       tmpObj[j] = '1';
