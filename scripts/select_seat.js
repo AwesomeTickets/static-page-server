@@ -186,8 +186,11 @@ $(document).ready(function() {
                 let movie_info_change_show_time_dialog_item = document.createElement('div');
                 movie_info_change_show_time_dialog_item.className = 'movie_info_change_show_time_dialog_item';
                 movie_info_change_show_time_dialog_item.innerHTML = day_times.showTime.slice(0, 5);
-                movie_info_change_show_time_dialog.appendChild(movie_info_change_show_time_dialog_item);
                 movie_info_change_show_time_dialog_item.id = 'movie_info_change_show_time_dialog_item_' + day_times.showTime.split(':')[0] + '_' + day_times.showTime.split(':')[1] + '_' + day_times.showTime.split(':')[2] + '_' + day_times.price;  
+                movie_info_change_show_time_dialog.appendChild(movie_info_change_show_time_dialog_item);
+                if (movie_info_change_show_time_dialog.childNodes.length == day.count) {
+                  sort_select_time_items();
+                }
               })
             }
           })
@@ -196,6 +199,25 @@ $(document).ready(function() {
         movie_info_change_show_time_dialog_triangle.style.display = 'none';
         movie_info_change_show_time_dialog.style.display = 'none';
         movie_info_change_show_time.innerHTML = '更改场次';        
+      }
+    }
+
+
+    // 将场次进行排序
+    function sort_select_time_items() {
+      let lengthTmp = movie_info_change_show_time_dialog.childNodes.length,
+        objTmp = {};
+      for (let i = 0; i < lengthTmp; i++) {
+        objTmp[movie_info_change_show_time_dialog.childNodes[i].innerHTML.split(':')[0] + movie_info_change_show_time_dialog.childNodes[i].innerHTML.split(':')[1]] = movie_info_change_show_time_dialog.childNodes[i].id;
+      }
+      let arrTmp = Object.keys(objTmp);
+      for (let i = 0; i < lengthTmp; i++) {
+        for (let j = 0; j < lengthTmp - 1; j++) {
+          if (movie_info_change_show_time_dialog.childNodes[j].id == objTmp[arrTmp[i]]) {
+            movie_info_change_show_time_dialog.appendChild(movie_info_change_show_time_dialog.childNodes[j]);
+            break;
+          }
+        }
       }
     }
 
