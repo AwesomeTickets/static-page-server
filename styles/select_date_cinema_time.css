@@ -130,9 +130,12 @@
 }
 
 #select_date button:hover,
-.select_cinema_item_select_time:hover,
 #select_time_change_cinema:hover {
   color: #E76456;
+}
+
+.select_cinema_item_select_time:hover {
+  background-color: #E76456;
 }
 
 
@@ -315,6 +318,6 @@
 }
 
 .select_time_item_select_seat:hover {
-  color: #E76456;
+  background-color: #E76456;
 }
 /*选择场次部分结束*/
