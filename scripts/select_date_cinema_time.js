@@ -161,8 +161,6 @@ $(document).ready(function() {
               movieOnShowID = '',
               showTime = '';
 
-            // todo: 场次按时间排序，并且现在传到select_seat的showTime有点不对
-
             /*选择场次 开始*/
             function select_time_show_all(select_time_clicked_showDate, select_time_clicked_cinemaID, select_time_clicked_cinema_name) {
               select_time_remove_items();
@@ -186,18 +184,16 @@ $(document).ready(function() {
               // 获取电影院日排期
               $.get(global_api.day, {showDate: select_time_clicked_showDate, cinemaID: select_time_clicked_cinemaID, movieID: movieID}, function(data, textStatus) {
                 const day = data;
+                // console.log('day: ', day);
                 for (let i = 0; i < day.count; i++) {
                   // 获取电影排期（根据日排期）
                   $.get(global_api.day_times + day.data[i], function(data, textStatus) {
                     const day_times = data;
-                    cinemaHallID = day_times.cinemaHallID;
-                    movieOnShowID = day_times.movieOnShowID;
-                    showTime = day_times.showTime;
-                    
+                    console.log('i: ', i, 'day_times: ', day_times);
                     // 获取影厅信息（不含座位布局）
                     $.get(global_api.cinema_hall + day_times.cinemaHallID, function(data, textStatus) {
+                      console.log('j: ', i, 'day_times: ', day_times);
                       const cinema_hall = data;
-
                       // 将该场次的各信息添加到DOM中显示到页面上
                       let select_time_item_fragment = document.createDocumentFragment();
                       let select_time_item = document.createElement('div');
@@ -235,7 +231,7 @@ $(document).ready(function() {
                       select_time_item_price.innerHTML = '￥' + day_times.price;
                       let select_time_item_select_seat = document.createElement('button');
                       select_time_item_select_seat.className = 'select_time_item_select_seat';
-                      select_time_item_select_seat.id = 'select_time_item' + (i + 1) + '_select_seat';
+                      select_time_item_select_seat.id = 'select_time_item' + (i + 1) + '_select_seat_' + day_times.cinemaHallID + '_' + day_times.movieOnShowID + '_' + day_times.showTime;
                       select_time_item_select_seat.innerHTML = '选座购票';
 
                       select_time_item_fragment.appendChild(select_time_item_show_time);
@@ -245,7 +241,10 @@ $(document).ready(function() {
                       select_time_item_fragment.appendChild(select_time_item_price);
                       select_time_item_fragment.appendChild(select_time_item_select_seat);
                       select_time_item.appendChild(select_time_item_fragment);
-                      select_time.appendChild(select_time_item);                    
+                      select_time.appendChild(select_time_item);                   
+                      if (select_time.childNodes.length == day.count + 2) {
+                        sort_select_time_items(); 
+                      }
                     })
 
                     /*选择场次部分的两个点击事件 开始*/
@@ -253,11 +252,36 @@ $(document).ready(function() {
                       if (event.target.id == 'select_time_change_cinema') {
                         window.location.hash = '#select_cinema';
                       }
-                      if (event.target.id.slice(-11) == 'select_seat') {
-                        window.location = './select_seat.html?cinemaHallID=' + cinemaHallID + '&movieOnShowID=' + movieOnShowID + '&movieID=' + movieID + '&showDate=' + select_time_clicked_showDate + '&showTime=' + showTime;
+                      if (event.target.id.slice(18, 29) == 'select_seat') {
+                        let arrTmp = event.target.id.split('_'),
+                          cinemaHallIDTmp = arrTmp[5],
+                          movieOnShowIDTmp = arrTmp[6],
+                          showTimeTmp = arrTmp[7];    
+                        window.location = './select_seat.html?cinemaHallID=' + cinemaHallIDTmp + '&movieOnShowID=' + movieOnShowIDTmp + '&movieID=' + movieID + '&showDate=' + select_time_clicked_showDate + '&showTime=' + showTimeTmp;
                       }
                     }                      
                     /*选择场次部分的两个点击事件 结束*/
+
+                    /*将场次进行排序 开始*/
+                    function sort_select_time_items() {
+                      let lengthTmp = select_time.childNodes.length,
+                        objTmp = {};
+                      for (let i = 2; i < lengthTmp; i++) {
+                        objTmp[select_time.childNodes[i].childNodes[0].innerHTML.split(':')[0] + select_time.childNodes[i].childNodes[0].innerHTML.split(':')[1]] = select_time.childNodes[i].id;
+                      }
+                      let arrTmp = Object.keys(objTmp);
+                      for (let j = 0; j < arrTmp.length; j++) {
+                      }
+                      for (let i = 2; i < lengthTmp; i++) {
+                        for (let j = 2; j < lengthTmp - 1; j++) {
+                          if (select_time.childNodes[j].id == objTmp[arrTmp[i - 2]]) {
+                            select_time.appendChild(select_time.childNodes[j]);
+                            break;
+                          }
+                        }
+                      }
+                    }
+                    /*将场次进行排序 结束*/
                   })
                 }
               })
