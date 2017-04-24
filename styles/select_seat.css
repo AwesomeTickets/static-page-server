@@ -127,6 +127,10 @@
   background-color: #fff;
 }
 
+#movie_info_change_show_time:hover {
+  color: #E76456;
+}
+
 #movie_info_show_time_hint,
 #movie_info_show_time {
   margin-bottom: 32px;

@@ -267,7 +267,6 @@ $(document).ready(function() {
                         objTmp[select_time.childNodes[i].childNodes[0].innerHTML.split(':')[0] + select_time.childNodes[i].childNodes[0].innerHTML.split(':')[1] + i] = select_time.childNodes[i].id;
                       }
                       let arrTmp = Object.keys(objTmp);
-                      console.log(arrTmp);
                       for (let i = 2; i < lengthTmp; i++) {
                         for (let j = 2; j < lengthTmp - 1; j++) {
                           if (select_time.childNodes[j].id == objTmp[arrTmp[i - 2]]) {

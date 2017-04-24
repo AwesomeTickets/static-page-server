@@ -314,4 +314,7 @@
   border: 0;
 }
 
+.select_time_item_select_seat:hover {
+  color: #E76456;
+}
 /*选择场次部分结束*/
