@@ -321,7 +321,7 @@
   left: 291px;
   top: 45px;
   width: 0px;
-  border-right: 2px dotted #DF9088;
+  border-right: 2px dashed #DF9088;
 }
 
 .select_seat_row {
@@ -349,8 +349,16 @@
   margin-right: 4px;
 }
 
+.select_seat_seats_item.select_seat_seats_item_avaliable:hover {
+  background-image: url('/static/pictures/assets/seats/available_hover.png') !important;
+}
+
 .select_seat_seats_item_unavailable {
   background-image: url('/static/pictures/assets/seats/unavailable.png') !important;
+}
+
+.select_seat_seats_item_unavailable_click {
+  background-image: url('/static/pictures/assets/seats/unavailable_click.png') !important;
 }
 
 .select_seat_seats_item_select {
