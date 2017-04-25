@@ -164,8 +164,6 @@ $(document).ready(function() {
         delete select_seats[event.target.id];
         show_select_seats();
         hide_movie_info_change_show_time_dialog();
-      } else if (event.target.className == 'select_seat_seats_item select_seat_seats_item_unavailable' && event.target.id.slice(0, 12) == 'select_seat_') {
-        event.target.className = 'select_seat_seats_item select_seat_seats_item_unavailable_click';
       }
     }
 
