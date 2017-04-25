@@ -216,7 +216,7 @@ $(document).ready(function() {
                       if (minutes_tmp < 10 && minutes_tmp >= 0) {
                         minutes_tmp = '0' + minutes_tmp.toString();
                       }
-                      select_time_item_end_time.innerHTML = hours_tmp + ':' + minutes_tmp;
+                      select_time_item_end_time.innerHTML = '- ' + hours_tmp + ':' + minutes_tmp;
                       let select_time_item_lang_and_movie_type = document.createElement('div');
                       select_time_item_lang_and_movie_type.className = 'select_time_item_lang_and_movie_type';
                       select_time_item_lang_and_movie_type.innerHTML = day_times.lang + ' ' + global_movie_info.movieType;
