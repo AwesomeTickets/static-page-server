@@ -291,6 +291,7 @@
 }
 
 .select_time_item_cinema_hall_name {
+  width: 80px;
   font-family: PingFangSC-Regular;
   font-size: 12px;
   color: #999999;
@@ -298,10 +299,11 @@
 }
 
 .select_time_item_price {
+  width: 80px;
   font-family: Avenir-Book;
   font-size: 20px;
   color: #484848;
-  margin-left: 15%;
+  margin-left: 12%;
 }
 
 .select_time_item_select_seat {
