@@ -1,23 +1,23 @@
 $(document).ready(function() {
   const global_api = {
     movie_info: 'http://120.25.76.106/resource/movie/',
-    seat_layout: 'http://120.25.76.106/resource/cinema_hall/',
+    seat_layout: 'http://120.25.76.106/resource/cinema-hall/',
     unavailable: 'http://120.25.76.106/resource/seat/unavailable',
-    movie_on_show: 'http://120.25.76.106/resource/movie_on_show',
+    movie_on_show: 'http://120.25.76.106/resource/movie-on-show',
     cinema: 'http://120.25.76.106/resource/cinema/',
-    cinema_hall: 'http://120.25.76.106/resource/cinema_hall/',
-    day: 'http://120.25.76.106/resource/movie_on_show/day',
-    day_times: 'http://120.25.76.106/resource/movie_on_show/',
+    cinema_hall: 'http://120.25.76.106/resource/cinema-hall/',
+    day: 'http://120.25.76.106/resource/movie-on-show/day',
+    day_times: 'http://120.25.76.106/resource/movie-on-show/',
   }
 
-  const cinemaHallID = location.href.split('?')[1].split('&')[0].split('=')[1];
-  const movieOnShowID = location.href.split('?')[1].split('&')[1].split('=')[1];
-  const movieID = location.href.split('?')[1].split('&')[2].split('=')[1];
+  const cinemaHallId = location.href.split('?')[1].split('&')[0].split('=')[1];
+  const movieOnShowId = location.href.split('?')[1].split('&')[1].split('=')[1];
+  const movieId = location.href.split('?')[1].split('&')[2].split('=')[1];
   const showDate = location.href.split('?')[1].split('&')[3].split('=')[1];
   const showTime = location.href.split('?')[1].split('&')[4].split('=')[1];
-  let cinemaID = 0,
-    changedMovieOnShowID = 0,
-    changedCinemaHallID = 0;
+  let cinemaId = 0,
+    changedMovieOnShowId = 0,
+    changedCinemaHallId = 0;
 
   /*点击LOGO回到主页开始*/
   let head_bar_img = document.getElementById('head_bar_img');
@@ -48,20 +48,20 @@ $(document).ready(function() {
     global_movie_price = 0;
 
   // 获取电影信息
-  $.get(global_api.movie_info + movieID, function(data, textStatus) {
+  $.get(global_api.movie_info + movieId, function(data, textStatus) {
     const movie_info = data;
     // 获取电影排期
-    $.get(global_api.movie_on_show, {movieID: movieID, cinemaHallID: cinemaHallID, showDate: showDate, showTime: showTime}, function(data, textStatus) {
+    $.get(global_api.movie_on_show, {movieId: movieId, cinemaHallId: cinemaHallId, showDate: showDate, showTime: showTime}, function(data, textStatus) {
       const movie_on_show = data;
       movie_info_poster.src = movie_info.posterSmall;
       movie_info_title.innerHTML = movie_info.title;
       movie_info_lang_and_movie_type.innerHTML = movie_on_show.lang + ' ' + movie_info.movieType;
       movie_info_length.innerHTML = movie_info.length + '分钟';
-      $.get(global_api.cinema_hall + cinemaHallID, function(data, textStatus) {
+      $.get(global_api.cinema_hall + cinemaHallId, function(data, textStatus) {
         const cinema_hall = data;
         movie_info_cinema_hall_name.innerHTML = cinema_hall.name;
-        cinemaID = cinema_hall.cinemaID;
-        $.get(global_api.cinema + cinemaID, function(data, textStatus) {
+        cinemaId = cinema_hall.cinemaId;
+        $.get(global_api.cinema + cinemaId, function(data, textStatus) {
           const cinema = data;
           movie_info_cinema_name.innerHTML = cinema.name;
         })
@@ -86,7 +86,7 @@ $(document).ready(function() {
 
   /*选择座位部分开始*/
   // 根据收到的字符串生成大布局矩阵
-  $.get(global_api.seat_layout + cinemaHallID + '/seat_layout', function(data, textStatus) {
+  $.get(global_api.seat_layout + cinemaHallId + '/seat-layout', function(data, textStatus) {
     const seat_layout = data;
     let select_seat_layout_matrix = seat_layout.seatLayout.split(','),
       select_seat_row_count = select_seat_layout_matrix.length,
@@ -96,6 +96,7 @@ $(document).ready(function() {
       select_seat_dot_line = document.getElementById('select_seat_dot_line');
 
     for (let i = 1; i <= select_seat_row_count; i++) {
+      // let tmpK = 1;
       let select_seat_row = document.createElement('div');
       select_seat_row.className = 'select_seat_row';
       let select_seat_row_number = document.createElement('div');
@@ -114,6 +115,9 @@ $(document).ready(function() {
         if (select_seat_layout_matrix[i - 1].slice(j - 1, j) == 1) {
           select_seat_seats_item.style.backgroundImage = 'url(\'/static/pictures/assets/seats/available.png\')';
           select_seat_seats_item.className = 'select_seat_seats_item select_seat_seats_item_avaliable';
+          // select_seat_seats_item.name = 'select_seat_' + i + '_' + tmpK;
+          // console.log('i: ', i, ' j: ', j, ' tmpK: ', tmpK);
+          // tmpK++;
         }
         select_seat_seats.appendChild(select_seat_seats_item);
       }
@@ -125,14 +129,16 @@ $(document).ready(function() {
     select_seat_dot_line.style.height = 40 * select_seat_row_count + 10 + 'px';
     select_seat.appendChild(select_seat_fragment);
 
-    // 将不可选座位的图标改为红色
-    $.get(global_api.unavailable, {movieOnShowID: movieOnShowID}, function(data, textStatus) {
+    // 将不可选座位的图标改为灰色
+    $.get(global_api.unavailable, {movieOnShowId: movieOnShowId}, function(data, textStatus) {
       const unavailable = data;
+      // console.log('unavailable.data: ', unavailable.data);
       for (let i = 0; i < unavailable.data.length; i++) {
         let select_seat_this_row_array = [],
           tmpObj = {};
         for (let k = 0; k < select_seat_layout_matrix[unavailable.data[i][0] - 1].length; k++) {
           select_seat_this_row_array.push((select_seat_layout_matrix[unavailable.data[i][0] - 1]).slice(k, k + 1));
+          // console.log('(select_seat_layout_matrix[unavailable.data[i][0] - 1]).slice(k, k + 1): ', (select_seat_layout_matrix[unavailable.data[i][0] - 1]).slice(k, k + 1));
         }
         for (let j = 0; j < select_seat_this_row_array.length; j++) {
           if (select_seat_this_row_array[j] == 1) {
@@ -140,6 +146,8 @@ $(document).ready(function() {
           }
         }
         let tmpArr = Object.keys(tmpObj);
+        // console.log('tmpArr: ', tmpArr)
+        // console.log('lala: ', (parseInt(tmpArr[unavailable.data[i][1] - 1]) + 1));
         document.getElementById('select_seat_' + unavailable.data[i][0] + '_' + (parseInt(tmpArr[unavailable.data[i][1] - 1]) + 1)).className = 'select_seat_seats_item select_seat_seats_item_unavailable';
       }
     })
@@ -210,7 +218,7 @@ $(document).ready(function() {
 
         if (movie_info_change_show_time_dialog.childNodes.length == 0) {
           // 获取电影日排期 
-          $.get(global_api.day, {showDate: showDate, cinemaID: cinemaID, movieID: movieID}, function(data, textStatus) {
+          $.get(global_api.day, {showDate: showDate, cinemaId: cinemaId, movieId: movieId}, function(data, textStatus) {
             const day = data;
             for (let i = 0; i < day.count; i++) {
               // 获取电影排期
@@ -220,9 +228,9 @@ $(document).ready(function() {
                 movie_info_change_show_time_dialog_item.className = 'movie_info_change_show_time_dialog_item';
                 movie_info_change_show_time_dialog_item.innerHTML = day_times.showTime.slice(0, 5);
                 showTimeTmp = day_times.showTime.slice(0, 5);
-                movie_info_change_show_time_dialog_item.id = 'movie_info_change_show_time_dialog_item_' + day_times.showTime.split(':')[0] + '_' + day_times.showTime.split(':')[1] + '_' + day_times.showTime.split(':')[2] + '_' + day_times.price + '_' + day_times.movieOnShowID;  
+                movie_info_change_show_time_dialog_item.id = 'movie_info_change_show_time_dialog_item_' + day_times.showTime.split(':')[0] + '_' + day_times.showTime.split(':')[1] + '_' + day_times.showTime.split(':')[2] + '_' + day_times.price + '_' + day_times.movieOnShowId;  
                 movie_info_change_show_time_dialog.appendChild(movie_info_change_show_time_dialog_item);
-                if (day_times.movieOnShowID == movieOnShowID) {
+                if (day_times.movieOnShowId == movieOnShowId) {
                   movie_info_change_show_time_dialog_item.className += ' movie_info_change_show_time_dialog_item_active';
                 }
                 if (movie_info_change_show_time_dialog.childNodes.length == day.count) {
@@ -247,17 +255,22 @@ $(document).ready(function() {
         event.target.className = 'movie_info_change_show_time_dialog_item movie_info_change_show_time_dialog_item_active';
         showTimeTmp = event.target.id.split('_')[7] + ':' + event.target.id.split('_')[8];
         global_movie_price = event.target.id.split('_')[10];
-        changedMovieOnShowID = parseInt(event.target.id.split('_')[11]);
+        changedMovieOnShowId = parseInt(event.target.id.split('_')[11]);
 
         movie_info_show_time.innerHTML = showTimeTmp;
         show_select_seats();
         clear_all_seats();
         clear_all_selected_seats();
 
-        $.get(global_api.movie_on_show + '/' + changedMovieOnShowID, function(data, textStatus) {
+        $.get(global_api.movie_on_show + '/' + changedMovieOnShowId, function(data, textStatus) {
           const movie_on_show = data;
-          changedCinemaHallID = movie_on_show.cinemaHallID;
-          $.get(global_api.seat_layout + changedCinemaHallID + '/seat_layout', function(data, textStatus) {
+          changedCinemaHallId = movie_on_show.cinemaHallId;
+          // 变化影厅名
+          $.get(global_api.cinema_hall + changedCinemaHallId, function(data, textStatus) {
+            const cinema_hall = data;
+            movie_info_cinema_hall_name.innerHTML = cinema_hall.name;
+          })
+          $.get(global_api.seat_layout + changedCinemaHallId + '/seat-layout', function(data, textStatus) {
             const seat_layout = data;
             let select_seat_layout_matrix = seat_layout.seatLayout.split(','),
               select_seat_row_count = select_seat_layout_matrix.length,
@@ -296,8 +309,8 @@ $(document).ready(function() {
             select_seat_dot_line.style.height = 40 * select_seat_row_count + 10 + 'px';
             select_seat.appendChild(select_seat_fragment);
 
-            // 将不可选座位的图标改为红色
-            $.get(global_api.unavailable, {movieOnShowID: changedMovieOnShowID}, function(data, textStatus) {
+            // 将不可选座位的图标改为灰色
+            $.get(global_api.unavailable, {movieOnShowId: changedMovieOnShowId}, function(data, textStatus) {
               const unavailable = data;
               for (let i = 0; i < unavailable.data.length; i++) {
                 let select_seat_this_row_array = [],

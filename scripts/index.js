@@ -6,9 +6,9 @@ $(document).ready(function() {
 
   const global_api = {
     head: 'http://120.25.76.106/resource/movie/popular?count=3',
-    on_show: 'http://120.25.76.106/resource/movie/on_show',
-    on_show_resourse: 'http://120.25.76.106/resource/movie/',
-    coming_soon: 'http://120.25.76.106/resource/movie/coming_soon', 
+    on_show: 'http://120.25.76.106/resource/movie/on',
+    movie_info: 'http://120.25.76.106/resource/movie/',
+    coming_soon: 'http://120.25.76.106/resource/movie/soon', 
   }
 
   /*顶部电影热图 js代码部分开始*/
@@ -32,7 +32,7 @@ $(document).ready(function() {
 
     var on_show_global_temp = 0, on_show_num = data.count;
     for (var i = 0; i < data.count; i++) {
-      $.get(global_api.on_show_resourse+data.data[i], function(data, textStatus) {
+      $.get(global_api.movie_info+data.data[i], function(data, textStatus) {
         $("#on_show_img"+on_show_global_temp).attr("data-lazy", data.posterSmall);
         on_show_set_info(data, on_show_global_temp);
         on_show_set_hover_info(data, on_show_global_temp);
@@ -41,7 +41,7 @@ $(document).ready(function() {
           if (global_flag == 1){slick_func();}
           else global_flag++;
         }
-        $("#on_show_button"+ (on_show_global_temp - 1)).addClass('on_show_img_class_' + data.movieID); 
+        $("#on_show_button"+ (on_show_global_temp - 1)).addClass('on_show_img_class_' + data.movieId); 
       });
     }
 
@@ -49,8 +49,8 @@ $(document).ready(function() {
     const on_show_content = $('.content')[0];
     on_show_content.addEventListener('click', function(event) {
       if (event.target.id.slice(0, event.target.id.length - 1) == 'on_show_button') {
-        const movieID = event.target.className.split('_')[4];
-        window.location = './layouts/select_date_cinema_time.html?movieID=' + movieID + '#select_cinema';
+        const movieId = event.target.className.split('_')[4];
+        window.location = './layouts/select_date_cinema_time.html?movieId=' + movieId + '#select_cinema';
       }
     })
   });
@@ -74,7 +74,7 @@ $(document).ready(function() {
       string = string + data.movieStyle[i] + (i == data.movieStyle.length-1 ? "" : "&nbsp;/&nbsp;");
     on_show_temp.find(".on_show_hover_style").html(string);
     on_show_temp.find(".on_show_hover_CAndL").html(data.country + "&nbsp;/&nbsp;" +data.length +"分钟");
-    on_show_temp.find(".on_show_hover_pubdate").html(data.pubdate+"&nbsp;上映");
+    on_show_temp.find(".on_show_hover_pubdate").html(data.pubDate+"&nbsp;上映");
    }
 
    function on_show_add_img(count) {
@@ -193,7 +193,7 @@ $(document).ready(function() {
         string = string + data.movieStyle[i] + (i == data.movieStyle.length-1 ? "" : "&nbsp;/&nbsp;");
       coming_soon_temp.find(".coming_soon_hover_style").html(string);
       coming_soon_temp.find(".coming_soon_hover_CAndL").html(data.country + "&nbsp;/&nbsp;" +data.length +"分钟");
-      coming_soon_temp.find(".coming_soon_hover_pubdate").html(data.pubdate+"&nbsp;上映");
+      coming_soon_temp.find(".coming_soon_hover_pubdate").html(data.pubDate+"&nbsp;上映");
     }
 
     function coming_soon_set_hover() {
