@@ -96,7 +96,7 @@ $(document).ready(function() {
       select_seat_dot_line = document.getElementById('select_seat_dot_line');
 
     for (let i = 1; i <= select_seat_row_count; i++) {
-      // let tmpK = 1;
+      let tmpK = 1;
       let select_seat_row = document.createElement('div');
       select_seat_row.className = 'select_seat_row';
       let select_seat_row_number = document.createElement('div');
@@ -115,9 +115,8 @@ $(document).ready(function() {
         if (select_seat_layout_matrix[i - 1].slice(j - 1, j) == 1) {
           select_seat_seats_item.style.backgroundImage = 'url(\'/static/pictures/assets/seats/available.png\')';
           select_seat_seats_item.className = 'select_seat_seats_item select_seat_seats_item_avaliable';
-          // select_seat_seats_item.name = 'select_seat_' + i + '_' + tmpK;
-          // console.log('i: ', i, ' j: ', j, ' tmpK: ', tmpK);
-          // tmpK++;
+          select_seat_seats_item.setAttribute('name', 'select_seat_' + i + '_' + tmpK)
+          tmpK++;
         }
         select_seat_seats.appendChild(select_seat_seats_item);
       }
@@ -132,13 +131,11 @@ $(document).ready(function() {
     // 将不可选座位的图标改为灰色
     $.get(global_api.unavailable, {movieOnShowId: movieOnShowId}, function(data, textStatus) {
       const unavailable = data;
-      // console.log('unavailable.data: ', unavailable.data);
       for (let i = 0; i < unavailable.data.length; i++) {
         let select_seat_this_row_array = [],
           tmpObj = {};
         for (let k = 0; k < select_seat_layout_matrix[unavailable.data[i][0] - 1].length; k++) {
           select_seat_this_row_array.push((select_seat_layout_matrix[unavailable.data[i][0] - 1]).slice(k, k + 1));
-          // console.log('(select_seat_layout_matrix[unavailable.data[i][0] - 1]).slice(k, k + 1): ', (select_seat_layout_matrix[unavailable.data[i][0] - 1]).slice(k, k + 1));
         }
         for (let j = 0; j < select_seat_this_row_array.length; j++) {
           if (select_seat_this_row_array[j] == 1) {
@@ -146,8 +143,6 @@ $(document).ready(function() {
           }
         }
         let tmpArr = Object.keys(tmpObj);
-        // console.log('tmpArr: ', tmpArr)
-        // console.log('lala: ', (parseInt(tmpArr[unavailable.data[i][1] - 1]) + 1));
         document.getElementById('select_seat_' + unavailable.data[i][0] + '_' + (parseInt(tmpArr[unavailable.data[i][1] - 1]) + 1)).className = 'select_seat_seats_item select_seat_seats_item_unavailable';
       }
     })
@@ -158,7 +153,7 @@ $(document).ready(function() {
         if (Object.keys(select_seats).length < 4) {
           if (event.target.style.backgroundImage != '') {
             event.target.className = 'select_seat_seats_item select_seat_seats_item_select';
-            select_seats[event.target.id] = event.target.id.split('_')[2] + ' 排 ' + event.target.id.split('_')[3] + ' 座';
+            select_seats[event.target.id] = event.target.getAttribute('name').split('_')[2] + ' 排 ' + event.target.getAttribute('name').split('_')[3] + ' 座';
             show_select_seats();
             hide_movie_info_change_show_time_dialog();
           }
@@ -280,6 +275,7 @@ $(document).ready(function() {
               select_seat_dot_line = document.getElementById('select_seat_dot_line');
 
             for (let i = 1; i <= select_seat_row_count; i++) {
+              let tmpK = 1;
               let select_seat_row = document.createElement('div');
               select_seat_row.className = 'select_seat_row';
               let select_seat_row_number = document.createElement('div');
@@ -298,6 +294,8 @@ $(document).ready(function() {
                 if (select_seat_layout_matrix[i - 1].slice(j - 1, j) == 1) {
                   select_seat_seats_item.style.backgroundImage = 'url(\'/static/pictures/assets/seats/available.png\')';
                   select_seat_seats_item.className = 'select_seat_seats_item select_seat_seats_item_avaliable';
+                  select_seat_seats_item.setAttribute('name', 'select_seat_' + i + '_' + tmpK)
+                  tmpK++;
                 }
                 select_seat_seats.appendChild(select_seat_seats_item);
               }
