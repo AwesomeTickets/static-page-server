@@ -52,6 +52,7 @@
 
 /*选择部分和电影信息部分的整体布局*/
 #select_and_movie_info {
+  width: 1024px;
   width: calc(100vw - 100% + 1024px);
   margin-left: auto;
   margin-right: auto;
