@@ -59,11 +59,11 @@ $(document).ready(function() {
       movie_info_length.innerHTML = movie_info.length + '分钟';
       $.get(global_api.cinema_hall + cinemaHallId, function(data, textStatus) {
         const cinema_hall = data;
-        movie_info_cinema_hall_name.innerHTML = cinema_hall.name;
+        movie_info_cinema_hall_name.innerHTML = cinema_hall.hallName;
         cinemaId = cinema_hall.cinemaId;
         $.get(global_api.cinema + cinemaId, function(data, textStatus) {
           const cinema = data;
-          movie_info_cinema_name.innerHTML = cinema.name;
+          movie_info_cinema_name.innerHTML = cinema.cinemaName;
         })
       })
       let month_tmp = showDate.split('-')[1],
@@ -263,7 +263,7 @@ $(document).ready(function() {
           // 变化影厅名
           $.get(global_api.cinema_hall + changedCinemaHallId, function(data, textStatus) {
             const cinema_hall = data;
-            movie_info_cinema_hall_name.innerHTML = cinema_hall.name;
+            movie_info_cinema_hall_name.innerHTML = cinema_hall.hallName;
           })
           $.get(global_api.seat_layout + changedCinemaHallId + '/seat-layout', function(data, textStatus) {
             const seat_layout = data;
