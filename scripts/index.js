@@ -1,3 +1,5 @@
+import "babel-polyfill";
+
 $(document).ready(function() {
   // 注意事项！
   // 因为各部分代码处于同一个js文件里，因此尽量都创建局部变量，非不得已时避免创建全局变量，这样代码性能也更好
