@@ -1,15 +1,17 @@
 import "babel-polyfill";
 
 $(document).ready(function() {
+  const global_url = 'http://120.25.76.106';
+
   const global_api = {
-    movie_info: 'http://120.25.76.106/resource/movie/',
-    seat_layout: 'http://120.25.76.106/resource/cinema-hall/',
-    unavailable: 'http://120.25.76.106/resource/seat/unavailable',
-    movie_on_show: 'http://120.25.76.106/resource/movie-on-show',
-    cinema: 'http://120.25.76.106/resource/cinema/',
-    cinema_hall: 'http://120.25.76.106/resource/cinema-hall/',
-    day: 'http://120.25.76.106/resource/movie-on-show/day',
-    day_times: 'http://120.25.76.106/resource/movie-on-show/',
+    movie_info: global_url + '/resource/movie/',
+    seat_layout: global_url + '/resource/cinema-hall/',
+    unavailable: global_url + '/resource/seat/unavailable',
+    movie_on_show: global_url + '/resource/movie-on-show',
+    cinema: global_url + '/resource/cinema/',
+    cinema_hall: global_url + '/resource/cinema-hall/',
+    day: global_url + '/resource/movie-on-show/day',
+    day_times: global_url + '/resource/movie-on-show/',
   }
 
   const cinemaHallId = location.href.split('?')[1].split('&')[0].split('=')[1];
