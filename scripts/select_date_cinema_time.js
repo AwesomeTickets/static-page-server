@@ -1,14 +1,16 @@
 import "babel-polyfill";
 
 $(document).ready(function() {
+  const global_url = 'http://120.25.76.106';
+
   const global_api = {
-    movie_info: 'http://120.25.76.106/resource/movie/',
-    recent: 'http://120.25.76.106/resource/movie-on-show/recent',
-    brief: 'http://120.25.76.106/resource/movie-on-show/day/brief',
-    cinema: 'http://120.25.76.106/resource/cinema/',
-    day: 'http://120.25.76.106/resource/movie-on-show/day',
-    day_times: 'http://120.25.76.106/resource/movie-on-show/',
-    cinema_hall: 'http://120.25.76.106/resource/cinema-hall/',
+    movie_info: global_url + '/resource/movie/',
+    recent: global_url + '/resource/movie-on-show/recent',
+    brief: global_url + '/resource/movie-on-show/day/brief',
+    cinema: global_url + '/resource/cinema/',
+    day: global_url + '/resource/movie-on-show/day',
+    day_times: global_url + '/resource/movie-on-show/',
+    cinema_hall: global_url + '/resource/cinema-hall/',
   }
 
   /*取下movieId*/
@@ -33,9 +35,18 @@ $(document).ready(function() {
   /*保存该电影的一些信息*/
 
   /*电影信息部分开始*/
+
   // 获取电影信息
-  $.get(global_api.movie_info + movieId, function(data, textStatus) {
-    const movie_info = data;
+  function getMovieInfo() {
+    return new Promise((resolve, reject) => {
+      $.get(global_api.movie_info + movieId, function(data, textStatus) {
+        resolve(data);
+      });
+    })
+  }
+
+  // 将电影各信息添加进DOM里
+  function setMovieInfo(movie_info) {
     global_movie_info.length = movie_info.length;
     global_movie_info.movieType = movie_info.movieType;
     let movie_info_poster = document.getElementById('movie_info_poster'),
@@ -61,7 +72,14 @@ $(document).ready(function() {
     movie_info_movie_type.innerHTML = '版本：' + movie_info.movieType;
     movie_info_country.innerHTML = '地区：' + movie_info.country;
     movie_info_length.innerHTML = '时长：' + movie_info.length + '分钟';
-  })
+  }
+
+  async function movieInfoPart() {
+    let movie_info = await getMovieInfo();
+    setMovieInfo(movie_info);
+  }
+
+  movieInfoPart();
   /*电影信息部分结束*/
 
 

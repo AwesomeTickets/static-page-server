@@ -5,12 +5,13 @@ $(document).ready(function() {
   // 因为各部分代码处于同一个js文件里，因此尽量都创建局部变量，非不得已时避免创建全局变量，这样代码性能也更好
   // 在创建变量或函数时需要加上自己部分的前缀名: head、on_show、coming_soon
   // 例： var head_count = 0; const on_show_name = 'movie'; function coming_soon_find_movie() {}
+  const global_url = 'http://120.25.76.106';
 
   const global_api = {
-    head: 'http://120.25.76.106/resource/movie/popular?count=3',
-    on_show: 'http://120.25.76.106/resource/movie/on',
-    movie_info: 'http://120.25.76.106/resource/movie/',
-    coming_soon: 'http://120.25.76.106/resource/movie/soon', 
+    head: global_url + '/resource/movie/popular?count=3',
+    on_show: global_url + '/resource/movie/on',
+    movie_info: global_url + '/resource/movie/',
+    coming_soon: global_url + '/resource/movie/soon', 
   }
 
   /*顶部电影热图 js代码部分开始*/
