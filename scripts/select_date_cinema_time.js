@@ -123,10 +123,10 @@ $(document).ready(function() {
             select_cinema_item_min_price_span.innerHTML = '起';
             let select_cinema_item_name = document.createElement('div');
             select_cinema_item_name.className = 'select_cinema_item_name';
-            select_cinema_item_name.innerHTML = cinema.name;
+            select_cinema_item_name.innerHTML = cinema.cinemaName;
             let select_cinema_item_location = document.createElement('div');
             select_cinema_item_location.className = 'select_cinema_item_location';
-            select_cinema_item_location.innerHTML = cinema.location;
+            select_cinema_item_location.innerHTML = cinema.cinemaAddr;
             select_cinema_item.appendChild(select_cinema_item_select_time);
             select_cinema_item_min_price.appendChild(select_cinema_item_min_price_span);
             select_cinema_item.appendChild(select_cinema_item_min_price);
@@ -222,7 +222,7 @@ $(document).ready(function() {
                       select_time_item_lang_and_movie_type.innerHTML = day_times.lang + ' ' + global_movie_info.movieType;
                       let select_time_item_cinema_hall_name = document.createElement('div');
                       select_time_item_cinema_hall_name.className = 'select_time_item_cinema_hall_name';
-                      select_time_item_cinema_hall_name.innerHTML = cinema_hall.name;
+                      select_time_item_cinema_hall_name.innerHTML = cinema_hall.hallName;
                       let select_time_item_price = document.createElement('div');
                       select_time_item_price.className = 'select_time_item_price';
                       select_time_item_price.innerHTML = '￥' + day_times.price;
