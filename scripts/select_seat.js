@@ -1,3 +1,5 @@
+import "babel-polyfill";
+
 $(document).ready(function() {
   const global_api = {
     movie_info: 'http://120.25.76.106/resource/movie/',
