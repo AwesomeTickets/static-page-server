@@ -4,13 +4,13 @@ $(document).ready(function() {
   const global_url = 'http://120.25.76.106';
 
   const global_api = {
-    movie_info: global_url + '/resource/movie/',
-    recent: global_url + '/resource/movie-on-show/recent',
-    brief: global_url + '/resource/movie-on-show/day/brief',
-    cinema: global_url + '/resource/cinema/',
-    day: global_url + '/resource/movie-on-show/day',
-    day_times: global_url + '/resource/movie-on-show/',
-    cinema_hall: global_url + '/resource/cinema-hall/',
+    movie_info: `${global_url}/resource/movie/`,
+    recent: `${global_url}/resource/movie-on-show/recent`,
+    brief: `${global_url}/resource/movie-on-show/day/brief`,
+    cinema: `${global_url}/resource/cinema/`,
+    day: `${global_url}/resource/movie-on-show/day`,
+    day_times: `${global_url}/resource/movie-on-show/`,
+    cinema_hall: `${global_url}/resource/cinema-hall/`,
   }
 
   /*取下movieId*/
@@ -68,7 +68,7 @@ $(document).ready(function() {
     movie_info_poster.src = movie_info.posterSmall;
     movie_info_title.innerHTML = movie_info.title;
     movie_info_rating.innerHTML = movie_info.rating;
-    movie_info_pubdate.innerHTML = '首映：' + movie_info.pubDate;
+    movie_info_pubdate.innerHTML = `首映：${movie_info.pubDate}`;
     let movie_info_movie_style_tmp = '';
     for (let i = 0; i < movie_info.movieStyle.length; i++) {
       movie_info_movie_style_tmp += movie_info.movieStyle[i];
@@ -76,10 +76,10 @@ $(document).ready(function() {
         movie_info_movie_style_tmp += ' / ';
       }
     }
-    movie_info_movie_style.innerHTML = '类型：' + movie_info_movie_style_tmp;
-    movie_info_movie_type.innerHTML = '版本：' + movie_info.movieType;
-    movie_info_country.innerHTML = '地区：' + movie_info.country;
-    movie_info_length.innerHTML = '时长：' + movie_info.length + '分钟';
+    movie_info_movie_style.innerHTML = `类型：${movie_info_movie_style_tmp}`;
+    movie_info_movie_type.innerHTML = `版本：${movie_info.movieType}`;
+    movie_info_country.innerHTML = `地区：${movie_info.country}`;
+    movie_info_length.innerHTML = `时长：${movie_info.length}分钟`;
   }
 
   async function movie_info_part() {
@@ -151,15 +151,15 @@ $(document).ready(function() {
   function show_cinema(i, cinemaId, brief, cinema) {
     let select_cinema_fragment = document.createDocumentFragment();
     let select_cinema_item = document.createElement('div');
-    select_cinema_item.id = 'select_cinema_item' + i;
+    select_cinema_item.id = `select_cinema_item${i}`;
     select_cinema_item.className = 'select_cinema_item';
     let select_cinema_item_select_time = document.createElement('button');
-    select_cinema_item_select_time.id = select_cinema_item.id + '_select_time';
-    select_cinema_item_select_time.className = 'select_cinema_item_select_time' + ' select_cinema_item_select_time_' + cinemaId;
+    select_cinema_item_select_time.id = `${select_cinema_item.id}_select_time`;
+    select_cinema_item_select_time.className = `select_cinema_item_select_time select_cinema_item_select_time_${cinemaId}`;
     select_cinema_item_select_time.innerHTML = '选择场次';
     let select_cinema_item_min_price = document.createElement('div');
     select_cinema_item_min_price.className = 'select_cinema_item_min_price';
-    select_cinema_item_min_price.innerHTML = '￥' + brief.minPrice;
+    select_cinema_item_min_price.innerHTML = `￥${brief.minPrice}`;
     let select_cinema_item_min_price_span = document.createElement('span');
     select_cinema_item_min_price_span.innerHTML = '起';
     let select_cinema_item_name = document.createElement('div');
@@ -264,7 +264,7 @@ $(document).ready(function() {
           cinemaHallIdTmp = arrTmp[5],
           movieOnShowIdTmp = arrTmp[6],
           showTimeTmp = arrTmp[7];    
-        window.location = './select_seat.html?cinemaHallId=' + cinemaHallIdTmp + '&movieOnShowId=' + movieOnShowIdTmp + '&movieId=' + movieId + '&showDate=' + select_time_clicked_showDate + '&showTime=' + showTimeTmp;
+        window.location = `./select_seat.html?cinemaHallId=${cinemaHallIdTmp}&movieOnShowId=${movieOnShowIdTmp}&movieId=${movieId}&showDate=${select_time_clicked_showDate}&showTime=${showTimeTmp}`;
       }
     }                      
   }
@@ -275,7 +275,7 @@ $(document).ready(function() {
       select_date_fragment = document.createDocumentFragment();
     for (let i = 1; i <= recent.count; i++) {
       let button = document.createElement('button');
-      button.id = 'select_date_button' + i;
+      button.id = `select_date_button${i}`;
       if (i == 1) {
         button.className += 'active';
       }
@@ -287,7 +287,7 @@ $(document).ready(function() {
       if (dayTmp.slice(0, 1) == '0') {
         dayTmp = dayTmp.slice(1, 2);
       }
-      button.innerHTML = monthTmp + '月' + dayTmp + '日';
+      button.innerHTML = `${monthTmp}月${dayTmp}日`;
       select_date_fragment.appendChild(button);
     }
     select_date.appendChild(select_date_fragment);
@@ -342,7 +342,7 @@ $(document).ready(function() {
   function show_day_times_item(day, i, day_times, cinema_hall) {
     let select_time_item_fragment = document.createDocumentFragment();
     let select_time_item = document.createElement('div');
-    select_time_item.id = 'select_time_item' + (i + 1);
+    select_time_item.id = `select_time_item${i + 1}`;
     select_time_item.className += 'select_time_item';
 
     let select_time_item_show_time = document.createElement('div');
@@ -367,16 +367,16 @@ $(document).ready(function() {
     select_time_item_end_time.innerHTML = '- ' + hours_tmp + ':' + minutes_tmp;
     let select_time_item_lang_and_movie_type = document.createElement('div');
     select_time_item_lang_and_movie_type.className = 'select_time_item_lang_and_movie_type';
-    select_time_item_lang_and_movie_type.innerHTML = day_times.lang + ' ' + global_movie_info.movieType;
+    select_time_item_lang_and_movie_type.innerHTML = `${day_times.lang} ${global_movie_info.movieType}`;
     let select_time_item_cinema_hall_name = document.createElement('div');
     select_time_item_cinema_hall_name.className = 'select_time_item_cinema_hall_name';
     select_time_item_cinema_hall_name.innerHTML = cinema_hall.hallName;
     let select_time_item_price = document.createElement('div');
     select_time_item_price.className = 'select_time_item_price';
-    select_time_item_price.innerHTML = '￥' + day_times.price;
+    select_time_item_price.innerHTML = `￥${day_times.price}`;
     let select_time_item_select_seat = document.createElement('button');
     select_time_item_select_seat.className = 'select_time_item_select_seat';
-    select_time_item_select_seat.id = 'select_time_item' + (i + 1) + '_select_seat_' + day_times.cinemaHallId + '_' + day_times.movieOnShowId + '_' + day_times.showTime;
+    select_time_item_select_seat.id = `select_time_item${i + 1}_select_seat_${day_times.cinemaHallId}_${day_times.movieOnShowId}_${day_times.showTime}`;
     select_time_item_select_seat.innerHTML = '选座购票';
 
     select_time_item_fragment.appendChild(select_time_item_show_time);
@@ -396,20 +396,20 @@ $(document).ready(function() {
   function select_date_part(recent, select_time_clicked_cinemaId, select_time_clicked_cinema_name) {
     let select_date_documents = {};
     for (let i = 1; i <= recent.count; i++) {
-      select_date_documents['select_date_button' + i] = document.getElementById('select_date_button' + i);
+      select_date_documents[`select_date_button${i}`] = document.getElementById(`select_date_button${i}`);
     }
     select_date.onclick = function(event) {
       if (event.target.id.slice(event.target.id.length - 1) != select_date_initial_count && event.target.id.slice(0, event.target.id.length - 1) == 'select_date_button') {
         if (location.hash == '#select_cinema') {
-          select_date_documents['select_date_button' + select_date_initial_count].className = '';
+          select_date_documents[`select_date_button${select_date_initial_count}`].className = '';
           select_date_initial_count = event.target.id.slice(-1);
-          select_date_documents['select_date_button' + select_date_initial_count].className += 'active';
+          select_date_documents[`select_date_button${select_date_initial_count}`].className += 'active';
           select_cinema_remove_items();
           show_all_day_times(recent);
         } else if (location.hash == '#select_time') {
-          select_date_documents['select_date_button' + select_date_initial_count].className = '';
+          select_date_documents[`select_date_button${select_date_initial_count}`].className = '';
           select_date_initial_count = event.target.id.slice(-1);
-          select_date_documents['select_date_button' + select_date_initial_count].className += 'active';
+          select_date_documents[`select_date_button${select_date_initial_count}`].className += 'active';
           select_time_part(recent.data[select_date_initial_count - 1].showDate, select_time_clicked_cinemaId, select_time_clicked_cinema_name);            
         }
       }
