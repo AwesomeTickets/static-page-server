@@ -6,12 +6,11 @@ $(document).ready(function() {
   // 在创建变量或函数时需要加上自己部分的前缀名: head、on_show、coming_soon
   // 例： var head_count = 0; const on_show_name = 'movie'; function coming_soon_find_movie() {}
   const global_url = 'http://120.25.76.106';
-
   const global_api = {
-    head: global_url + '/resource/movie/popular?count=3',
-    on_show: global_url + '/resource/movie/on',
-    movie_info: global_url + '/resource/movie/',
-    coming_soon: global_url + '/resource/movie/soon', 
+    head: `${global_url}/resource/movie/popular?count=3`,
+    on_show: `${global_url}/resource/movie/on`,
+    movie_info: `${global_url}/resource/movie/`,
+    coming_soon: `${global_url}/resource/movie/soon`, 
   }
 
   /*顶部电影热图 js代码部分开始*/
