@@ -14,14 +14,16 @@ $(document).ready(function() {
     day_times: global_url + '/resource/movie-on-show/',
   }
 
-  const cinemaHallId = location.href.split('?')[1].split('&')[0].split('=')[1];
-  const movieOnShowId = location.href.split('?')[1].split('&')[1].split('=')[1];
-  const movieId = location.href.split('?')[1].split('&')[2].split('=')[1];
-  const showDate = location.href.split('?')[1].split('&')[3].split('=')[1];
-  const showTime = location.href.split('?')[1].split('&')[4].split('=')[1];
+  const cinemaHallId = location.href.split('?')[1].split('&')[0].split('=')[1],
+    movieOnShowId = location.href.split('?')[1].split('&')[1].split('=')[1],
+    movieId = location.href.split('?')[1].split('&')[2].split('=')[1],
+    showDate = location.href.split('?')[1].split('&')[3].split('=')[1],
+    showTime = location.href.split('?')[1].split('&')[4].split('=')[1];
   let cinemaId = 0,
     changedMovieOnShowId = 0,
-    changedCinemaHallId = 0;
+    changedCinemaHallId = 0,
+    select_seats = {},
+    global_movie_price = 0;
 
   /*点击LOGO回到主页开始*/
   let head_bar_img = document.getElementById('head_bar_img');
@@ -48,43 +50,63 @@ $(document).ready(function() {
     movie_info_order = document.getElementById('movie_info_order'),
     hint_dialog = document.getElementById('hint_dialog');
 
-  let select_seats = {},
-    global_movie_price = 0;
-
   // 获取电影信息
-  $.get(global_api.movie_info + movieId, function(data, textStatus) {
-    const movie_info = data;
-    // 获取电影排期
-    $.get(global_api.movie_on_show, {movieId: movieId, cinemaHallId: cinemaHallId, showDate: showDate, showTime: showTime}, function(data, textStatus) {
-      const movie_on_show = data;
-      movie_info_poster.src = movie_info.posterSmall;
-      movie_info_title.innerHTML = movie_info.title;
-      movie_info_lang_and_movie_type.innerHTML = movie_on_show.lang + ' ' + movie_info.movieType;
-      movie_info_length.innerHTML = movie_info.length + '分钟';
-      $.get(global_api.cinema_hall + cinemaHallId, function(data, textStatus) {
-        const cinema_hall = data;
-        movie_info_cinema_hall_name.innerHTML = cinema_hall.hallName;
-        cinemaId = cinema_hall.cinemaId;
-        $.get(global_api.cinema + cinemaId, function(data, textStatus) {
-          const cinema = data;
-          movie_info_cinema_name.innerHTML = cinema.cinemaName;
-        })
-      })
-      let month_tmp = showDate.split('-')[1],
-        day_tmp = showDate.split('-')[2];
-      if (month_tmp.slice(0, 1) == '0') {
-        month_tmp = month_tmp.slice(1, 2);
-      }
-      if (day_tmp.slice(0, 1) == '0') {
-        day_tmp = day_tmp.slice(1, 2);
-      }
-      movie_info_show_date.innerHTML = month_tmp + ' 月 ' + day_tmp + ' 日';
-      movie_info_show_time.innerHTML = showTime.slice(0,2) + ' : ' + showTime.slice(3, 5);
-      global_movie_price = movie_on_show.price;
-      movie_info_price.innerHTML = '￥' + global_movie_price + ' × 0张';
-      movie_info_total_price.innerHTML = '￥0';
+  function get_movie_info() {
+    return new Promise((resolve, reject) => {
+      $.get(global_api.movie_info + movieId, function(data, textStatus) {
+        resolve(data);
+      });
     })
-  })
+  }
+
+  // 获取电影排期
+  function get_movie_on_show() {
+    return new Promise((resolve, reject) => {
+      $.get(global_api.movie_on_show, {movieId: movieId, cinemaHallId: cinemaHallId, showDate: showDate, showTime: showTime}, function(data, textStatus) {
+        resolve(data);
+      });
+    })
+  }
+
+  // 将电影信息呈现在页面上
+  function show_movie_info(movie_info, movie_on_show) {
+    movie_info_poster.src = movie_info.posterSmall;
+    movie_info_title.innerHTML = movie_info.title;
+    movie_info_lang_and_movie_type.innerHTML = movie_on_show.lang + ' ' + movie_info.movieType;
+    movie_info_length.innerHTML = movie_info.length + '分钟';
+    $.get(global_api.cinema_hall + cinemaHallId, function(data, textStatus) {
+      const cinema_hall = data;
+      movie_info_cinema_hall_name.innerHTML = cinema_hall.hallName;
+      cinemaId = cinema_hall.cinemaId;
+      $.get(global_api.cinema + cinemaId, function(data, textStatus) {
+        const cinema = data;
+        movie_info_cinema_name.innerHTML = cinema.cinemaName;
+      })
+    })
+    let month_tmp = showDate.split('-')[1],
+      day_tmp = showDate.split('-')[2];
+    if (month_tmp.slice(0, 1) == '0') {
+      month_tmp = month_tmp.slice(1, 2);
+    }
+    if (day_tmp.slice(0, 1) == '0') {
+      day_tmp = day_tmp.slice(1, 2);
+    }
+    movie_info_show_date.innerHTML = month_tmp + ' 月 ' + day_tmp + ' 日';
+    movie_info_show_time.innerHTML = showTime.slice(0,2) + ' : ' + showTime.slice(3, 5);
+    global_movie_price = movie_on_show.price;
+    movie_info_price.innerHTML = '￥' + global_movie_price + ' × 0张';
+    movie_info_total_price.innerHTML = '￥0';
+  }
+
+  async function movie_info_part() {
+    // 获取电影信息
+    let movie_info = await get_movie_info();
+    // 获取电影排期
+    let movie_on_show = await get_movie_on_show();
+    // 将电影信息呈现在页面上
+    show_movie_info(movie_info, movie_on_show);
+  }
+  movie_info_part();
   /*电影信息部分 结束*/
 
 
