@@ -1,3 +1,7 @@
+html, body {
+  background-color: #202020 !important;
+}
+
 /*顶部电影热图 样式部分开始*/
 #head_popular_images {
   width: 100%;
