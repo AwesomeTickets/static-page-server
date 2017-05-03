@@ -1,13 +1,16 @@
+import "babel-polyfill";
+
 $(document).ready(function() {
   // 注意事项！
   // 因为各部分代码处于同一个js文件里，因此尽量都创建局部变量，非不得已时避免创建全局变量，这样代码性能也更好
   // 在创建变量或函数时需要加上自己部分的前缀名: head、on_show、coming_soon
   // 例： var head_count = 0; const on_show_name = 'movie'; function coming_soon_find_movie() {}
-
+  const global_url = 'http://120.25.76.106';
   const global_api = {
-    head: 'http://120.25.76.106/resource/movie/popular?count=3',
-    on_show: 'http://120.25.76.106/resource/movie/on_show',
-    coming_soon: 'http://120.25.76.106/resource/movie/coming_soon',
+    head: `${global_url}/resource/movie/popular?count=3`,
+    on_show: `${global_url}/resource/movie/on`,
+    movie_info: `${global_url}/resource/movie/`,
+    coming_soon: `${global_url}/resource/movie/soon`, 
   }
 
   /*顶部电影热图 js代码部分开始*/
@@ -16,10 +19,11 @@ $(document).ready(function() {
   /*使用ajax根据api来拿照片信息*/
   $.get(global_api.head, function(data, textStatus) {
     for (let i = 0; i < 3; i++) {
-      head_popular_images[i].src = data.data[i].uri;
+      head_popular_images[i].src = data.data[i].posterLarge;
     }
   })  
   /*顶部电影热图 js代码部分结束*/
+
 
   /*正在热映 js代码部分开始*/
   var global_flag = 0;
@@ -29,9 +33,8 @@ $(document).ready(function() {
     on_show_add_img(data.count);
 
     var on_show_global_temp = 0, on_show_num = data.count;
-    var on_show_resourse = "http://120.25.76.106/resource/movie/";
     for (var i = 0; i < data.count; i++) {
-      $.get(on_show_resourse+data.data[i], function(data, textStatus) {
+      $.get(global_api.movie_info+data.data[i], function(data, textStatus) {
         $("#on_show_img"+on_show_global_temp).attr("data-lazy", data.posterSmall);
         on_show_set_info(data, on_show_global_temp);
         on_show_set_hover_info(data, on_show_global_temp);
@@ -40,8 +43,18 @@ $(document).ready(function() {
           if (global_flag == 1){slick_func();}
           else global_flag++;
         }
+        $("#on_show_button"+ (on_show_global_temp - 1)).addClass('on_show_img_class_' + data.movieId); 
       });
     }
+
+    // 添加点击事件，点击进入选择日期、影院、场次页面。
+    const on_show_content = $('.content')[0];
+    on_show_content.addEventListener('click', function(event) {
+      if (event.target.id.slice(0, event.target.id.length - 1) == 'on_show_button') {
+        const movieId = event.target.className.split('_')[4];
+        window.location = './layouts/select_date_cinema_time.html?movieId=' + movieId + '#select_cinema';
+      }
+    })
   });
 
    function on_show_set_info(data, i) {
@@ -63,7 +76,7 @@ $(document).ready(function() {
       string = string + data.movieStyle[i] + (i == data.movieStyle.length-1 ? "" : "&nbsp;/&nbsp;");
     on_show_temp.find(".on_show_hover_style").html(string);
     on_show_temp.find(".on_show_hover_CAndL").html(data.country + "&nbsp;/&nbsp;" +data.length +"分钟");
-    on_show_temp.find(".on_show_hover_pubdate").html(data.pubdate+"&nbsp;上映");
+    on_show_temp.find(".on_show_hover_pubdate").html(data.pubDate+"&nbsp;上映");
    }
 
    function on_show_add_img(count) {
@@ -81,7 +94,7 @@ $(document).ready(function() {
             "<div class=\"on_show_hover_style\"></div>"+
             "<div class=\"on_show_hover_CAndL\"></div>"+
             "<div class=\"on_show_hover_pubdate\"></div>"+
-            "<button>购票</button>"+
+            "<button id=\"on_show_button"+i+"\">购票</button>"+
           "</div>"+
         "</div>"+
       "</div>";
@@ -109,14 +122,12 @@ $(document).ready(function() {
       });
     });
    }
-  
   /*正在热映 js代码部分结束*/
 
-  /*即将上映 js代码部分开始*/
 
+  /*即将上映 js代码部分开始*/
   // 获取海报数据
   $.get(global_api.coming_soon, function(data, textStatus) {
-    console.log(textStatus);
     if (textStatus != "success")alert("服务器雪崩");
     coming_soon_add_img(data.count);
 
@@ -184,7 +195,7 @@ $(document).ready(function() {
         string = string + data.movieStyle[i] + (i == data.movieStyle.length-1 ? "" : "&nbsp;/&nbsp;");
       coming_soon_temp.find(".coming_soon_hover_style").html(string);
       coming_soon_temp.find(".coming_soon_hover_CAndL").html(data.country + "&nbsp;/&nbsp;" +data.length +"分钟");
-      coming_soon_temp.find(".coming_soon_hover_pubdate").html(data.pubdate+"&nbsp;上映");
+      coming_soon_temp.find(".coming_soon_hover_pubdate").html(data.pubDate+"&nbsp;上映");
     }
 
     function coming_soon_set_hover() {
@@ -201,12 +212,8 @@ $(document).ready(function() {
       });
     });
     }
-  // 模拟api接口
-  
-  
-
-  
   /*即将上映 js代码部分结束*/
+
 
   //  滑动组件
   function slick_func() {
@@ -217,5 +224,4 @@ $(document).ready(function() {
       infinite:false
     });
   }
-
 });
