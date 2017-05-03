@@ -1,0 +1,329 @@
+/*顶栏样式开始*/
+#head_bar {
+  width: 100%;
+  height: 64px;
+  border-bottom: 2px solid #ECE7E7;
+  margin-bottom: 24px;
+}
+
+#head_bar > img {
+  position: relative;
+  left: 24px;
+  top: 16px;
+  cursor: pointer;
+}
+
+#head_bar_count {
+  display: inline-block;
+  float: right;
+  margin: 24px 24px 0 0;
+  color: #484848;
+  border: 0;
+  background-color: #fff;
+}
+/*顶栏样式结束*/
+
+/*选择部分和电影信息部分的整体布局（圣杯布局版）*/
+/*#select_and_movie_info {
+  width: 100%;
+  padding-right: 320px;
+  padding-left: 48px;
+}
+
+#select {
+  float: left;
+  margin-right: 24px;
+  margin-left: -24px;
+  height: 800px;
+  width: 100%;
+}
+
+#movie_info {
+  float: left;
+  position: relative;
+  width: 300px;
+  height: 407px;
+  left: 300px;
+  margin-left: -300px;
+  border: 2px solid #ECE7E7;
+  border-radius: 2px;
+}*/
+/*选择部分和电影信息部分的整体布局（圣杯布局版）*/
+
+/*选择部分和电影信息部分的整体布局*/
+#select_and_movie_info {
+  width: 1024px;
+  width: calc(100vw - 100% + 1024px);
+  margin-left: auto;
+  margin-right: auto;
+  /*避免出现滚动条而跳动*/
+  padding-left: calc(100vw - 100%); 
+}
+
+#select {
+  display: inline-block;
+  width: 700px;
+}
+
+#movie_info {
+  display: inline-block;
+  float: right;
+  width: 300px;
+  height: 407px;
+  margin-left: 24px;
+  border: 2px solid #ECE7E7;
+  border-radius: 2px;
+}
+/*选择部分和电影信息部分的整体布局*/
+
+
+/*电影信息部分开始*/
+#movie_info_poster {
+  display: block;
+  margin: 24px 0 0 24px;
+  width: 120px;
+  height: 168px;
+}
+#movie_info_title {
+  display: inline-block;
+  margin: 24px 0 24px 24px;
+  color: #484848;
+  font-size: 16px;
+  font-family: PingFangSC-Regular;
+}
+#movie_info_rating {
+  margin-left: 16px;
+}
+#movie_info_pubdate,
+#movie_info_movie_style,
+#movie_info_movie_type,
+#movie_info_country,
+#movie_info_length {
+  margin: 0 0 8px 24px;
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #999999;
+}
+/*电影信息部分结束*/
+
+
+/*选择日期部分开始*/
+#select_date {
+  width: 100%;
+  height: 86px;
+  border-bottom: 4px solid #ECE7E7;
+  margin-bottom: 24px;
+}
+
+#select_date_title {
+  font-family: PingFangSC-Regular;
+  font-size: 16px;
+  color: #999999;
+}
+
+#select_date button{
+  font-family: PingFangSC-Regular;
+  background-color: #fff;
+  border: 0;
+  padding: 0;
+  margin: 16px 32px 16px 0;
+  font-size: 16px;
+}
+
+#select_date button:hover,
+#select_time_change_cinema:hover {
+  color: #E76456;
+}
+
+.select_cinema_item_select_time:hover {
+  background-color: #E76456;
+}
+
+
+.active {
+  color: #E84A3A;
+  font-size: 20px !important;
+}
+/*选择日期部分结束*/
+
+
+/*选择影院部分开始*/
+#select_cinema_title {
+  font-family: PingFangSC-Regular;
+  font-size: 16px;
+  color: #999999;
+}
+
+.select_cinema_item {
+  width: 100%;
+  height: 104px;
+  border-bottom: 2px solid #ECE7E7;
+  margin: 24px 0;
+}
+
+.select_cinema_item_name {
+  font-family: PingFangSC-Regular;
+  font-size: 16px;
+  color: #484848;
+  margin-bottom: 8px;
+}
+
+.select_cinema_item_location {
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #999999;
+}
+
+.select_cinema_item_time {
+  display: inline-block;
+  margin: 16px 8px 16px 0;
+  font-family: Avenir-Book;
+  font-size: 16px;
+  color: #484848;
+  border-right: 2px solid #ECE7E7;
+  padding-right: 8px;
+}
+
+.select_cinema_item_select_time {
+  float: right;
+  background: #E84A3A;
+  border: 0;
+  border-radius: 2px;
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #FFFFFF;
+  width: 80px;
+  height: 36px;
+  margin-left: 32px;
+}
+
+.select_cinema_item_min_price {
+  float: right;
+  font-family: Avenir-Book;
+  font-size: 16px;
+  color: #1E1E1E;
+  line-height: 22px;
+  position: relative;
+  top: 7px;
+}
+
+.select_cinema_item_min_price span {
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #8c8c8c;
+  line-height: 22px;
+  margin-left: 6px;
+}
+/*选择影院部分结束*/
+
+
+/*选择场次部分开始*/
+#select_time {
+  display: none;
+}
+
+#select_time_cinema_info {
+  width: 100%;
+  height: 48px;
+  border-bottom: 4px solid #ECE7E7;
+  margin-bottom: 24px;
+}
+
+#select_time_cinema_name {
+  font-family: PingFangSC-Regular;
+  font-size: 20px;
+  color: #484848;
+}
+
+#select_time_change_cinema {
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #E84A3A;
+  border: 0;
+  padding: 0;
+  background-color: #fff;
+  float: right;
+  position: relative;
+  top: 11px;
+}
+
+#select_time_title {
+  font-family: PingFangSC-Regular;
+  font-size: 16px;
+  color: #999999;
+  margin-bottom: 24px;
+}
+
+.select_time_item {
+  width: 100%;
+  height: 36px;
+  margin-bottom: 32px;
+  font-family: Avenir-Book;
+  font-size: 20px;
+  color: #484848;
+}
+
+.select_time_item_show_time,
+.select_time_item_end_time,
+.select_time_item_lang_and_movie_type,
+.select_time_item_cinema_hall_name,
+.select_time_item_price {
+  display: inline-block;
+  position: relative;
+  top: 5px;
+}
+
+.select_time_item_show_time {
+  font-family: Avenir-Book;
+  font-size: 20px;
+  color: #484848;
+}
+
+.select_time_item_end_time {
+  font-family: Avenir-Book;
+  font-size: 12px;
+  color: #999999;
+  margin-left: 10px;
+}
+
+.select_time_item_lang_and_movie_type {
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #484848;
+  margin-left: 15%;
+  width: 100px;
+}
+
+.select_time_item_cinema_hall_name {
+  width: 80px;
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #999999;
+  margin-left: 8%;
+}
+
+.select_time_item_price {
+  width: 80px;
+  font-family: Avenir-Book;
+  font-size: 20px;
+  color: #484848;
+  margin-left: 12%;
+}
+
+.select_time_item_select_seat {
+  display: inline-block;
+  width: 80px;
+  height: 36px;
+  background: #E84A3A;
+  border-radius: 2px;
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #FFFFFF;
+  float: right;
+  border: 0;
+}
+
+.select_time_item_select_seat:hover {
+  background-color: #E76456;
+}
+/*选择场次部分结束*/
