@@ -39,7 +39,10 @@ block content
 
   //- 正在热映 部分
   mixin on_show
-    div#on_show_hint 正在热映  12部 >
+    div#on_show_hint
+      div.on_show_more 正在热映 
+      div.on_show_num
+      div.on_show_more_array
       div.on_show_slick
         div.content
           div.slider.lazy.on_show
@@ -47,7 +50,10 @@ block content
 
   //- 即将上映 部分
   mixin coming_soon
-    div#coming_soon_hint 即将上映  8部 >
+    div#coming_soon_hint
+      div.coming_soon_more 即将上映 
+      div.coming_soon_num
+      div.coming_soon_more_array
       div.coming_soon_slick
         section#features
         div.content
