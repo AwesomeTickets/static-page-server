@@ -65,7 +65,7 @@ $(document).ready(function() {
     var temp = data.title.substring(0, 6);
     if (data.title.substring(6, 7) != "") {temp += "...";}
     $("#on_show_poster_hint_name"+i).html(temp);
-    $("#on_show_poster_hint_score"+i).html(data.rating);
+    $("#on_show_poster_hint_score"+i).html(parseFloat(data.rating).toFixed(1));
   }
 
   function on_show_set_hover_info(data, i) {
@@ -73,7 +73,7 @@ $(document).ready(function() {
     if (data.title.substring(6, 7) != "") {temp += "...";}
     var on_show_temp = $("#on_show_hover_info"+i);
     on_show_temp.find(".on_show_hover_title").html(temp);
-    on_show_temp.find(".on_show_hover_rating").html(data.rating);
+    on_show_temp.find(".on_show_hover_rating").html(parseFloat(data.rating).toFixed(1));
     on_show_temp.find(".on_show_hover_type").html(data.movieType);
     var string = "";
     for (var i = 0; i < data.movieStyle.length; i++)
