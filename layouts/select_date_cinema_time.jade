@@ -1,0 +1,42 @@
+extends ../layout
+
+block links
+  link(rel="stylesheet" href="/styles/select_date_cinema_time.css")
+
+block content
+  include head_bar.jade
+  div#select_and_movie_info
+    +select
+    +movie_info
+
+  mixin select
+    div#select
+      +select_date
+      +select_cinema
+      +select_time
+
+  mixin movie_info
+    div#movie_info
+      img#movie_info_poster 
+      div#movie_info_title
+      span#movie_info_rating
+      div#movie_info_pubdate
+      div#movie_info_movie_style
+      div#movie_info_movie_type
+      div#movie_info_country
+      div#movie_info_length
+
+  mixin select_date
+    div#select_date
+      div#select_date_title 选择日期
+
+  mixin select_cinema
+    div#select_cinema
+      div#select_cinema_title 选择影院
+
+  mixin select_time
+    div#select_time
+
+
+block scripts
+  script(type="text/javascript" src="/scripts/select_date_cinema_time.js")
