@@ -4,15 +4,10 @@ block links
   link(rel="stylesheet" href="/styles/select_seat.css")
 
 block content
-  +head_bar
+  include head_bar.jade
   div#select_and_movie_info
     +select
     +movie_info
-
-  mixin head_bar
-    div#head_bar
-      img#head_bar_img(src='/static/pictures/assets/logo_black_clear.png')
-      button#head_bar_count 账户
 
   mixin select
     div#select
