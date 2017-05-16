@@ -104,7 +104,7 @@ $(document).ready(function () {
 
     btn.onclick = function() {
       if (check_input_valid(trans_phonenum(input.value))) {
-        get_sms();
+        get_sms(trans_phonenum(input.value));
         ask_sms(trans_phonenum(input.value));
       } else {
         document.getElementById("input_hint").innerText = "请输入有效手机号";
@@ -118,12 +118,11 @@ $(document).ready(function () {
     for (var i = 0; i < str.length; i++) {
       if (re.test(str[i])) num += str[i];
     }
-    console.log(num);
     return num;
   }
 
   function ask_sms(phone_num) {
-
+    $.get(global_api.sms + phone_num, function(data, textStatus){});
   }
 
   function check_input_valid(input) {
@@ -131,7 +130,7 @@ $(document).ready(function () {
     return re.test(input);
   }
 
-  function get_sms() {
+  function get_sms(phone_num) {
     document.getElementById("input_hint").innerText = "！验证码已发至手机，请输入验证码";
     phone_check_container.removeChild(document.getElementById("phone_check_btn"));
     document.getElementById("phone_check_input").disabled = true;
@@ -144,9 +143,9 @@ $(document).ready(function () {
     sms_btn_resent.id = 'phone_check_sms_btn_resent';
     sms_btn_resent.innerText = "60s 内重发";
     sms_btn_resent.disabled = true;
-    sms_btn_resent.onclick = resent_sms();
+    sms_btn_resent.onclick = resent_sms(phone_num);
     phone_check_container.appendChild(sms_btn_resent);
-    counting_time(60);
+    counting_time(2);
 
     var sms_btn_confirm = document.createElement("button");
     sms_btn_confirm.id = 'phone_check_sms_btn';
@@ -155,7 +154,7 @@ $(document).ready(function () {
     sms_btn_confirm.disabled = true;
     phone_check_container.appendChild(sms_btn_confirm);
 
-    set_btn_action();
+    set_btn_action(phone_num);
   }
 
   function counting_time(value) {
@@ -165,6 +164,7 @@ $(document).ready(function () {
     if (val == 0) {
       btn.disabled = false;
       btn.innerText = "重发";
+      btn.className = "click_btn";
       return;
     } else {
       val--;
@@ -175,11 +175,11 @@ $(document).ready(function () {
     }, 1000);
   }
 
-  function resent_sms() {
-
+  function resent_sms(phone_num) {
+    $.get(global_api.sms + phone_num, function(data, textStatus){});
   }
 
-  function set_btn_action() {
+  function set_btn_action(phone_num) {
     var btn = document.getElementById('phone_check_sms_btn'),
       input = document.getElementById("phone_check_sms_input");
     input.oninput = function() {
@@ -192,18 +192,18 @@ $(document).ready(function () {
       }
     }
     btn.onclick = function() {
-      if (sms_check(input.value)) {
-        show_the_ticket_key("4311 6543 75");
-      } else {
-        document.getElementById('input_hint').innerText = "！验证码错误";
-      }
+      $.post(global_api.sms + phone_num + "/check", {code:input.value}, function(result) {
+        if (parseInt(result.phoneNum) == parseInt(phone_num)) {
+          sent_booking_info();
+        } else {
+          document.getElementById("input_hint").innerText = "！验证码错误";
+        }
+      });
     }
   }
 
-  function sms_check(value) {
-    // 在这里添加验证码验证
-
-    return true;
+  function sent_booking_info() {
+    show_the_ticket_key("4311 6543 75");
   }
 
   function show_the_ticket_key(keyValue) {
@@ -225,7 +225,8 @@ $(document).ready(function () {
     copy_btn.id = "ticket_key_copy";
     copy_btn.innerText = "复制";
     copy_btn.onclick = function() {
-
+      var copy_info = document.getElementById("ticket_key").innerHTML;
+      window.clipboardData.setData('text', copy_info);
     }
     phone_check_container.appendChild(copy_btn);
 
