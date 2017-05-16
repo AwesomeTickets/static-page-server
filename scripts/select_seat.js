@@ -106,6 +106,13 @@ $(document).ready(function() {
     let movie_on_show = await get_movie_on_show();
     // 将电影信息呈现在页面上
     show_movie_info(movie_info, movie_on_show);
+    // 点击"确认订票按钮"
+    movie_info_order.onclick = function(event) {
+      if (event.target.className === '') {
+        console.log('选好座位才能点击订票');
+        // 进行页面的跳转
+      }
+    }
   }
   movie_info_part();
   /*电影信息部分 结束*/
@@ -147,7 +154,7 @@ $(document).ready(function() {
       select_seat_row_number.innerHTML = i;
       let select_seat_seats = document.createElement('div');
       select_seat_seats.className = 'select_seat_seats';
-      select_seat_seats.style.width = `${select_seat_column_count * 28}px`; 
+      select_seat_seats.style.width = `${select_seat_column_count * 28}px`;
 
       for (let j = 1; j <= select_seat_column_count; j++) {
         let select_seat_seats_item = document.createElement('div');
@@ -169,7 +176,7 @@ $(document).ready(function() {
     }
 
     select_seat_dot_line.style.height = `${40 * select_seat_row_count + 10}px`;
-    select_seat.appendChild(select_seat_fragment);    
+    select_seat.appendChild(select_seat_fragment);
   }
 
   // 获取不可用座位信息
@@ -196,7 +203,7 @@ $(document).ready(function() {
       }
       let tmpArr = Object.keys(tmpObj);
       document.getElementById('select_seat_' + unavailable.data[i][0] + '_' + (parseInt(tmpArr[unavailable.data[i][1] - 1]) + 1)).className = 'select_seat_seats_item select_seat_seats_item_unavailable';
-    }    
+    }
   }
 
   // 获取电影排期（根据Id）
@@ -217,7 +224,7 @@ $(document).ready(function() {
     })
   }
 
-  // 获取电影日排期 
+  // 获取电影日排期
   function get_day(showDate, cinemaId, movieId) {
     return new Promise((resolve, reject) => {
       $.get(global_api.day, {showDate: showDate, cinemaId: cinemaId, movieId: movieId}, function(data, textStatus) {
@@ -226,7 +233,7 @@ $(document).ready(function() {
     })
   }
 
-  // 获取电影排期 
+  // 获取电影排期
   function get_day_times(day, i) {
     return new Promise((resolve, reject) => {
       $.get(global_api.day_times + day.data[i], function(data, textStatus) {
@@ -257,10 +264,10 @@ $(document).ready(function() {
             show_select_seats();
             hide_movie_info_change_show_time_dialog();
           }
-        } else if (Object.keys(select_seats).length >= 4) { 
+        } else if (Object.keys(select_seats).length >= 4) {
           // alert('最多选择四个座位');
           hint_dialog.style.display = 'block';
-          hide_movie_info_change_show_time_dialog();  
+          hide_movie_info_change_show_time_dialog();
         }
       } else if (event.target.className == 'select_seat_seats_item select_seat_seats_item_select' && event.target.id.slice(0, 12) == 'select_seat_') {
         event.target.className = 'select_seat_seats_item select_seat_seats_item_avaliable';
@@ -276,7 +283,7 @@ $(document).ready(function() {
         // 显示更改场次弹框
         show_movie_info_change_show_time_dialog();
         if (movie_info_change_show_time_dialog.childNodes.length == 0) {
-          // 获取电影日排期 
+          // 获取电影日排期
           let day = await get_day(showDate, cinemaId, movieId);
           for (let i = 0; i < day.count; i++) {
             // 获取电影排期
@@ -287,7 +294,7 @@ $(document).ready(function() {
         }
       } else if (movie_info_change_show_time.innerHTML == '确定') {
         // 隐藏更改场次弹框
-        hide_movie_info_change_show_time_dialog();        
+        hide_movie_info_change_show_time_dialog();
       }
     }
 
@@ -337,7 +344,7 @@ $(document).ready(function() {
     show_select_seats();
     clear_all_seats();
     clear_all_selected_seats();
-  }  
+  }
 
   // 将该电影的各个场次显示在弹出框中
   function show_movie_info_change_show_time_dialog_items(day, day_times) {
@@ -345,14 +352,14 @@ $(document).ready(function() {
     movie_info_change_show_time_dialog_item.className = 'movie_info_change_show_time_dialog_item';
     movie_info_change_show_time_dialog_item.innerHTML = day_times.showTime.slice(0, 5);
     showTimeTmp = day_times.showTime.slice(0, 5);
-    movie_info_change_show_time_dialog_item.id = `movie_info_change_show_time_dialog_item_${day_times.showTime.split(':')[0]}_${day_times.showTime.split(':')[1]}_${day_times.showTime.split(':')[2]}_${day_times.price}_${day_times.movieOnShowId}`;  
+    movie_info_change_show_time_dialog_item.id = `movie_info_change_show_time_dialog_item_${day_times.showTime.split(':')[0]}_${day_times.showTime.split(':')[1]}_${day_times.showTime.split(':')[2]}_${day_times.price}_${day_times.movieOnShowId}`;
     movie_info_change_show_time_dialog.appendChild(movie_info_change_show_time_dialog_item);
     if (day_times.movieOnShowId == movieOnShowId) {
       movie_info_change_show_time_dialog_item.className += ' movie_info_change_show_time_dialog_item_active';
     }
     if (movie_info_change_show_time_dialog.childNodes.length == day.count) {
       sort_select_time_items();
-    }      
+    }
   }
 
   // 将已选择的座位呈现到对应的地方，并显示价格和总价
@@ -400,13 +407,13 @@ $(document).ready(function() {
   function hide_movie_info_change_show_time_dialog() {
     movie_info_change_show_time_dialog_triangle.style.display = 'none';
     movie_info_change_show_time_dialog.style.display = 'none';
-    movie_info_change_show_time.innerHTML = '更改场次';   
+    movie_info_change_show_time.innerHTML = '更改场次';
   }
   // 显示更改场次弹框
   function show_movie_info_change_show_time_dialog() {
     movie_info_change_show_time_dialog_triangle.style.display = 'block';
     movie_info_change_show_time_dialog.style.display = 'block';
-    movie_info_change_show_time.innerHTML = '确定'; 
+    movie_info_change_show_time.innerHTML = '确定';
   }
   // 清除已选座位信息
   function clear_all_selected_seats() {
