@@ -1,0 +1,218 @@
+#booking_hint{
+  width: 321px;
+  height: 156px;
+  margin: 0px auto;
+}
+
+#booking_ticket_container {
+  width : 800px;
+  margin: 0 auto;
+}
+
+#booking_info_container {
+  width: 480px;
+  height: 128px;
+  background-color: #FAFAFA;
+  padding: 5px;
+  position: absolute;
+}
+
+#movie_info_poster {
+  width: 80px;
+  height: 112px;
+  position: absolute;
+}
+
+#movie_info_poster img {
+  width: 80px;
+  height: 112px;
+}
+
+#movie_info_text {
+  position: relative;
+  left: 112px;
+}
+
+#movie_info_time {
+  position: absolute;
+  width: 116px;
+  height: 112px;
+}
+
+#movie_info_date {
+  font-family: PingFangSC-Regular;
+  font-size: 20px;
+  color: #484848;
+  margin-top: 14px;
+}
+
+#movie_info_show_time {
+  font-family: PingFangSC-Regular;
+  font-size: 20px;
+  color: #484848;
+  margin-top: 14px;
+  margin-left: 6px;
+}
+
+#movie_info_loc {
+  position: absolute;
+  left: 130px;
+  width: 260px;
+  height: 112px;
+}
+
+#movie_info_cinema {
+  font-family: PingFangSC-Regular;
+  font-size: 16px;
+  color: #484848;
+  top: 8px;
+}
+
+#movie_info_cinema_hall {
+  font-family: PingFangSC-Regular;
+  font-size: 16px;
+  color: #484848;
+  margin-top: 8px;
+}
+
+#movie_info_seats {
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #484848;
+  margin-top: 16px;
+}
+
+#phone_check_container {
+  width: 290px;
+  height: 130px;
+  position: relative;
+  left: 480px;
+  margin-left: 30px;
+}
+
+.nonclick_btn {
+  background: #DF9088;
+  border-style: none;
+  border-radius: 2px;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #FFFFFF;
+}
+
+.click_btn {
+  background: #E84A3A;
+  border-style: none;
+  border-radius: 2px;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #FFFFFF;
+}
+
+#phone_check_btn {
+  width: 240px;
+  height: 48px;
+  margin-top: 24px;
+}
+
+#input_group {
+  border: 1px solid #E84A3A;
+  border-radius: 2px;
+  width: 240px;
+  height: 48px;
+}
+
+#input_group_hint {
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #999999;
+  vertical-align: middle;
+  position: absolute;
+  top: 14px;
+  left: 14px;
+}
+
+#phone_check_input {
+  width: 160px;
+  border-style: none;
+  margin-top: 8px;
+  margin-left: 60px;
+  font-family: Avenir-Book;
+  font-size: 20px;
+  color: #484848;
+  letter-spacing: 1px;
+  background-color: #fff;
+}
+
+#phone_check_sms_input {
+  width: 130px;
+  height: 48px;
+  border: 1px solid #E84A3A;
+  border-radius: 2px;
+  margin-top: 20px;
+  font-family: Avenir-Book;
+  font-size: 20px;
+  color: #202020;
+  text-align: center;
+}
+
+#phone_check_sms_btn_resent {
+  background: #DF9088;
+  border-style: none;
+  border-radius: 2px;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #FFFFFF;
+  width: 94px;
+  height: 48px;
+  margin-left: 16px;
+}
+
+#phone_check_sms_btn {
+  width: 240px;
+  height: 48px;
+  margin-top: 24px;
+}
+
+#input_hint {
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #E84A3A;
+  width: 230px;
+  height: 20px; 
+  text-align: center;
+  margin-left: 800px;
+  margin-bottom: 8px;
+}
+
+#ticket_key_hint {
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #999999;
+  position: absolute;
+  top: 38px;
+  left: 5px;
+}
+
+#ticket_key{
+  font-family: Avenir-Book;
+  font-size: 24px;
+  color: #E84A3A;
+  letter-spacing: 1.2px;
+  position: absolute;
+  top: 30px;
+  left: 57px;
+}
+
+#ticket_key_copy {
+  background: #E84A3A;
+  border-radius: 2px;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #FFFFFF;
+  border-style: none;
+  position: absolute;
+  top: 28px;
+  right: 0;
+  width: 52px;
+  height: 36px;
+}
