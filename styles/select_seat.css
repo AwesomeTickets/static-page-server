@@ -171,8 +171,7 @@
 #movie_info_price_hint,
 #movie_info_price,
 #movie_info_total_price_hint,
-#movie_info_total_price,
-#movie_info_order {
+#movie_info_total_price {
   z-index: -1;
 }
 
@@ -228,9 +227,11 @@
   color: #FFFFFF;
   border: 1px solid #E84A3A;
   margin-top: 32px;
+  cursor: pointer;
 }
 
 .nonclickable {
+  cursor: not-allowed !important;
   border: 1px solid #DF9088 !important;
   background-color: #DF9088 !important;
 }
@@ -349,7 +350,6 @@
 #select_seat_hint span {
   ont-family: PingFangSC-Regular;
   font-size: 12px;
-  /*color: #484848;*/
 }
 
 #select_seat_hint span:nth-of-type(1),
