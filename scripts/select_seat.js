@@ -430,12 +430,10 @@ $(document).ready(function() {
   /*选择座位部分结束*/
 
   /* 添加确认按钮点击跳转 */
-  let temp = document.getElementById("temp");
-  temp.onclick = function(event) {
+  movie_info_order.onclick = function(event) {
     if (movie_info_order.className == "nonclickable") return;
     var info_temp = event.target.baseURI.split('?')[1] + '&';
     var seats = document.getElementsByClassName("movie_info_seats_item");
-    //var re = /^[0-9]+.?[0-9]*$/;  !re.test(seats[i].innerHTML[j])
     var str_temp = "";
     for(var i = 0; i < seats.length; i++) {
       for(var j = 0; j < seats[i].innerHTML.length; j++)
