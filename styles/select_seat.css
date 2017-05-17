@@ -313,7 +313,6 @@
 
 #select_seat {
   display: inline-block;
-  /*position: relative;*/
   width: 588px;
   overflow-x: auto;
   overflow-y: hidden;
@@ -321,8 +320,6 @@
 }
 
 .select_seat_row {
-  /*overflow-x: auto;*/
-  /*width: 588px;*/
   height: 24px;
   margin-bottom: 16px;
 }
@@ -336,10 +333,25 @@
 }
 
 .select_seat_seats {
-  /*max-width: 588px;*/
-  /*height: 24px;*/
   margin-left: auto;
   margin-right: auto;
+}
+
+.mCSB_scrollTools_horizontal {
+  width: 300px !important;
+  margin: 0 auto !important;
+}
+
+/*.mCSB_draggerContainer {
+  width: 260px !important;
+}*/
+.mCSB_draggerRail {
+  height: 10px !important;
+}
+
+.mCSB_dragger_bar {
+  height: 10px !important;
+  background-color: #E84A3A !important;
 }
 
 .select_seat_seats_item {
