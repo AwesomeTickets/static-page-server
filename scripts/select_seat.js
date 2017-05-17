@@ -137,10 +137,6 @@ $(document).ready(function() {
 
   // 根据收到的字符串生成大布局矩阵
   function show_select_seat_layout_matrix(seat_layout, select_seat_layout_matrix, select_seat_row_count, select_seat_column_count) {
-    console.log('seat_layout: ', seat_layout);
-    console.log('select_seat_layout_matrix: ', select_seat_layout_matrix);
-    console.log('select_seat_row_count: ', select_seat_row_count);
-    console.log('select_seat_column_count: ', select_seat_column_count);
     let select_seat_numbers_fragment = document.createDocumentFragment();
     for (let i = 1; i <= select_seat_row_count; i++) {
       let select_seat_number = document.createElement('div');
@@ -184,7 +180,7 @@ $(document).ready(function() {
       select_seat_fragment.appendChild(select_seat_row);
     }
 
-    select_seat_dot_line.style.height = `${40 * select_seat_row_count + 20}px`;
+    select_seat_dot_line.style.height = `${40 * select_seat_row_count + 10}px`;
     select_seat.appendChild(select_seat_fragment);
   }
 
@@ -436,8 +432,8 @@ $(document).ready(function() {
   // 清除选座位区的所有座位
   function clear_all_seats() {
     let lengthTmp = select_seat.childNodes.length;
-    for (let i = 1; i < lengthTmp; i++) {
-      select_seat.removeChild(select_seat.childNodes[1]);
+    for (let i = 0; i < lengthTmp; i++) {
+      select_seat.removeChild(select_seat.childNodes[0]);
     }
     lengthTmp = select_seat_numbers.childNodes.length;
     for (let i = 0; i < lengthTmp; i++) {
