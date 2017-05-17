@@ -247,6 +247,30 @@ $(document).ready(function() {
     })
   }
 
+  function set_custom_scroll_bar() {
+    console.log('lalla');
+    $("#select_seat").mCustomScrollbar({
+      axis:"x", // horizontal scrollbar
+      theme: "3d-dark",
+      setLeft: "50px",  //初始滚动距离,可再调整到初始滚动到中间
+      scrollButtons:{ enable: true },
+      callbacks:{
+        onScrollStart: function(){
+          console.log('Scroll Start!');
+        },
+        onTotalScroll: function(){
+          console.log('滚动到底啦!');
+        },
+        onTotalScrollBack: function(){
+          console.log('滚动到头啦!');
+        },
+        onScroll: function(){
+          console.log('Scroll End!');
+        },
+      },
+    });
+  }
+
   async function select_seat_part() {
     // 获取影厅座位布局
     let seat_layout = await get_seat_layout(cinemaHallId);
@@ -258,6 +282,7 @@ $(document).ready(function() {
     let unavailable = await get_unavailable(movieOnShowId);
     // 将不可选座位的图标改为灰色
     show_unavailable_seats(unavailable, select_seat_layout_matrix);
+    set_custom_scroll_bar();
     // 点击选座位
     select_seat.onclick = function(event) {
       if (event.target.className == 'select_seat_seats_item select_seat_seats_item_avaliable' && event.target.id.slice(0, 12) == 'select_seat_') {
@@ -318,8 +343,10 @@ $(document).ready(function() {
         // 将不可选座位的图标改为灰色
         let unavailable = await get_unavailable(changedMovieOnShowId);
         show_unavailable_seats(unavailable, select_seat_layout_matrix);
+        set_custom_scroll_bar();
       }
     }
+
   }
 
   select_seat_part();
