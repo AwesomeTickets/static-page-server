@@ -64,6 +64,8 @@ $(document).ready(function () {
   })();
 
   function phone_check_init() {
+    phone_check_container.innerHTML = "";
+
     var input_container = document.createElement("div");
     input_container.id = "input_group";
 
@@ -105,7 +107,6 @@ $(document).ready(function () {
 
     btn.onclick = function() {
       if (check_input_valid(trans_phonenum(input.value))) {
-        get_sms(trans_phonenum(input.value));
         ask_sms(trans_phonenum(input.value));
       } else {
         document.getElementById("input_hint").innerText = "请输入有效手机号";
@@ -123,7 +124,11 @@ $(document).ready(function () {
   }
 
   function ask_sms(phone_num) {
-    $.get(global_api.sms + phone_num, function(data, textStatus){});
+    $.get(global_api.sms + phone_num, function(data, textStatus){
+      get_sms(phone_num);
+    }).error(function() {
+        document.getElementById("input_hint").innerText = "请输入有效手机号";
+      });
   }
 
   function check_input_valid(input) {
@@ -146,7 +151,7 @@ $(document).ready(function () {
     sms_btn_resent.disabled = true;
     sms_btn_resent.className = "nonclick_btn";
     sms_btn_resent.onclick = function () {
-      $.get(global_api.sms + phone_num, function(data, textStatus){});
+      ask_sms(phone_num);
     }
     phone_check_container.appendChild(sms_btn_resent);
     counting_time(2);
@@ -196,10 +201,11 @@ $(document).ready(function () {
         console.log(textStatus);
         if (parseInt(result.phoneNum) == parseInt(phone_num)) {
           sent_booking_info(result.phoneNum);
-        } else {
-          document.getElementById("input_hint").innerText = "！验证码错误";
         }
+      }).error(function (xhr,errorText,errorType) {
+        document.getElementById("input_hint").innerText = "！验证码错误";
       });
+
     }
   }
 
