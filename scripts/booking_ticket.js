@@ -129,6 +129,8 @@ $(document).ready(function () {
     }).error(function() {
         document.getElementById("input_hint").innerText = "请输入有效手机号";
       });
+      
+      //get_sms(phone_num);
   }
 
   function check_input_valid(input) {
@@ -154,7 +156,7 @@ $(document).ready(function () {
       ask_sms(phone_num);
     }
     phone_check_container.appendChild(sms_btn_resent);
-    counting_time(2);
+    counting_time(60);
 
     var sms_btn_confirm = document.createElement("button");
     sms_btn_confirm.id = 'phone_check_sms_btn';
