@@ -6,6 +6,7 @@ $(document).ready(function () {
     cinema: `${global_url}/resource/cinema/`,
     cinema_hall: `${global_url}/resource/cinema-hall/`,
     sms: `${global_url}/resource/sms/`,
+    ticket: `${global_url}/resource/ticket/`,
   }
 
   const cinemaHallId = location.href.split('?')[1].split('&')[0].split('=')[1],
@@ -143,7 +144,10 @@ $(document).ready(function () {
     sms_btn_resent.id = 'phone_check_sms_btn_resent';
     sms_btn_resent.innerText = "60s 内重发";
     sms_btn_resent.disabled = true;
-    sms_btn_resent.onclick = resent_sms(phone_num);
+    sms_btn_resent.className = "nonclick_btn";
+    sms_btn_resent.onclick = function () {
+      $.get(global_api.sms + phone_num, function(data, textStatus){});
+    }
     phone_check_container.appendChild(sms_btn_resent);
     counting_time(2);
 
@@ -175,10 +179,6 @@ $(document).ready(function () {
     }, 1000);
   }
 
-  function resent_sms(phone_num) {
-    $.get(global_api.sms + phone_num, function(data, textStatus){});
-  }
-
   function set_btn_action(phone_num) {
     var btn = document.getElementById('phone_check_sms_btn'),
       input = document.getElementById("phone_check_sms_input");
@@ -192,9 +192,10 @@ $(document).ready(function () {
       }
     }
     btn.onclick = function() {
-      $.post(global_api.sms + phone_num + "/check", {code:input.value}, function(result) {
+      $.post(global_api.sms + phone_num + "/check/", {code:input.value}, function(result,textStatus) {
+        console.log(textStatus);
         if (parseInt(result.phoneNum) == parseInt(phone_num)) {
-          sent_booking_info();
+          sent_booking_info(result.phoneNum);
         } else {
           document.getElementById("input_hint").innerText = "！验证码错误";
         }
@@ -202,8 +203,16 @@ $(document).ready(function () {
     }
   }
 
-  function sent_booking_info() {
-    show_the_ticket_key("4311 6543 75");
+  function sent_booking_info(phoneNum) {
+    var seat_post = "";
+    for (var i = 0 ; i < seats.length; i++) {
+      for (var j = 0 ; j < seats[i].length; j++) {
+        seat_post += (i == 0 && j == 0 ? '' : ',') + seats[i][j];
+      }
+    }
+    $.post(global_api.ticket, {movieOnShowId:movieOnShowId, phoneNum:phoneNum, seats: seat_post}, function(result) {
+      show_the_ticket_key(result.ticketCode);
+    });
   }
 
   function show_the_ticket_key(keyValue) {
@@ -220,16 +229,6 @@ $(document).ready(function () {
     key.id = 'ticket_key';
     key.innerText = keyValue;
     phone_check_container.appendChild(key);
-
-    var copy_btn = document.createElement('button');
-    copy_btn.id = "ticket_key_copy";
-    copy_btn.innerText = "复制";
-    copy_btn.onclick = function() {
-      var copy_info = document.getElementById("ticket_key").innerHTML;
-      window.clipboardData.setData('text', copy_info);
-    }
-    phone_check_container.appendChild(copy_btn);
-
   }
 
 });
