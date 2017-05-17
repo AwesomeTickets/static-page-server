@@ -112,7 +112,8 @@ $(document).ready(function() {
 
 
   /*选择座位部分开始*/
-  let select_seat = document.getElementById('select_seat'),
+  let select = document.getElementById('select'),
+    select_seat = document.getElementById('select_seat'),
     select_seat_dot_line = document.getElementById('select_seat_dot_line'),
     select_seat_numbers = document.getElementById('select_seat_numbers'),
     select_seat_layout_matrix = '',
@@ -248,25 +249,30 @@ $(document).ready(function() {
   }
 
   function set_custom_scroll_bar() {
-    console.log('lalla');
+    // console.log('lala');
     $("#select_seat").mCustomScrollbar({
       axis:"x", // horizontal scrollbar
       theme: "3d-dark",
-      setLeft: "50px",  //初始滚动距离,可再调整到初始滚动到中间
+      setLeft: "70px",  //初始滚动距离,可再调整到初始滚动到中间
       scrollButtons:{ enable: true },
       callbacks:{
         onScrollStart: function(){
-          console.log('Scroll Start!');
+          $('.mCSB_buttonLeft').hide();
+          $('.mCSB_buttonRight').hide();
         },
         onTotalScroll: function(){
-          console.log('滚动到底啦!');
+          $('.mCSB_buttonRight').hide();
         },
         onTotalScrollBack: function(){
-          console.log('滚动到头啦!');
+          $('.mCSB_buttonLeft').hide();
         },
         onScroll: function(){
-          console.log('Scroll End!');
+          $('.mCSB_buttonLeft').show();
+          $('.mCSB_buttonRight').show();
         },
+        onUpdate: function(){
+          // console.log('update!!');
+        }
       },
     });
   }
