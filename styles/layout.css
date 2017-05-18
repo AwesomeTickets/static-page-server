@@ -4,5 +4,29 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
-  background-color: #202020 !important;
 }
+
+/*顶栏样式开始*/
+#head_bar {
+  width: 100%;
+  height: 64px;
+  border-bottom: 2px solid #ECE7E7;
+  margin-bottom: 24px;
+}
+
+#head_bar > img {
+  position: relative;
+  left: 24px;
+  top: 16px;
+  cursor: pointer;
+}
+
+#head_bar_count {
+  display: inline-block;
+  float: right;
+  margin: 24px 24px 0 0;
+  color: #484848;
+  border: 0;
+  background-color: #fff;
+}
+/*顶栏样式结束*/
