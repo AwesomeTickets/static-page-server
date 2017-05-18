@@ -71,8 +71,12 @@ $(document).ready(function () {
 
     var input_group_hint = document.createElement("div");
     input_group_hint.id = "input_group_hint";
-    input_group_hint.innerText = "+86 | "
+    input_group_hint.innerText = "+86"
     input_container.appendChild(input_group_hint);
+
+    var input_group_line = document.createElement('div');
+    input_group_line.className = "input_group_line";
+    input_container.appendChild(input_group_line);
 
     var phone_check_input = document.createElement("input");
     phone_check_input.id = 'phone_check_input';
@@ -94,15 +98,13 @@ $(document).ready(function () {
     const btn = document.getElementById("phone_check_btn"),
       input = document.getElementById("phone_check_input");
     input.oninput = function () {
-      if (this.value.length == 13) {
+      if (this.value.length == 11) {
         btn.disabled = false;
         btn.className = "click_btn";
       } else {
         btn.disabled = true;
         btn.className = "nonclick_btn";
       }
-      if (this.value.length == 3) this.value += "\ ";
-      else if (this.value.length == 8) this.value += "\ ";
     }
 
     btn.onclick = function() {
@@ -130,7 +132,7 @@ $(document).ready(function () {
         document.getElementById("input_hint").innerText = "请输入有效手机号";
       });
       
-      //get_sms(phone_num);
+      get_sms(phone_num);
   }
 
   function check_input_valid(input) {

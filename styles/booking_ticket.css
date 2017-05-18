@@ -131,6 +131,16 @@
   left: 14px;
 }
 
+.input_group_line{
+  width: 2px;
+  border-left: 1px solid #ECE7E7;
+  position: absolute;
+  left: 48px;
+  z-index: 999;
+  top: 13px;
+  height: 24px;
+}
+
 #phone_check_input {
   width: 160px;
   border-style: none;
