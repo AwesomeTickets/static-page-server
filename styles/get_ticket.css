@@ -1,8 +1,7 @@
 #input_container {
 	width: 240px;
 	height: 212px;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 100px auto 0 auto;
 }
 
 #item_phone, #item_code {
@@ -70,7 +69,7 @@
 	padding-bottom: 12px;
 	padding-left: 16px;
 	padding-top: 14px;
-} 
+}
 
 #get_ticket, #check_ticket {
 	width: 108px;
@@ -163,7 +162,7 @@
 
 
 
-#final_item_movie, #final_item_hall, #final_item_room, 
+#final_item_movie, #final_item_hall, #final_item_room,
 #final_item_time, #final_item_seat {
 	font-size: 14px;
 	color: #999999;
@@ -225,5 +224,3 @@
 .item_box {
 	margin-bottom: 24px;
 }
-
-

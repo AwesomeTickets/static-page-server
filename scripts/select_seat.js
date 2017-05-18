@@ -26,13 +26,6 @@ $(document).ready(function() {
     global_movie_price = 0,
     showTimeTmp = '';
 
-  /*点击LOGO回到主页开始*/
-  let head_bar_img = document.getElementById('head_bar_img');
-  head_bar_img.onclick = function() {
-    window.location = '../index.html';
-  }
-  /*点击LOGO回到主页结束*/
-
   /*电影信息部分 开始*/
   let movie_info_poster = document.getElementById('movie_info_poster'),
     movie_info_title = document.getElementById('movie_info_title'),
@@ -255,6 +248,8 @@ $(document).ready(function() {
       theme: "3d-dark",
       setLeft: "70px",  //初始滚动距离,可再调整到初始滚动到中间
       scrollButtons:{ enable: true },
+      keyboard:{ enable: true },
+      live: true,
       callbacks:{
         onScrollStart: function(){
           $('.mCSB_buttonLeft').hide();
@@ -272,7 +267,13 @@ $(document).ready(function() {
         },
         onUpdate: function(){
           // console.log('update!!');
-        }
+        },
+        onCreate: function(){
+          // console.log('onCreate!!');
+        },
+        onInit: function(){
+          // console.log('onInit!!');
+        },
       },
     });
   }
@@ -349,7 +350,8 @@ $(document).ready(function() {
         // 将不可选座位的图标改为灰色
         let unavailable = await get_unavailable(changedMovieOnShowId);
         show_unavailable_seats(unavailable, select_seat_layout_matrix);
-        set_custom_scroll_bar();
+        // set_custom_scroll_bar();
+        $('#select_seat').mCustomScrollbar("destroy");
       }
     }
 

@@ -354,6 +354,20 @@
   background-color: #E84A3A !important;
 }
 
+.mCSB_dragger_bar:hover {
+  background-color: #E76456 !important;
+}
+
+.mCSB_buttonRight {
+  background-image: url("/static/pictures/assets/scrollBarArrow_right.png") !important;
+  background-position: 12px 2px !important;
+}
+
+.mCSB_buttonLeft {
+  background-image: url("/static/pictures/assets/scrollBarArrow_left.png") !important;
+  background-position: 1px 3px !important;
+}
+
 .select_seat_seats_item {
   display: inline-block;
   width: 24px;

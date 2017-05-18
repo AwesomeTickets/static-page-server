@@ -26,22 +26,14 @@ $(document).ready(function() {
 
   window.location.hash = '#select_cinema';
 
-  /*点击LOGO回到主页开始*/
-  let head_bar_img = document.getElementById('head_bar_img'),
-    select_date_initial_count = 1,
+  let select_date_initial_count = 1,
     select_date_initial_count_tmp = 1,
     select = document.getElementById('select'),
     select_cinema = document.getElementById('select_cinema'),
     select_time = document.getElementById('select_time'),
-    select_time_clicked_showDate = '', 
+    select_time_clicked_showDate = '',
     select_time_clicked_cinemaId = '',
     select_time_clicked_cinema_name = '';
-
-  head_bar_img.onclick = function() {
-    window.location = '../index.html';
-  }
-  /*点击LOGO回到主页结束*/
-
 
   /*电影信息部分开始*/
   // 获取电影信息
@@ -92,7 +84,7 @@ $(document).ready(function() {
   movie_info_part();
   /*电影信息部分结束*/
 
-  /*选择部分 开始*/  
+  /*选择部分 开始*/
   // 获取电影排期
   function get_recent() {
     return new Promise((resolve, reject) => {
@@ -191,12 +183,12 @@ $(document).ready(function() {
     }
   }
 
-  // 移除所有选择场次信息 
+  // 移除所有选择场次信息
   function select_time_remove_items() {
     let lengthTmp = select_time.childNodes.length;
     for (let i = 0; i < lengthTmp; i++) {
       select_time.removeChild(select_time.childNodes[0]);
-    }      
+    }
   }
 
   // 将影院名，更改影院按钮等插入DOM中
@@ -215,7 +207,7 @@ $(document).ready(function() {
     let select_time_title = document.createElement('div')
     select_time_title.id = 'select_time_title';
     select_time_title.innerHTML = '选择场次';
-    select_time.appendChild(select_time_title);    
+    select_time.appendChild(select_time_title);
   }
 
   // 将场次进行排序
@@ -263,10 +255,10 @@ $(document).ready(function() {
         let arrTmp = event.target.id.split('_'),
           cinemaHallIdTmp = arrTmp[5],
           movieOnShowIdTmp = arrTmp[6],
-          showTimeTmp = arrTmp[7];    
+          showTimeTmp = arrTmp[7];
         window.location = `./select_seat.html?cinemaHallId=${cinemaHallIdTmp}&movieOnShowId=${movieOnShowIdTmp}&movieId=${movieId}&showDate=${select_time_clicked_showDate}&showTime=${showTimeTmp}`;
       }
-    }                      
+    }
   }
 
   // 将电影各个排期呈现在页面上
@@ -325,7 +317,7 @@ $(document).ready(function() {
         // 更改日期 部分
         select_date_part(recent, select_time_clicked_cinemaId, select_time_clicked_cinema_name);
       }
-    }    
+    }
     // 更改日期 部分
     select_date_part(recent, select_time_clicked_cinemaId, select_time_clicked_cinema_name);
   }
@@ -333,9 +325,9 @@ $(document).ready(function() {
   function show_day_times_item_empty_hint() {
     let select_time_item_fragment = document.createDocumentFragment();
     let select_time_item = document.createElement('div');
-    select_time_item.className += 'select_time_item';    
+    select_time_item.className += 'select_time_item';
     select_time_item.innerHTML = '无对应场次';
-    select_time.appendChild(select_time_item);                   
+    select_time.appendChild(select_time_item);
   }
 
   // 将某场次的各信息呈现到页面上
@@ -386,9 +378,9 @@ $(document).ready(function() {
     select_time_item_fragment.appendChild(select_time_item_price);
     select_time_item_fragment.appendChild(select_time_item_select_seat);
     select_time_item.appendChild(select_time_item_fragment);
-    select_time.appendChild(select_time_item);                   
+    select_time.appendChild(select_time_item);
     if (select_time.childNodes.length == day.count + 2) {
-      sort_select_time_items(); 
+      sort_select_time_items();
     }
   }
 
@@ -410,7 +402,7 @@ $(document).ready(function() {
           select_date_documents[`select_date_button${select_date_initial_count}`].className = '';
           select_date_initial_count = event.target.id.slice(-1);
           select_date_documents[`select_date_button${select_date_initial_count}`].className += 'active';
-          select_time_part(recent.data[select_date_initial_count - 1].showDate, select_time_clicked_cinemaId, select_time_clicked_cinema_name);            
+          select_time_part(recent.data[select_date_initial_count - 1].showDate, select_time_clicked_cinemaId, select_time_clicked_cinema_name);
         }
       }
     }
