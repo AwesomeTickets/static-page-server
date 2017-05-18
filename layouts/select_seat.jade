@@ -1,0 +1,51 @@
+extends ../layout
+
+block links
+  link(rel="stylesheet" href="/styles/select_seat.css")
+
+block content
+  include head_bar.jade
+  div#select_and_movie_info
+    +select
+    +movie_info
+
+  mixin select
+    div#select
+      div#hint_dialog 最多选择四个座位
+        button#hint_dialog_button 重新选座
+      div#select_title 选择座位
+      div#select_seat
+        img#select_seat_screen(src='/static/pictures/assets/selectSeat_screen.png')
+        div#select_seat_dot_line
+      div#select_seat_hint
+        img(src='/static/pictures/assets/seats/available.png') 
+        span 可选
+        img(src='/static/pictures/assets/seats/unavailable.png') 
+        span 不可选
+        img(src='/static/pictures/assets/seats/select.png') 
+        span 已选
+
+  mixin movie_info
+    div#movie_info
+      img#movie_info_poster
+      div#movie_info_title 电影名
+      div#movie_info_lang_and_movie_type 电影类型
+      div#movie_info_length 电影时长
+      div#movie_info_cinema_name 影院名
+      div#movie_info_cinema_hall_name 影厅名
+      div#movie_info_show_date_hint 日期：
+      div#movie_info_show_date
+      div#movie_info_show_time_hint 场次：
+      div#movie_info_show_time
+      button#movie_info_change_show_time 更改场次
+      div#movie_info_change_show_time_dialog_triangle
+      div#movie_info_change_show_time_dialog
+      div#movie_info_seats_hint 座位：
+      div#movie_info_seats 未选座
+      div#movie_info_price_hint 价格：
+      div#movie_info_price
+      div#movie_info_total_price_hint 总价：
+      div#movie_info_total_price 
+      button#movie_info_order.nonclickable 确认购票  
+block scripts
+  script(type="text/javascript" src="/scripts/select_seat.js")
