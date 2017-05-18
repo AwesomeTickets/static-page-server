@@ -1,0 +1,52 @@
+extends ../layout
+
+block links
+  link(rel="stylesheet" href="/styles/get_ticket.css")
+
+block content
+  include head_bar.jade
+  div#input_container
+    div#get_ticket_input_phone 
+    div#item_phone 手机号
+      div#phone_container
+        div#phone_prefix +86 | 
+        input#phone_input(type="text")
+    div#get_ticket_input_code 
+    div#item_code 取票码
+      div#code_container
+        input#code_input(type='text')
+    button#check_ticket 查票
+    button#get_ticket 取票
+
+  div#get_ticket_confirm
+    div#confirm_text 确认取票
+    button#cancel_get 取消
+    button#confirm_get 确认
+
+  div#final_container
+    div#final_item
+
+      div.item_box
+        div#final_item_movie 电影
+        div#final_movie 金刚狼3：殊死一战
+
+      div
+        div#final_item_hall 影厅
+        div#final_hall_cinema 金逸珠江国际影城(大学城店)
+      div.item_box
+        div#final_hall_room 5号厅
+
+      div.item_box
+        div#final_item_time 场次
+        div#final_date 5月5日 
+        div#final_time 20：00
+
+      div.item_box
+        div#final_item_seat 座位
+        div#final_seat 5排5座   5排6座   5排7座   5排8座
+    
+    div#final_state 已取票
+  
+block scripts
+  script(type="text/javascript" src="/scripts/get_ticket.js")
+  script(type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js")
