@@ -11,17 +11,17 @@ $(document).ready(function() {
     get_cinema_info: `${global_url}/resource/cinema/`,
   }
 
-    
+
   const phone_container = document.getElementById("phone_container"),
     item_phone = document.getElementById("item_phone"),
     code_input = document.getElementById("code_input"),
     item_code = document.getElementById("item_code"),
     phone_input = document.getElementById("phone_input"),
-    
+
     get_ticket_btn = document.getElementById("get_ticket"),
     check_ticket_btn = document.getElementById("check_ticket"),
     get_ticket_confirm = document.getElementById("get_ticket_confirm"),
-    
+
     cancel_btn = document.getElementById("cancel_get"),
     confirm_btn = document.getElementById("confirm_get"),
 
@@ -75,36 +75,36 @@ $(document).ready(function() {
 ///////////////确认取票//////////////////
   confirm_btn.onclick = function () {
     var code = trans_num(code_input.value), phone_num = trans_num(phone_input.value);
-    console.log(code, phone_num);
+    // console.log(code, phone_num);
     $.post(global_api.get_ticket, {ticketCode:code, phoneNum:phone_num}, function(result) {
-      console.log(result);
+      // console.log(result);
       var movie_id = result.movieOnShowId;
 
       $.get(global_api.get_movie_info + result.movieOnShowId, function(data) {
-        console.log(data);
+        // console.log(data);
 
         // get movie detial
         $.get(global_api.get_movie_detail + data.movieId, function(detial) {
-            console.log(detial);
+            // console.log(detial);
           // get hall detial
           $.get(global_api.get_hall_info + data.cinemaHallId, function(hallInfo) {
-            console.log(hallInfo);
+            // console.log(hallInfo);
             // get cinema detial
             $.get(global_api.get_cinema_info + hallInfo.cinemaId, function(cinemaInfo) {
-              console.log(cinemaInfo);
+              // console.log(cinemaInfo);
 
 ///////////////*begin your show*////////////////////
         var time_str = data.showDate.split("-");
         var seat_str = "";
         for(var i = 0; i < result.seats.length; i++) {
-            seat_str = seat_str + result.seats[i][0] + "&nbsp;排" + 
+            seat_str = seat_str + result.seats[i][0] + "&nbsp;排" +
                        result.seats[i][1] + "&nbsp;座&nbsp;&nbsp;&nbsp;&nbsp;";
         }
 ///
         final_movie.innerHTML = detial.title;
         final_hall_cinema.innerHTML = cinemaInfo.cinemaName;
         final_hall_room.innerHTML = hallInfo.hallName;
-        final_date.innerHTML = parseInt(time_str[1]) + "&nbsp;月&nbsp;" + 
+        final_date.innerHTML = parseInt(time_str[1]) + "&nbsp;月&nbsp;" +
                                parseInt(time_str[2]) + "&nbsp;日&nbsp;&nbsp;&nbsp;&nbsp;";
         final_time.innerHTML = data.showTime.slice(0,5);
         final_seat.innerHTML = seat_str;
@@ -138,35 +138,36 @@ $(document).ready(function() {
 
 check_ticket_btn.onclick = function () {
   var code = trans_num(code_input.value), phone_num = trans_num(phone_input.value);
-    console.log(code, phone_num);
-    $.get(global_api.check_ticket + "?" + "ticketCode=" +code + "&&" + "phoneNum="+phone_num, function(result) {
-      console.log(result);
+    // console.log(code, phone_num);
+    // $.get(global_api.check_ticket + "?" + "ticketCode=" +code + "&&" + "phoneNum="+phone_num, function(result) {
+    $.post(global_api.check_ticket, {ticketCode: code, phoneNum: phone_num}, function(result) {
+      // console.log(result);
 
       $.get(global_api.get_movie_info + result.movieOnShowId, function(data) {
-        console.log(data);
+        // console.log(data);
 
         // get movie detial
         $.get(global_api.get_movie_detail + data.movieId, function(detial) {
-            console.log(detial);
+            // console.log(detial);
           // get hall detial
           $.get(global_api.get_hall_info + data.cinemaHallId, function(hallInfo) {
-            console.log(hallInfo);
+            // console.log(hallInfo);
             // get cinema detial
             $.get(global_api.get_cinema_info + hallInfo.cinemaId, function(cinemaInfo) {
-              console.log(cinemaInfo);
+              // console.log(cinemaInfo);
 
 ///////////////*begin your show*////////////////////
         var time_str = data.showDate.split("-");
         var seat_str = "";
         for(var i = 0; i < result.seats.length; i++) {
-            seat_str = seat_str + result.seats[i][0] + "&nbsp;排" + 
+            seat_str = seat_str + result.seats[i][0] + "&nbsp;排" +
                        result.seats[i][1] + "&nbsp;座&nbsp;&nbsp;&nbsp;&nbsp;";
         }
 ///
         final_movie.innerHTML = detial.title;
         final_hall_cinema.innerHTML = cinemaInfo.cinemaName;
         final_hall_room.innerHTML = hallInfo.hallName;
-        final_date.innerHTML = parseInt(time_str[1]) + "&nbsp;月&nbsp;" + 
+        final_date.innerHTML = parseInt(time_str[1]) + "&nbsp;月&nbsp;" +
                                parseInt(time_str[2]) + "&nbsp日&nbsp;&nbsp;&nbsp;&nbsp;";
         final_time.innerHTML = data.showTime.slice(0,5);
         final_seat.innerHTML = seat_str;
