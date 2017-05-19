@@ -131,6 +131,7 @@ $(document).ready(function() {
 
   // 根据收到的字符串生成大布局矩阵
   function show_select_seat_layout_matrix(seat_layout, select_seat_layout_matrix, select_seat_row_count, select_seat_column_count) {
+    // select_seat = document.getElementById("select_seat");
     let select_seat_numbers_fragment = document.createDocumentFragment();
     for (let i = 1; i <= select_seat_row_count; i++) {
       let select_seat_number = document.createElement('div');
@@ -159,8 +160,6 @@ $(document).ready(function() {
         let select_seat_seats_item = document.createElement('div');
         select_seat_seats_item.className = 'select_seat_seats_item';
         select_seat_seats_item.id = `select_seat_${i}_${j}`;
-
-
         if (select_seat_layout_matrix[i - 1].slice(j - 1, j) == 1) {
           select_seat_seats_item.style.backgroundImage = 'url(\'/static/pictures/assets/seats/available.png\')';
           select_seat_seats_item.className = 'select_seat_seats_item select_seat_seats_item_avaliable';
@@ -242,7 +241,6 @@ $(document).ready(function() {
   }
 
   function set_custom_scroll_bar() {
-    // console.log('lala');
     $("#select_seat").mCustomScrollbar({
       axis:"x", // horizontal scrollbar
       theme: "3d-dark",
@@ -265,15 +263,6 @@ $(document).ready(function() {
           $('.mCSB_buttonLeft').show();
           $('.mCSB_buttonRight').show();
         },
-        onUpdate: function(){
-          // console.log('update!!');
-        },
-        onCreate: function(){
-          // console.log('onCreate!!');
-        },
-        onInit: function(){
-          // console.log('onInit!!');
-        },
       },
     });
   }
@@ -290,6 +279,7 @@ $(document).ready(function() {
     // 将不可选座位的图标改为灰色
     show_unavailable_seats(unavailable, select_seat_layout_matrix);
     set_custom_scroll_bar();
+    select_seat = document.getElementById("select_seat");
     // 点击选座位
     select_seat.onclick = function(event) {
       if (event.target.className == 'select_seat_seats_item select_seat_seats_item_avaliable' && event.target.id.slice(0, 12) == 'select_seat_') {
@@ -350,8 +340,29 @@ $(document).ready(function() {
         // 将不可选座位的图标改为灰色
         let unavailable = await get_unavailable(changedMovieOnShowId);
         show_unavailable_seats(unavailable, select_seat_layout_matrix);
-        // set_custom_scroll_bar();
-        $('#select_seat').mCustomScrollbar("destroy");
+        set_custom_scroll_bar();
+        select_seat.onclick = function(event) {
+          if (event.target.className == 'select_seat_seats_item select_seat_seats_item_avaliable' && event.target.id.slice(0, 12) == 'select_seat_') {
+            if (Object.keys(select_seats).length < 4) {
+              if (event.target.style.backgroundImage != '') {
+                event.target.className = 'select_seat_seats_item select_seat_seats_item_select';
+                select_seats[event.target.id] = `${event.target.getAttribute('name').split('_')[2]} 排 ${event.target.getAttribute('name').split('_')[3]} 座`;
+                show_select_seats();
+                hide_movie_info_change_show_time_dialog();
+              }
+            } else if (Object.keys(select_seats).length >= 4) {
+              // alert('最多选择四个座位');
+              hint_dialog.style.display = 'block';
+              hide_movie_info_change_show_time_dialog();
+            }
+          } else if (event.target.className == 'select_seat_seats_item select_seat_seats_item_select' && event.target.id.slice(0, 12) == 'select_seat_') {
+            event.target.className = 'select_seat_seats_item select_seat_seats_item_avaliable';
+            delete select_seats[event.target.id];
+            show_select_seats();
+            hide_movie_info_change_show_time_dialog();
+          }
+        }
+        // $('#select_seat').mCustomScrollbar("destroy");
       }
     }
 
@@ -470,6 +481,11 @@ $(document).ready(function() {
     for (let i = 0; i < lengthTmp; i++) {
       select_seat.removeChild(select_seat.childNodes[0]);
     }
+    select.removeChild(select_seat);
+    let select_seat2 = document.createElement('div');
+    select_seat2.id = "select_seat";
+    select.insertBefore(select_seat2, select_seat_hint);
+    select_seat = document.getElementById("select_seat");
     lengthTmp = select_seat_numbers.childNodes.length;
     for (let i = 0; i < lengthTmp; i++) {
       select_seat_numbers.removeChild(select_seat_numbers.childNodes[0]);
