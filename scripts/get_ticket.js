@@ -1,6 +1,4 @@
 $(document).ready(function() {
-  const global_url = 'http://120.25.76.106';
-
   const global_api = {
     movie_info: `${global_url}/resource/movie/`,
     get_ticket: `${global_url}/resource/ticket/check/`,
