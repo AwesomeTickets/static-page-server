@@ -1,1 +1,1 @@
-var hostname = 'http://120.25.76.106'
+window.global_url = 'http://120.25.76.106';
