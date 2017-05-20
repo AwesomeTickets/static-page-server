@@ -26,7 +26,7 @@ else:
 if hostname != '':
     print("Hostname changed to '%s'" % hostname)
     host_file = open(host_path, 'w')
-    host_file.write("var hostname = '%s'" % hostname)
+    host_file.write("window.global_url = '%s';" % hostname)
     host_file.close()
 
 print("Gulp building...")
