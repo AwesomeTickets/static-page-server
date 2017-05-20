@@ -11,9 +11,12 @@ python3 pack.py
 python3 pack.py -H <hostname>
 python3 pack.py { ? | -h | --help }'''
 
+protocal = "http"
 hostname = 'localhost'
-host_filename = os.path.join('scripts', 'host.js')
-pkg_filename = 'site.tar.gz'
+filename_host = os.path.join('scripts', 'host.js')
+
+dir_site = 'site'
+filename_pkg = dir_site + '.tar.gz'
 
 for i, arg in enumerate(sys.argv[1:]):
     if (arg == '?' or arg == '-h' or arg == '--help'):
@@ -22,8 +25,10 @@ for i, arg in enumerate(sys.argv[1:]):
     elif (arg == '-H' and i + 2 < len(sys.argv)):
         hostname = sys.argv[i + 2]
 
+hostname = protocal + '://' + hostname
+
 print("Hostname set to '%s'" % hostname)
-host_file = open(host_filename, 'w')
+host_file = open(filename_host, 'w')
 host_file.write("var hostname = '%s'" % hostname)
 host_file.close()
 
@@ -32,6 +37,6 @@ os.system("gulp clean --silent")
 os.system("gulp build --silent")
 
 print("Compressing...")
-os.system("tar -zcf %s tmp/" % pkg_filename)
+os.system("tar -zcf %s %s" % (filename_pkg, dir_site))
 
-print("Files saved to '%s'" % pkg_filename)
+print("Files saved to '%s'" % filename_pkg)
