@@ -1,1 +1,1 @@
-var hostname = 'localhost'
+var hostname = 'http://120.25.76.106'

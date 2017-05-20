@@ -9,13 +9,13 @@ var browserify = require('gulp-browserify');
 
 gulp.task('webserver', function() {
 	connect.server({
-		root: 'tmp',  //程序入口处，自动为这个文件夹下的Index.html
+		root: 'site',  //程序入口处，自动为这个文件夹下的Index.html
 		livereload: true
 	});
 });
 
 gulp.task('clean', function() {
-	return del(['tmp']);
+	return del(['site']);
 });
 
 gulp.task('sass', function() {
@@ -28,7 +28,7 @@ gulp.task('sass', function() {
 //['sass']指sass这个task完成之后再执行css这个task。
 gulp.task('css', ['sass'], function() {
 	gulp.src('styles/*.css')
-		.pipe(gulp.dest('tmp/styles'))
+		.pipe(gulp.dest('site/styles'))
 		.pipe(connect.reload());
 });
 
@@ -39,33 +39,33 @@ gulp.task('js', function() {
 				presets: ['es2015']
 		}))
 		.pipe(browserify())
-		.pipe(gulp.dest('tmp/scripts'))
+		.pipe(gulp.dest('site/scripts'))
 		.pipe(connect.reload());
 });
 
 gulp.task('staticFiles', function() {
 	gulp.src(['static/*.js', 'static/*.css', 'static/*.map', 'static/*.png'])
-		.pipe(gulp.dest('tmp/static'));
+		.pipe(gulp.dest('site/static'));
 })
 
 
 gulp.task('staticSlick', function() {
 	gulp.src(['static/slick/*.css', 'static/slick/*.js', 'static/slick/*.gif'])
-		.pipe(gulp.dest('tmp/static/slick'));
+		.pipe(gulp.dest('site/static/slick'));
 })
 
 gulp.task('staticPicsExport', function() {
 	gulp.src(['static/pictures/export/*'])
-		.pipe(gulp.dest('tmp/static/pictures/export'));
+		.pipe(gulp.dest('site/static/pictures/export'));
 })
 gulp.task('staticPicsAssets', function() {
 	gulp.src(['static/pictures/assets/*', 'static/pictures/assets/*/*'])
-		.pipe(gulp.dest('tmp/static/pictures/assets'));
+		.pipe(gulp.dest('site/static/pictures/assets'));
 })
 
 gulp.task('staticFonts', function() {
 	gulp.src(['static/fonts/*'])
-		.pipe(gulp.dest('tmp/fonts'));
+		.pipe(gulp.dest('site/fonts'));
 })
 
 // gulp-inject自动注入依赖，这个项目中赞不需要
@@ -76,18 +76,18 @@ gulp.task('staticFonts', function() {
 // 				.pipe(gulp.dest('./'));
 // });
 
-//index.jade预编译为tmp/index.html
+//index.jade预编译为site/index.html
 gulp.task('index', function() {
 	gulp.src('index.jade')
 		.pipe(jade())
-		.pipe(gulp.dest('tmp'))
+		.pipe(gulp.dest('site'))
 		.pipe(connect.reload());
 });
 
 gulp.task('jade', function() {
 	gulp.src('layouts/*.jade')
 		.pipe(jade())
-		.pipe(gulp.dest('tmp/layouts'))
+		.pipe(gulp.dest('site/layouts'))
 		.pipe(connect.reload());
 })
 
