@@ -53,15 +53,6 @@ $(document).ready(function() {
     item_code.style.color = "#999999";
   }
 
-   /*phone_input.oninput = function () {
-    if ( this.value.length == 3 ) this.value += "\ ";
-    else if( this.value.length == 8) this.value += "\ ";
-  }
-
-  code_input.oninput = function () {
-    if ( this.value.length == 4 ) this.value += "\ ";
-    else if( this.value.length == 9) this.value += "\ ";
-  }*/
   phone_input.onkeyup = function(e) {
     if(this.value.length == 3 && e.keyCode != 8) {  // 8 退格键键码
       this.value = this.value + ' ';
