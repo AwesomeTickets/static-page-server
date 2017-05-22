@@ -26,7 +26,7 @@ gulp.task('sass', function() {
 });
 
 //['sass']指sass这个task完成之后再执行css这个task。
-gulp.task('css', ['sass'], function() {   
+gulp.task('css', ['sass'], function() {
 	gulp.src('styles/*.css')
 		.pipe(gulp.dest('tmp/styles'))
 		.pipe(connect.reload());
@@ -44,7 +44,7 @@ gulp.task('js', function() {
 });
 
 gulp.task('staticFiles', function() {
-	gulp.src(['static/*.js', 'static/*.css', 'static/*.map'])
+	gulp.src(['static/*.js', 'static/*.css', 'static/*.map', 'static/*.png'])
 		.pipe(gulp.dest('tmp/static'));
 })
 
@@ -73,7 +73,7 @@ gulp.task('staticFonts', function() {
 // 	var target = gulp.src('./layout.jade');
 // 	var sources = gulp.src(['./styles/*.css', './scripts/*.js'], {read: false});
 // 	return target.pipe(inject(sources))
-// 				.pipe(gulp.dest('./'));	
+// 				.pipe(gulp.dest('./'));
 // });
 
 //index.jade预编译为tmp/index.html

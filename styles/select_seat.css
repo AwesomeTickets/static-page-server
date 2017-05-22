@@ -171,8 +171,7 @@
 #movie_info_price_hint,
 #movie_info_price,
 #movie_info_total_price_hint,
-#movie_info_total_price,
-#movie_info_order {
+#movie_info_total_price {
   z-index: -1;
 }
 
@@ -228,9 +227,11 @@
   color: #FFFFFF;
   border: 1px solid #E84A3A;
   margin-top: 32px;
+  cursor: pointer;
 }
 
 .nonclickable {
+  cursor: not-allowed !important;
   border: 1px solid #DF9088 !important;
   background-color: #DF9088 !important;
 }
@@ -278,12 +279,6 @@
   color: #999999;
 }
 
-#select_seat {
-  position: relative;
-  width: 588px;
-  margin: 12px auto 0 auto;
-}
-
 #select_seat_screen {
   display: block;
   width: 584px;
@@ -293,19 +288,44 @@
 
 #select_seat_dot_line {
   position: absolute;
-  left: 291px;
-  top: 45px;
+  left: 347px;
+  top: 76px;
   width: 0px;
   border-right: 2px dashed #DF9088;
 }
 
+#select_seat_numbers {
+  position: absolute;
+  top: 90px;
+  left: 30px;
+  width: 20px;
+  display: inline-block;
+  word-wrap: break-word;
+  font-family: HelveticaNeue;
+  font-size: 16px;
+  color: #999999;
+}
+
+.select_seat_number {
+  height: 24px;
+  margin-bottom: 16px;
+}
+
+#select_seat {
+  display: inline-block;
+  width: 588px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 12px 56px 0 56px;
+}
+
 .select_seat_row {
-  width: 100%;
   height: 24px;
   margin-bottom: 16px;
 }
 
 .select_seat_row_number {
+  position: absolute;
   float: left;
   font-family: HelveticaNeue;
   font-size: 16px;
@@ -315,6 +335,37 @@
 .select_seat_seats {
   margin-left: auto;
   margin-right: auto;
+}
+
+.mCSB_scrollTools_horizontal {
+  width: 300px !important;
+  margin: 0 auto !important;
+}
+
+/*.mCSB_draggerContainer {
+  width: 260px !important;
+}*/
+.mCSB_draggerRail {
+  height: 10px !important;
+}
+
+.mCSB_dragger_bar {
+  height: 10px !important;
+  background-color: #E84A3A !important;
+}
+
+.mCSB_dragger_bar:hover {
+  background-color: #E76456 !important;
+}
+
+.mCSB_buttonRight {
+  background-image: url("/static/pictures/assets/scrollBarArrow_right.png") !important;
+  background-position: 12px 2px !important;
+}
+
+.mCSB_buttonLeft {
+  background-image: url("/static/pictures/assets/scrollBarArrow_left.png") !important;
+  background-position: 1px 3px !important;
 }
 
 .select_seat_seats_item {
@@ -347,9 +398,8 @@
 }
 
 #select_seat_hint span {
-  ont-family: PingFangSC-Regular;
+  font-family: PingFangSC-Regular;
   font-size: 12px;
-  /*color: #484848;*/
 }
 
 #select_seat_hint span:nth-of-type(1),

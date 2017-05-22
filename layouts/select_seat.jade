@@ -2,6 +2,7 @@ extends ../layout
 
 block links
   link(rel="stylesheet" href="/styles/select_seat.css")
+  link(rel="stylesheet" href="/static/jquery.mCustomScrollbar.css")
 
 block content
   include head_bar.jade
@@ -14,9 +15,10 @@ block content
       div#hint_dialog 最多选择四个座位
         button#hint_dialog_button 重新选座
       div#select_title 选择座位
+      img#select_seat_screen(src='/static/pictures/assets/selectSeat_screen.png')
+      div#select_seat_dot_line
+      div#select_seat_numbers
       div#select_seat
-        img#select_seat_screen(src='/static/pictures/assets/selectSeat_screen.png')
-        div#select_seat_dot_line
       div#select_seat_hint
         img(src='/static/pictures/assets/seats/available.png') 
         span 可选
@@ -47,5 +49,7 @@ block content
       div#movie_info_total_price_hint 总价：
       div#movie_info_total_price 
       button#movie_info_order.nonclickable 确认购票  
+
 block scripts
   script(type="text/javascript" src="/scripts/select_seat.js")
+  script(src="/static/jquery.mCustomScrollbar.concat.min.js")
