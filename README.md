@@ -1,4 +1,4 @@
-# WebClient
+# StaticPageServer
 2016～2017学年下半学期系统分析与设计课程大作业的电影购票系统的前端代码。   
 
 该项目包使用gulp进行自动化构建。   
@@ -6,7 +6,7 @@
 ## 启动方式
 在执行下面命令之前，先确保电脑上已装好较新版本的node.js和npm   
 
-> 在WebClient文件夹根目录下执行以下命令：   
+> 在StaticPageServer文件夹根目录下执行以下命令：   
 > npm install    
 > npm install gulp -g   
 > gulp clean     
