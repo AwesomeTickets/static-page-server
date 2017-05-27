@@ -100,4 +100,4 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', ['webserver', 'clean', 'sass', 'css', 'js', 'staticFiles', 'staticSlick', 'staticPicsExport', 'staticPicsAssets', 'staticFonts', 'index', 'jade', 'watch']);
-gulp.task('build', ['clean', 'sass', 'css', 'js', 'staticFiles', 'staticSlick', 'staticPicsExport', 'staticPicsAssets', 'staticFonts', 'index', 'jade']);
+gulp.task('build', ['sass', 'css', 'js', 'staticFiles', 'staticSlick', 'staticPicsExport', 'staticPicsAssets', 'staticFonts', 'index', 'jade']);
