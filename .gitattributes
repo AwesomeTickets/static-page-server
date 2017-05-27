@@ -1,0 +1,11 @@
+* text=auto
+
+nginx.conf text eol=lf
+nginx_signing.key text eol=lf
+
+*.png binary
+*.jpg binary
+*.eot binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
