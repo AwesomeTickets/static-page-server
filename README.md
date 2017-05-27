@@ -18,7 +18,7 @@
 
 > 使用 Docker 运行：   
 > docker build -t static-server .    
-> docker run --rm --name static-server -p 8080:80 -d static-server   
+> docker run --name static-server -p 8080:80 -d static-server   
 
 ## 目录结构
  -  layouts/：各页面内容部分，放置各.jade文件   
