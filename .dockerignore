@@ -1,0 +1,14 @@
+.git
+.gitignore
+.gitattributes
+README.md
+LICENSE
+
+Dockerfile
+
+node_modules
+site
+tmp
+*.log
+.sass-cache
+.DS_Store
