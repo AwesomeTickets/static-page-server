@@ -137,9 +137,8 @@ function slick_temp(i) {
     coming_soon_add_img(data.count);
 
     var coming_soon_global_temp = 0, coming_soon_num = data.count;
-    var coming_soon_resourse = "http://120.25.76.106/resource/movie/";
     for(var i = 0; i < data.count; i++) {
-      $.get(coming_soon_resourse+data.data[i], function(data, textStatus) {
+      $.get(global_api.movie_info+data.data[i], function(data, textStatus) {
         coming_soon_set_poster_resource(data.posterSmall, coming_soon_global_temp);
         coming_soon_set_info(data, coming_soon_global_temp);
         coming_soon_set_hover_info(data, coming_soon_global_temp);
