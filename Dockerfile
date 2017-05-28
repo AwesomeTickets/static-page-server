@@ -3,8 +3,8 @@ FROM node:6.10.3
 ENV NGINX_VERSION 1.13.0-1~jessie
 ENV NJS_VERSION   1.13.0.0.1.10-1~jessie
 
-COPY ./nginx_signing.key .
-RUN apt-key add nginx_signing.key \
+RUN wget http://nginx.org/keys/nginx_signing.key \
+    && apt-key add nginx_signing.key \
     && echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
     && apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests -y \
@@ -27,10 +27,10 @@ WORKDIR /static-server
 COPY ./package.json .
 RUN npm install && npm install gulp -g
 
-COPY ./nginx.conf /etc/nginx/nginx.conf
-
 COPY . .
-RUN gulp build
+RUN gulp build \
+    && cp -r site/* /usr/share/nginx/html \
+    && gulp clean
 
 EXPOSE 80
 
