@@ -22,7 +22,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 
 STOPSIGNAL SIGQUIT
 
-WORKDIR /static-server
+WORKDIR /proxy-server
 
 COPY ./package.json .
 RUN npm install && npm install gulp -g
