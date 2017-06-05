@@ -1,0 +1,134 @@
+body{
+  background-color: #FAFAFA;
+}
+
+#container {
+  width: 320px;
+  margin: 64px auto 0 auto;
+}
+
+#reg_container {
+  background-color: #fff;
+  width: 320px;
+  padding-bottom: 48px;
+  margin-top: 32px;
+}
+
+#head_img {
+  width: 160px;
+  height: 32px;
+  margin: 0 auto;
+}
+
+#reg_title {
+  font-family: PingFangSC-Regular;
+  font-size: 20px;
+  color: #484848;
+  padding-top: 32px;
+  margin-left: 40px;
+}
+
+#reg_phone_input_hint {
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  margin-left: 40px;
+  margin-top: 16px;
+}
+
+#reg_phone_input {
+  width: 240px;
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+#input_err_hint {
+  width: 240px;
+  margin: 16px auto 16px auto;
+  color: #E84A3A;
+  font-size: 14px;
+  height: 14px;
+}
+
+#reg_phone_input input, #pw_input{
+  width: 240px;
+  height: 48px;
+  font-family: Avenir-Book;
+  font-size: 20px;
+  color: #484848;
+  text-align: center;
+  margin-top: 8px;
+}
+
+#reg_btn {
+  width: 240px;
+  margin: 0 auto;
+  font-size: 14px;
+}
+
+#reg_confirm_btn {
+  width: 240px;
+  height: 48px;
+  border: none;
+  color: #fff;
+  border-radius: 2px;
+}
+
+.non-clickable {
+  background: #DF9088;
+}
+
+.clickable {
+  background: #E84A3A;
+}
+
+.non-focus {
+  border: 1px solid #ECE7E7;
+}
+
+.focus {
+  border: 1px solid #E84A3A;
+}
+
+.non-focus-hint {
+  color: #999999;
+}
+
+.focus-hint {
+  color: #E84A3A;
+}
+
+
+#pw_group {
+  width: 240px;
+  margin: 10px auto 0 auto;
+}
+
+#sms_hint {
+  margin: 10px auto 8px 40px; 
+}
+
+#sms_group {
+  width: 240px;
+  margin: 0 auto;
+}
+
+#sms_input {
+  border-radius: 2px;
+  width: 130px;
+  height: 48px;
+  font-family: Avenir-Book;
+  font-size: 20px;
+  color: #484848;
+  text-align: center;
+}
+
+#resent_btn {
+  border: none;
+  border-radius: 2px;
+  width: 94px;
+  height: 48px;
+  color: #fff;
+  margin-left: 16px;
+  position: absolute;
+}
+
