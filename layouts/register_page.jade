@@ -1,0 +1,22 @@
+extends ../layout
+
+block links
+  link(rel="stylesheet" href="/styles/register_page.css")
+
+block content
+  div#container
+    div#head_img
+      img(src="/static/pictures/export/logo_black.png")
+    div#reg_container
+      div#reg_title 注册
+      div#reg_phone_input_container
+        div#reg_phone_input_hint.non-focus-hint 手机号
+        div#reg_phone_input
+          input#reg_phone_input_in.non-focus(type='text')
+      div#input_err_hint
+      div#reg_btn
+        button#reg_confirm_btn.non-clickable(disable='true') 下一步
+
+block scripts
+  script(type="text/javascript" src="/scripts/register_page.js")
+  script(type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js")
