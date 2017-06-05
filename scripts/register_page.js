@@ -226,6 +226,8 @@ $(document).ready(function() {
     }).error(function(err) {
       if (err.responseText.split(',')[0].split(':')[1] == 400) {
         document.getElementById('input_err_hint').innerText = "请设置8位以上数字和字母组合!";
+      } else if (err.responseText.split(',')[0].split(':')[1] == 403) {
+        document.getElementById('input_err_hint').innerText = "该号码已经注册，请直接登陆";
       }
     });
   }
@@ -276,15 +278,19 @@ $(document).ready(function() {
 
     // sign in action
     btn.onclick = function() {
-      check_pw(document.getElementById('reg_phone_input_in'), document.getElementById('pw_input').value);
+      check_password(document.getElementById('reg_phone_input_in').value, document.getElementById('pw_input').value);
     }
   }
 
-  function check_pw(phone, pw) {
+  function check_password(phone, pw) {
+    console.log("phone = " + phone + ", pw = "+ pw);
     $.post(global_api.check_pw, {phoneNum:phone, password:pw}, function(res) {
       console.log(res);
+      console.log(document.cookie);
     }).error(function(err) {
-      console.log(err);
+      if (err.responseText.split(',')[0].split(':')[1] == 402) {
+        document.getElementById('input_err_hint').innerText = "密码错误！";
+      }
     });
   }
 
