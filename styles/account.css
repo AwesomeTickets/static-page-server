@@ -1,0 +1,59 @@
+#account_container {
+	width: 180px;
+	height: 28px;
+
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+
+	font-size: 20px;
+	color: #484848;
+}
+
+#account_no_record {
+	display: none;
+	width: 288px;
+	height: 152px;
+	margin-top: 40px;
+}
+
+.table {
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	border-top: 4px solid #ECE7E7;;
+}
+
+.picture {
+	margin: 20px;
+	width: 48px;
+	height: 66px;
+}
+
+.movie_name, .movie_time, .cinema_hall, 
+.seats, .state_wait, .state_over, .code{
+	margin-right: 20px;
+	margin-top: 20px;
+	font-size: 14px;
+	height: 20px;
+}
+
+.price {
+	margin-right: 20px;
+	margin-top: 40px;
+	width: 100px;
+}
+
+.state_wait {
+	color: #E84A3A;
+}
+
+.state_over {
+	color: #DF9088;
+}
+
+
+
+
