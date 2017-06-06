@@ -21,7 +21,6 @@ $(document).ready(function() {
   	}
 
   	const table = document.getElementById("table_"),
-  		  phone_num;	//   用socket拿？？还没完成
 
   	var data = {
   		src : '/static/pictures/assets/Account_noRecord_img.png',
