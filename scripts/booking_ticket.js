@@ -64,29 +64,25 @@ $(document).ready(function () {
   function phone_check_init() {
     phone_check_container.innerHTML = "";
 
-    var input_container = document.createElement("div");
-    input_container.id = "input_group";
+    var phone_container = document.createElement("div");
+    phone_container.id = 'phone_container';
 
-    var input_group_hint = document.createElement("div");
-    input_group_hint.id = "input_group_hint";
-    input_group_hint.innerText = "+86"
-    input_container.appendChild(input_group_hint);
+    var phone_hint = document.createElement("div");
+    phone_hint.id = 'phone_hint';
+    phone_hint.innerText = "订票手机号";
+    phone_container.appendChild(phone_hint);
 
-    var input_group_line = document.createElement('div');
-    input_group_line.className = "input_group_line";
-    input_container.appendChild(input_group_line);
+    var phone_num = document.createElement("div");
+    phone_num.id = 'phone_num';
+    phone_num.innerText = "135 1234 5678";  // get from cookie here
+    phone_container.appendChild(phone_num);
 
-    var phone_check_input = document.createElement("input");
-    phone_check_input.id = 'phone_check_input';
-    input_container.appendChild(phone_check_input);
-
-    phone_check_container.appendChild(input_container);
+    phone_check_container.appendChild(phone_container);
 
     var phone_check_btn = document.createElement("button");
     phone_check_btn.id = "phone_check_btn";
-    phone_check_btn.className = "nonclick_btn";
+    phone_check_btn.className = "click_btn";
     phone_check_btn.innerText = "获取电子票";
-    phone_check_btn.disabled = true;
     phone_check_container.appendChild(phone_check_btn);
 
     add_phone_check_input_and_btn_action();
@@ -94,43 +90,15 @@ $(document).ready(function () {
 
   function add_phone_check_input_and_btn_action() {
     const btn = document.getElementById("phone_check_btn"),
-      input = document.getElementById("phone_check_input");
-    input.oninput = function () {
-      if (this.value.length == 11) {
-        btn.disabled = false;
-        btn.className = "click_btn";
-      } else {
-        btn.disabled = true;
-        btn.className = "nonclick_btn";
-      }
-    }
+      input = document.getElementById("phone_num");
 
     btn.onclick = function() {
-      if (check_input_valid(trans_phonenum(input.value))) {
-        ask_sms(trans_phonenum(input.value));
+      if (check_input_valid(turn_to_num(input.innerText))) {
+        sent_booking_info(turn_to_num(input.innerText));
       } else {
         document.getElementById("input_hint").innerText = "请输入有效手机号";
       }
     }
-  }
-
-  function trans_phonenum(str) {
-    var num = "";
-    var re = /[0-9]/;
-    for (var i = 0; i < str.length; i++) {
-      if (re.test(str[i])) num += str[i];
-    }
-    return num;
-  }
-
-  function ask_sms(phone_num) {
-    $.get(global_api.sms + phone_num, function(data, textStatus){
-      get_sms(phone_num);
-    }).error(function() {
-        document.getElementById("input_hint").innerText = "请输入有效手机号";
-      });
-
-      get_sms(phone_num);
   }
 
   function check_input_valid(input) {
@@ -138,77 +106,15 @@ $(document).ready(function () {
     return re.test(input);
   }
 
-  function get_sms(phone_num) {
-    document.getElementById("input_hint").innerText = "！验证码已发至手机，请输入验证码";
-    phone_check_container.removeChild(document.getElementById("phone_check_btn"));
-    document.getElementById("phone_check_input").disabled = true;
-
-    var sms_input = document.createElement("input");
-    sms_input.id = 'phone_check_sms_input';
-    phone_check_container.appendChild(sms_input);
-
-    var sms_btn_resent = document.createElement("button");
-    sms_btn_resent.id = 'phone_check_sms_btn_resent';
-    sms_btn_resent.innerText = "60s 内重发";
-    sms_btn_resent.disabled = true;
-    sms_btn_resent.className = "nonclick_btn";
-    sms_btn_resent.onclick = function () {
-      ask_sms(phone_num);
-    }
-    phone_check_container.appendChild(sms_btn_resent);
-    counting_time(60);
-
-    var sms_btn_confirm = document.createElement("button");
-    sms_btn_confirm.id = 'phone_check_sms_btn';
-    sms_btn_confirm.innerText = "获取电子票";
-    sms_btn_confirm.className = "nonclick_btn";
-    sms_btn_confirm.disabled = true;
-    phone_check_container.appendChild(sms_btn_confirm);
-
-    set_btn_action(phone_num);
-  }
-
-  function counting_time(value) {
-    var val = value;
-    var btn = document.getElementById("phone_check_sms_btn_resent");
-    if (btn == null)return;
-    if (val == 0) {
-      btn.disabled = false;
-      btn.innerText = "重发";
-      btn.className = "click_btn";
-      return;
-    } else {
-      val--;
-      btn.innerHTML = val + "s 内重发";
-    }
-    setTimeout(function() {
-      counting_time(val);
-    }, 1000);
-  }
-
-  function set_btn_action(phone_num) {
-    var btn = document.getElementById('phone_check_sms_btn'),
-      input = document.getElementById("phone_check_sms_input");
-    input.oninput = function() {
-      if (this.value.length == 6) {
-        btn.disabled = false;
-        btn.className = "click_btn";
-      } else {
-        btn.disabled = true;
-        btn.className = "nonclick_btn";
+  function turn_to_num(input) {
+    var re = /[0-9]/;
+    var res = "";
+    for (var i = 0; i < input.length; i++) {
+      if (re.test(input[i])) {
+        res+=input[i];
       }
     }
-    btn.onclick = function() {
-      $.post(global_api.sms + phone_num + "/check/", {code:input.value}, function(result,textStatus) {
-        console.log(textStatus);
-        if (parseInt(result.phoneNum) == parseInt(phone_num)) {
-          sent_booking_info(result.phoneNum);
-        }
-      }).error(function (xhr,errorText,errorType) {
-        document.getElementById("input_hint").innerText = "！验证码错误";
-      });
-
-    }
+    return res;
   }
 
   function sent_booking_info(phoneNum) {
@@ -220,6 +126,9 @@ $(document).ready(function () {
     }
     $.post(global_api.ticket, {movieOnShowId:movieOnShowId, phoneNum:phoneNum, seats: seat_post}, function(result) {
       show_the_ticket_key(result.ticketCode);
+    }).error(function (err) {
+      console.log("cant buy ticket");
+      console.log(err);
     });
   }
 
