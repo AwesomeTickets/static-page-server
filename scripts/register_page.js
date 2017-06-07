@@ -221,7 +221,7 @@ $(document).ready(function() {
 
 // sent the register request
   function register_req(phone, sms, pw) {
-    console.log(pw);
+    // console.log(pw);
     $.post(global_api.register, {phoneNum:phone, password:pw, smsCode:sms}, function(result) {
       registered();
     }).error(function(err) {
@@ -279,78 +279,47 @@ $(document).ready(function() {
 
     // sign in action
     btn.onclick = function() {
-      check_password(document.getElementById('reg_phone_input_in').value, document.getElementById('pw_input').value);
+      login(document.getElementById('reg_phone_input_in').value, document.getElementById('pw_input').value);
     }
   }
 
-  function check_password(phone, pw) {
-    console.log("phone = " + phone + ", pw = "+ pw);
-    $.post(global_api.check_pw, {phoneNum:phone, password:pw}, function(res) {
-      console.log('res: ', res);
-      test(phone);
-      // console.log('document.cookie: ', document.cookie);
-      // docCookies.setItem('phone', phone);
-      // document.cookie = `${encodeURIComponent('phone')}=${encodeURIComponent(phone)}`
-      // console.log('document.cookie.phone: ', docCookies.getItem('phone'));
-      // console.log('document.cookie.phonee: ', docCookies.getItem('phonee'));
-    }).error(function(err) {
-      if (err.responseText.split(',')[0].split(':')[1] == 402) {
-        document.getElementById('input_err_hint').innerText = "密码错误！";
-      }
+  function login(phone, pw) {
+    // console.log("phone = " + phone + ", pw = "+ pw);
+    $.ajax({
+      url: global_api.check_pw,
+      type: "POST",
+      data: {
+        phoneNum:phone,
+        password:pw,
+      },
+      xhrFields: {
+        withCredentials: true
+      },
+      success: function(data) {
+        console.log('liweiLogin: ', data);
+        // drop(phone);  // 登出
+      },
     });
   }
 
-  function test(phone) {
-    $.post(global_api.drop, {phoneNum:phone}, function(res) {
-      console.log('reslalal: ', res);
-      console.log('document.cookie: ', document.cookie);
-      // docCookies.setItem('phone', phone);
-      // document.cookie = `${encodeURIComponent('phone')}=${encodeURIComponent(phone)}`
-      console.log('document.cookie.phone: ', docCookies.getItem('phone'));
-      console.log('document.cookie.phonee: ', docCookies.getItem('phonee'));
-    }).error(function(err) {
-      console.log('err: ', err);
+  function drop(phone) {
+    $.ajax({
+      url: global_api.drop,
+      type: "POST",
+      data: {
+        phoneNum:phone,
+      },
+      xhrFields: {
+        withCredentials: true
+      },
+      success: function(data) {
+        console.log('liweiLogout: ', data);
+      },
+      error: function(err) {
+        console.log('liweiError: ', err);
+      }
     });
   }
-
-
-  var docCookies = {
-    getItem: function (sKey) {
-      return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
-    },
-    setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
-      if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
-      var sExpires = "";
-      if (vEnd) {
-        switch (vEnd.constructor) {
-          case Number:
-            sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
-            break;
-          case String:
-            sExpires = "; expires=" + vEnd;
-            break;
-          case Date:
-            sExpires = "; expires=" + vEnd.toUTCString();
-            break;
-        }
-      }
-      document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
-      return true;
-    },
-    removeItem: function (sKey, sPath, sDomain) {
-      if (!sKey || !this.hasItem(sKey)) { return false; }
-      document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + ( sDomain ? "; domain=" + sDomain : "") + ( sPath ? "; path=" + sPath : "");
-      return true;
-    },
-    hasItem: function (sKey) {
-      return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
-    },
-    keys: /* optional method: you can safely remove it! */ function () {
-      var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
-      for (var nIdx = 0; nIdx < aKeys.length; nIdx++) { aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]); }
-      return aKeys;
-    }
-  };
 
 // go to sign in end
 
