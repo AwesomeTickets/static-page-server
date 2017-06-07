@@ -12,6 +12,18 @@ block content
 
   mixin select
     div#select
+      div#login_dialog
+        div#login_form(action="#" method="post")
+          div#login_form_title 请先登录
+          div#sign_up + 注册
+          .form-group
+            label(for='phone') 手机号
+            input.form-control(type='text' name='phone' autofocus=true)
+          .form-group
+            label(for='password') 密码
+            input.form-control(type='password' name='password')
+          div#login_error
+          button#login_button(type="submit") 登录
       div#hint_dialog 最多选择四个座位
         button#hint_dialog_button 重新选座
       div#select_title 选择座位
