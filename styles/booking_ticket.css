@@ -114,69 +114,6 @@
   margin-top: 24px;
 }
 
-#input_group {
-  border: 1px solid #E84A3A;
-  border-radius: 2px;
-  width: 240px;
-  height: 48px;
-}
-
-#input_group_hint {
-  font-family: PingFangSC-Regular;
-  font-size: 14px;
-  color: #999999;
-  vertical-align: middle;
-  position: absolute;
-  top: 14px;
-  left: 14px;
-}
-
-.input_group_line{
-  width: 2px;
-  border-left: 1px solid #ECE7E7;
-  position: absolute;
-  left: 48px;
-  z-index: 999;
-  top: 13px;
-  height: 24px;
-}
-
-#phone_check_input {
-  width: 160px;
-  border-style: none;
-  margin-top: 8px;
-  margin-left: 60px;
-  font-family: Avenir-Book;
-  font-size: 20px;
-  color: #484848;
-  letter-spacing: 1px;
-  background-color: #fff;
-}
-
-#phone_check_sms_input {
-  width: 130px;
-  height: 48px;
-  border: 1px solid #E84A3A;
-  border-radius: 2px;
-  margin-top: 20px;
-  font-family: Avenir-Book;
-  font-size: 20px;
-  color: #202020;
-  text-align: center;
-}
-
-#phone_check_sms_btn_resent {
-  width: 94px;
-  height: 48px;
-  margin-left: 16px;
-}
-
-#phone_check_sms_btn {
-  width: 240px;
-  height: 48px;
-  margin-top: 24px;
-}
-
 #input_hint {
   font-family: PingFangSC-Regular;
   font-size: 14px;
@@ -207,16 +144,19 @@
   left: 57px;
 }
 
-#ticket_key_copy {
-  background: #E84A3A;
-  border-radius: 2px;
+#phone_container div {
+  display: inline;
+}
+
+#phone_hint {
   font-family: PingFangSC-Regular;
   font-size: 14px;
-  color: #FFFFFF;
-  border-style: none;
-  position: absolute;
-  top: 28px;
-  right: 0;
-  width: 52px;
-  height: 36px;
+  color: #999999;
+}
+
+#phone_num {
+  font-family: Avenir-Book;
+  font-size: 24px;
+  color: rgba(0,0,0,0.87);
+  padding-left: 15px;
 }
