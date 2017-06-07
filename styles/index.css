@@ -65,7 +65,7 @@ html, body {
   display: inline-block;
 }
 
-#head_search,
+#head_login,
 #head_user {
   display: inline-block;
   float: right;
@@ -75,7 +75,8 @@ html, body {
   z-index: 2;
 }
 
-#head_search {
+#head_login {
+  cursor: pointer;
   margin: 24px 56px 0 0;
 }
 

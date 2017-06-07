@@ -24,7 +24,6 @@ $(document).ready(function() {
   })
   /*顶部电影热图 js代码部分结束*/
 
-
   /*正在热映 js代码部分开始*/
   var global_flag = 0;
   // get resourse and handle
