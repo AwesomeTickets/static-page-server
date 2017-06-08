@@ -283,9 +283,6 @@ $(document).ready(function() {
     }
   }
 
-<<<<<<< HEAD
-
-=======
   function login(phone, pw) {
     // console.log("phone = " + phone + ", pw = "+ pw);
     $.ajax({
@@ -302,7 +299,6 @@ $(document).ready(function() {
         console.log('liweiLogin: ', data);
         // drop(phone);  // 登出
       },
->>>>>>> refs/remotes/AwesomeTickets/master
     });
   }
 
