@@ -287,7 +287,8 @@ $(document).ready(function() {
     console.log("phone = " + phone + ", pw = "+ pw);
     $.post(global_api.check_pw, {phoneNum:phone, password:pw}, function(res) {
       console.log('res: ', res);
-      test(phone);
+      console.log(document.cookie);
+      //test(phone);
       // console.log('document.cookie: ', document.cookie);
       // docCookies.setItem('phone', phone);
       // document.cookie = `${encodeURIComponent('phone')}=${encodeURIComponent(phone)}`
