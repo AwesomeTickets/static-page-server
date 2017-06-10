@@ -10,6 +10,8 @@ $(document).ready(function() {
     cinema_hall: `${global_url}/resource/cinema-hall/`,
     day: `${global_url}/resource/movie-on-show/day`,
     day_times: `${global_url}/resource/movie-on-show/`,
+    login: `${global_url}/resource/session/`,
+    checkLogin: `${global_url}/resource/session/check`,
   }
 
   const cinemaHallId = location.href.split('?')[1].split('&')[0].split('=')[1],
@@ -40,7 +42,12 @@ $(document).ready(function() {
     movie_info_price = document.getElementById('movie_info_price'),
     movie_info_total_price = document.getElementById('movie_info_total_price'),
     movie_info_order = document.getElementById('movie_info_order'),
-    hint_dialog = document.getElementById('hint_dialog');
+    hint_dialog = document.getElementById('hint_dialog'),
+    login_dialog = document.getElementById('login_dialog'),
+    login_button = document.getElementById('login_button'),
+    login_close = document.getElementById('login_close'),
+    login_phone = $('.form-group')[0].childNodes[1],
+    login_password = $('.form-group')[1].childNodes[1];
 
   // 获取电影信息
   function get_movie_info() {
@@ -363,7 +370,6 @@ $(document).ready(function() {
         // $('#select_seat').mCustomScrollbar("destroy");
       }
     }
-
   }
 
   select_seat_part();
@@ -494,6 +500,11 @@ $(document).ready(function() {
   /* 添加确认按钮点击跳转 */
   movie_info_order.onclick = function(event) {
     if (movie_info_order.className == "nonclickable") return;
+    checkLogin(event);
+  }
+
+  function getInfo(event) {
+    if (movie_info_order.className == "nonclickable") return;
     var info_temp = event.target.baseURI.split('?')[1] + '&';
     var seats = document.getElementsByClassName("movie_info_seats_item");
     var str_temp = "";
@@ -508,9 +519,54 @@ $(document).ready(function() {
     window.location = './booking_ticket.html?'+info_temp;
   }
 
-  // 登录注册
+  // checkLogin
+  function checkLogin(event) {
+    $.ajax({
+      url: global_api.checkLogin,
+      type: "GET",
+      xhrFields: {
+        withCredentials: true
+      },
+      success: function(data) {
+        if (data.phoneNum === '') {
+          login_dialog.style.display = 'block';
+          login_button.onclick = function(event) {
+            event.preventDefault();
+            login(login_phone.value, login_password.value, event);
+          }
+        } else {
+          getInfo(event);
+				}
+      },
+    });
+  }
+
+  // login_close
+  function login(phone, pw, event) {
+    $.ajax({
+      url: global_api.login,
+      type: "POST",
+      data: {
+        phoneNum:phone,
+        password:pw,
+      },
+      xhrFields: {
+        withCredentials: true
+      },
+      success: function(data) {
+        getInfo(event);
+      },
+    });
+  }
+
+  // 注册
   const sign_up = document.getElementById('sign_up');
   sign_up.onclick = function() {
     window.location = './register_page.html';
+  }
+
+  // 关闭登录弹框
+  login_close.onclick = function() {
+    login_dialog.style.display = 'none';
   }
 });
