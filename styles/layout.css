@@ -29,4 +29,13 @@ html, body {
   border: 0;
   background-color: #fff;
 }
+
+#drop_button {
+  display: none;
+  float: right;
+  margin: 24px 24px 0 0;
+  color: #484848;
+  border: 0;
+  background-color: #fff;
+}
 /*顶栏样式结束*/
