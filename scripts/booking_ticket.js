@@ -4,7 +4,7 @@ $(document).ready(function () {
     cinema: `${global_url}/resource/cinema/`,
     cinema_hall: `${global_url}/resource/cinema-hall/`,
     sms: `${global_url}/resource/sms/`,
-    ticket: `${global_url}/resource/ticket/`,
+    ticket: `${global_url}/resource/ticket`,
   }
 
   const cinemaHallId = location.href.split('?')[1].split('&')[0].split('=')[1],
@@ -94,7 +94,7 @@ $(document).ready(function () {
 
     btn.onclick = function() {
       if (check_input_valid(turn_to_num(input.innerText))) {
-        sent_booking_info(turn_to_num(input.innerText));
+        sent_booking_info(input.innerText.split(' ').join(''));
       } else {
         document.getElementById("input_hint").innerText = "请输入有效手机号";
       }
@@ -118,10 +118,13 @@ $(document).ready(function () {
   }
 
   function sent_booking_info(phoneNum) {
-    var seat_post = "";
+    var seat_post = [];
     for (var i = 0 ; i < seats.length; i++) {
       for (var j = 0 ; j < seats[i].length; j++) {
-        seat_post += (i == 0 && j == 0 ? '' : ',') + seats[i][j];
+        // console.log('seats[i][j]: ', typeof parseInt(seats[i][j]));
+        seat_post.push(parseInt(seats[i][j]));
+        // console.log(());
+        // seat_post += (i == 0 && j == 0 ? '' : ',') + seats[i][j];
       }
     }
     // $.post(global_api.ticket, {movieOnShowId:movieOnShowId, phoneNum:phoneNum, seats: seat_post}, function(result) {
@@ -130,15 +133,18 @@ $(document).ready(function () {
     //   console.log("cant buy ticket");
     //   console.log(err);
     // });
-    console.log(movieOnShowId+" "+phoneNum+ "  "+seat_post);
+    // console.log(movieOnShowId);
+    // console.log(phoneNum);
+    // console.log(seat_post);
+    // console.log(movieOnShowId+" "+phoneNum+ "  "+seat_post);
 
     ///////////////////  这里有问题  ///////////////////////////
     $.ajax({
       url: global_api.ticket,
       type: "POST",
       data: {
-        movieOnShowId: movieOnShowId, 
-        phoneNum: phoneNum, 
+        movieOnShowId: movieOnShowId,
+        phoneNum: phoneNum,
         seats: seat_post
       },
       xhrFields: {
