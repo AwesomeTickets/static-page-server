@@ -131,6 +131,8 @@ $(document).ready(function () {
     //   console.log(err);
     // });
     console.log(movieOnShowId+" "+phoneNum+ "  "+seat_post);
+
+    ///////////////////  这里有问题  ///////////////////////////
     $.ajax({
       url: global_api.ticket,
       type: "POST",
@@ -146,6 +148,7 @@ $(document).ready(function () {
         show_the_ticket_key(data.ticketCode);
       },
     });
+    ///////////////////  这里有问题  ////////////////////////////
   }
 
   function show_the_ticket_key(keyValue) {
