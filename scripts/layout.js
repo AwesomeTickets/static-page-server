@@ -48,4 +48,12 @@ $(document).ready(function() {
 		}
 	}
 	/*点击其他页面的账户按钮跳转到帐号页面*/
+
+	/*点击首页取票按钮进入取票页面*/
+	let head_get_ticket = document.getElementById('head_get_ticket');
+	if (head_get_ticket !== null) {
+		head_get_ticket.onclick = function() {
+			window.location = '/layouts/get_ticket.html';
+		}
+	}
 });
