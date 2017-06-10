@@ -14,7 +14,7 @@ $(document).ready(function() {
   /*点击LOGO回到主页结束*/
 
   // checkLogin
-  function checkLogin(phone) {
+  function checkLogin() {
     $.ajax({
       url: global_api.checkLogin,
       type: "GET",
@@ -22,11 +22,10 @@ $(document).ready(function() {
         withCredentials: true
       },
       success: function(data) {
-				console.log('dataaa: ', data);
         if (data.phoneNum === '') {
-          window.location = './layouts/register_login.html';
+          window.location = '/layouts/register_login.html';
         } else {
-					window.location = `./layouts/account.html?phone=${data.phoneNum}`
+					window.location = `/layouts/account.html?phone=${data.phoneNum}`
 				}
       },
     });
