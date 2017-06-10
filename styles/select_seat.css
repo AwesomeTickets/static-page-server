@@ -239,7 +239,7 @@
 
 /*登录弹框 开始*/
 #login_dialog {
-  display: block;
+  display: none;
   position: absolute;
   left: 300px;
   top: 170px;
@@ -259,11 +259,19 @@
 
 #sign_up {
   position: relative;
-  top: -20px;
+  top: -49px;
   left: 200px;
   font-family: PingFangSC-Regular;
   font-size: 14px;
   color: #E84A3A;
+  cursor: pointer;
+}
+
+#login_close {
+  position: relative;
+  top: -48px;
+  left: 250px;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -272,7 +280,9 @@
 }
 
 .form-group {
-  margin: 16px auto;
+  position: relative;
+  top: -20px;
+  margin: 0 auto 16px 0;
 }
 
 .form-group > label {
@@ -298,6 +308,8 @@
 }
 
 #login_button {
+  position: relative;
+  top: -20px;
   width: 240px;
   height: 48px;
   background: #E84A3A;
