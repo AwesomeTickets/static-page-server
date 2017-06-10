@@ -45,7 +45,9 @@ $(document).ready(function() {
     hint_dialog = document.getElementById('hint_dialog'),
     login_dialog = document.getElementById('login_dialog'),
     login_button = document.getElementById('login_button'),
-    login_close = document.getElementById('login_close');
+    login_close = document.getElementById('login_close'),
+    login_phone = $('.form-group')[0].childNodes[1],
+    login_password = $('.form-group')[1].childNodes[1];
 
   // 获取电影信息
   function get_movie_info() {
@@ -497,10 +499,11 @@ $(document).ready(function() {
 
   /* 添加确认按钮点击跳转 */
   movie_info_order.onclick = function(event) {
-    checkLogin();
+    if (movie_info_order.className == "nonclickable") return;
+    checkLogin(event);
   }
 
-  function getInfo() {
+  function getInfo(event) {
     if (movie_info_order.className == "nonclickable") return;
     var info_temp = event.target.baseURI.split('?')[1] + '&';
     var seats = document.getElementsByClassName("movie_info_seats_item");
@@ -517,7 +520,7 @@ $(document).ready(function() {
   }
 
   // checkLogin
-  function checkLogin() {
+  function checkLogin(event) {
     $.ajax({
       url: global_api.checkLogin,
       type: "GET",
@@ -525,14 +528,34 @@ $(document).ready(function() {
         withCredentials: true
       },
       success: function(data) {
+        console.log('data.phoneNum: ', data.phoneNum);
         if (data.phoneNum === '') {
           login_dialog.style.display = 'block';
-          login_button.onclick = function() {
-            getInfo();
+          login_button.onclick = function(event) {
+            event.preventDefault();
+            login(login_phone.value, login_password.value, event);
           }
         } else {
-          getInfo();
+          getInfo(event);
 				}
+      },
+    });
+  }
+
+  // login_close
+  function login(phone, pw, event) {
+    $.ajax({
+      url: global_api.login,
+      type: "POST",
+      data: {
+        phoneNum:phone,
+        password:pw,
+      },
+      xhrFields: {
+        withCredentials: true
+      },
+      success: function(data) {
+        getInfo(event);
       },
     });
   }
