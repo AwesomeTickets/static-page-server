@@ -508,7 +508,7 @@ $(document).ready(function() {
     window.location = './booking_ticket.html?'+info_temp;
   }
 
-  // 登录注册
+  // 注册
   const sign_up = document.getElementById('sign_up');
   sign_up.onclick = function() {
     window.location = './register_page.html';

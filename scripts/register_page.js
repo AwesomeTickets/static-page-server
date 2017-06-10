@@ -297,6 +297,7 @@ $(document).ready(function() {
       },
       success: function(data) {
         console.log('liweiLogin: ', data);
+        window.location = '../index.html';
         // drop(phone);  // 登出
       },
     });
