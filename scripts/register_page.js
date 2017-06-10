@@ -4,7 +4,7 @@ $(document).ready(function() {
     get_sms: `${global_url}/resource/sms/`,
     check_sms: `${global_url}/resource/sms/`,
     register: `${global_url}/resource/user/`,
-    check_pw: `${global_url}/resource/session/`,
+    login: `${global_url}/resource/session/`,
     drop: `${global_url}/resource/session/drop`,
   }
 
@@ -235,7 +235,7 @@ $(document).ready(function() {
 
   // 注册成功后续动作
   function registered() {
-
+    window.location = '../index.html';
   }
 // go to register end
 
@@ -284,9 +284,8 @@ $(document).ready(function() {
   }
 
   function login(phone, pw) {
-    // console.log("phone = " + phone + ", pw = "+ pw);
     $.ajax({
-      url: global_api.check_pw,
+      url: global_api.login,
       type: "POST",
       data: {
         phoneNum:phone,
@@ -296,33 +295,10 @@ $(document).ready(function() {
         withCredentials: true
       },
       success: function(data) {
-        console.log('liweiLogin: ', data);
         window.location = '../index.html';
-        // drop(phone);  // 登出
       },
     });
   }
-
-  function drop(phone) {
-    $.ajax({
-      url: global_api.drop,
-      type: "POST",
-      data: {
-        phoneNum:phone,
-      },
-      xhrFields: {
-        withCredentials: true
-      },
-      success: function(data) {
-        console.log('liweiLogout: ', data);
-      },
-      error: function(err) {
-        console.log('liweiError: ', err);
-      }
-    });
-  }
-
-// go to sign in end
 
 
 });
