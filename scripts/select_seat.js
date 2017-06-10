@@ -528,7 +528,6 @@ $(document).ready(function() {
         withCredentials: true
       },
       success: function(data) {
-        console.log('data.phoneNum: ', data.phoneNum);
         if (data.phoneNum === '') {
           login_dialog.style.display = 'block';
           login_button.onclick = function(event) {
