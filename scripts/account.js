@@ -6,7 +6,6 @@ $(document).ready(function() {
 		head_bar_count = document.getElementById('head_bar_count'),
 		user_phone = document.getElementById('user_phone'),
 	  phone_num = window.location.search.split('=')[1];
-	console.log('phone_num: ', phone_num);
 
 	const global_api = {
 
@@ -23,7 +22,7 @@ $(document).ready(function() {
   	get_cinema_info: `${global_url}/resource/cinema/`,
 
   	// (get)用movieId获取电影名，小尺寸海报的URL
-  	movie_info: `${global_url}/resource/movie`,
+  	movie_info: `${global_url}/resource/movie/`,
 
 		// 登出
 		drop: `${global_url}/resource/session/drop`,
@@ -55,7 +54,6 @@ $(document).ready(function() {
         withCredentials: true
       },
       success: function(data) {
-        console.log('liweiLogout: ', data);
 				window.location = '../index.html';
       },
     });
@@ -86,35 +84,37 @@ $(document).ready(function() {
 		let history = await getHistory(phone_num);
 
 		// 这是模拟的静态数据，用这个来模拟样式
-		// let history = {
-	  //   "count": 2,
-	  //   "data": [
-	  //       {
-	  //           "code": "1111111111",
-	  //           "valid": true,
-	  //           "seats": [[7, 8], [7, 9], [7, 10], [7, 11]],
-	  //           "movieOnShowId": 111
-	  //       },
-	  //       {
-	  //           "code": "2222222222",
-	  //           "valid": false,
-	  //           "seats": [[8, 8], [8, 9], [8, 10], [8, 11]],
-	  //           "movieOnShowId": 222
-	  //       }
-	  //   ]
-		// }
+		/* let history = {
+	     "count": 2,
+	     "data": [
+	         {
+	             "code": "1111111111",
+	             "valid": true,
+	             "seats": [[7, 8], [7, 9], [7, 10], [7, 11]],
+	             "movieOnShowId": 111
+	         },
+	         {
+	             "code": "2222222222",
+	             "valid": false,
+	             "seats": [[8, 8], [8, 9], [8, 10], [8, 11]],
+	             "movieOnShowId": 222
+	         }
+	     ]
+		 }*/
 
 		user_phone.innerHTML = `hello, ${phone_num}`;
 		drop_button.onclick = function() {
-			console.log('lala');
 			drop(phone_num);
 		}
 		if(history.count == 0) {
 			table_.style.display = "none";
 			document.getElementById("account_no_record").style.display = "block";
 		} else {
+
+			var i;
+			for( i = 0; i < history.count; i++ ) {
 			/* get movie information, movie_time(日期和时间), price, movieID, hallID */
-			$.get(global_api.get_movie_info + history.movieOnShowId, function(movie_info) {
+			$.get(global_api.get_movie_info + history.data[i].movieOnShowId, function(movie_info) {
 
 				/* get hall information, hall, cinemaID*/
 				$.get(global_api.get_hall_info + movie_info.cinemaHallId, function(hall_info) {
@@ -124,7 +124,6 @@ $(document).ready(function() {
 
 						/* get movie name, poster */
 						$.get(global_api.movie_info + movie_info.movieId, function(movie_detial) {
-								for( var i = 0; i < history.count; i++ ) {
 
 									var time_str = movie_info.showDate.split("-");
 
@@ -135,15 +134,15 @@ $(document).ready(function() {
 									data.hall = hall_info.hallName;
 
 									var seat_str = "";
-									for(var j = 0; j < history[i].seats.length; j++) {
-											seat_str = seat_str + history[i].seats[j][0] + "排" +
-																	history[i].seats[j][1] + "座&nbsp;&nbsp;";
+									for(var j = 0; j < history.data[i].seats.length; j++) {
+											seat_str = seat_str + history.data[i].seats[j][0] + "排" +
+																	history.data[i].seats[j][1] + "座&nbsp;&nbsp;";
 									}
 									data.seats = seat_str;
 									data.price = '￥' + movie_info.price;
-									data.code = history[i].code;
+									data.code = history.data[i].code;
 
-									if(history[i].valid == false) {
+									if(history.data[i].valid == false) {
 										data.state = '已取票';
 										var html_ = "<tbody><tr>" +
 											"<td><img class=\'picture\' src=\'"+data.src+"\'/></td>"+
@@ -170,7 +169,7 @@ $(document).ready(function() {
 											"</tr></tbody>";
 										table.innerHTML += html_;
 									}
-								}
+								
 								table_.style.display = "block";
 								document.getElementById("account_no_record").style.display = "none";
 						});
@@ -178,8 +177,8 @@ $(document).ready(function() {
 					});
 
 				});
-
 			});
+		   }	
 		}
 
 
