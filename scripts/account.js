@@ -81,10 +81,10 @@ $(document).ready(function() {
 		/* get history list, movieOnShowId--code, state, seats */
 
 		// 这是动态拿数据的，count为0.
-		let history = await getHistory(phone_num);
+		// let history = await getHistory(phone_num);
 
 		// 这是模拟的静态数据，用这个来模拟样式
-		/* let history = {
+		let history = {
 	     "count": 2,
 	     "data": [
 	         {
@@ -100,7 +100,7 @@ $(document).ready(function() {
 	             "movieOnShowId": 222
 	         }
 	     ]
-		 }*/
+		 }
 
 		user_phone.innerHTML = `hello, ${phone_num}`;
 		drop_button.onclick = function() {
@@ -110,9 +110,7 @@ $(document).ready(function() {
 			table_.style.display = "none";
 			document.getElementById("account_no_record").style.display = "block";
 		} else {
-
-			var i;
-			for( i = 0; i < history.count; i++ ) {
+			for(let i = 0; i < history.count; i++ ) {
 			/* get movie information, movie_time(日期和时间), price, movieID, hallID */
 			$.get(global_api.get_movie_info + history.data[i].movieOnShowId, function(movie_info) {
 
@@ -169,7 +167,7 @@ $(document).ready(function() {
 											"</tr></tbody>";
 										table.innerHTML += html_;
 									}
-								
+
 								table_.style.display = "block";
 								document.getElementById("account_no_record").style.display = "none";
 						});
@@ -178,7 +176,7 @@ $(document).ready(function() {
 
 				});
 			});
-		   }	
+		   }
 		}
 
 
@@ -187,7 +185,6 @@ $(document).ready(function() {
 
 	function add_tr() {
 
-  	console.log(data);
 
 	}
 
