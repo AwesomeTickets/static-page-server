@@ -2,8 +2,7 @@ import "babel-polyfill";
 
 $(document).ready(function() {
   const global_api = {
-    login: `${global_url}/resource/session`,
-    sign_up: `${global_url}/resource/user`,
+    login: `${global_url}/resource/session/`,
   }
 
   const login_button = document.getElementById('login_button'),
@@ -11,61 +10,33 @@ $(document).ready(function() {
     login_phone = $('.form-group')[0].childNodes[1],
     login_password = $('.form-group')[1].childNodes[1];
 
-  function sign_up() {
-    return new Promise((resolve, reject) => {
-      $.ajax({
-        url: global_api.sign_up,
-        type: 'POST',
-        data: {
-          phoneNum: '13511112222',
-          password: 'q123456',
-          smsCode: '448291',
-        },
-        error: function(xhr, status, error) {
-          console.log('xhr: ', xhr);
-          console.log('status: ', status);
-          console.log('error: ', error);
-        },
-        success: function(data) {
-          console.log('data: ', data);
-        },
-      });
-    })
-  }
-
-  function post_form(phone, password) {
+  function sign_in(phone, password) {
     login_error.innerHTML = '';
     return new Promise((resolve, reject) => {
       $.ajax({
         url: global_api.login,
         type: 'POST',
         data: {
-          phoneNum: '13512345678',
-          password: '123456',
+          phoneNum: phone,
+          password: password,
+        },
+        xhrFields: {
+          withCredentials: true
         },
         error: function(xhr, status, error) {
-          console.log('xhr: ', xhr);
-          console.log('status: ', status);
-          console.log('error: ', error);
           login_error.innerHTML = '手机号或密码错误。'
         },
         success: function(data) {
-          console.log('data: ', data);
+          window.location = `./account.html?phone=${data.phoneNum}`
         },
       });
-    })
+    });
   }
 
   login_button.onclick = async function(event) {
-    // console.log('login_phone.value', login_phone.value);
-    // console.log('login_password.value', login_password.value);
     event.preventDefault();
-    // let sign_up_data = await sign_up();
-    // console.log('sign_up_data: ', sign_up_data);
-    let login_action = await post_form(login_phone.value, login_password.value);
-    login_action.catch(function(err) {
-      console.log('erroroooo: ', err);
-    })
+    let login_action = await sign_in(login_phone.value, login_password.value);
+    console.log('login_action: ', login_action);
   }
 
   login_phone.onfocus = function() {
@@ -74,5 +45,11 @@ $(document).ready(function() {
 
   login_password.onfocus = function() {
     login_error.innerHTML = '';
+  }
+
+  // 注册
+  const sign_up_button = document.getElementById('sign_up');
+  sign_up_button.onclick = function() {
+    window.location = './register_page.html';
   }
 });
