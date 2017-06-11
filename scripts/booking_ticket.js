@@ -118,27 +118,13 @@ $(document).ready(function () {
   }
 
   function sent_booking_info(phoneNum) {
-    var seat_post = [];
+    var seat_post = "";
     for (var i = 0 ; i < seats.length; i++) {
       for (var j = 0 ; j < seats[i].length; j++) {
-        // console.log('seats[i][j]: ', typeof parseInt(seats[i][j]));
-        seat_post.push(parseInt(seats[i][j]));
-        // console.log(());
-        // seat_post += (i == 0 && j == 0 ? '' : ',') + seats[i][j];
+        seat_post += (i == 0 && j == 0 ? '' : ',') + seats[i][j];
       }
     }
-    // $.post(global_api.ticket, {movieOnShowId:movieOnShowId, phoneNum:phoneNum, seats: seat_post}, function(result) {
-    //   show_the_ticket_key(result.ticketCode);
-    // }).error(function (err) {
-    //   console.log("cant buy ticket");
-    //   console.log(err);
-    // });
-    // console.log(movieOnShowId);
-    // console.log(phoneNum);
-    // console.log(seat_post);
-    // console.log(movieOnShowId+" "+phoneNum+ "  "+seat_post);
 
-    ///////////////////  这里有问题  ///////////////////////////
     $.ajax({
       url: global_api.ticket,
       type: "POST",
@@ -154,7 +140,6 @@ $(document).ready(function () {
         show_the_ticket_key(data.ticketCode);
       },
     });
-    ///////////////////  这里有问题  ////////////////////////////
   }
 
   function show_the_ticket_key(keyValue) {
