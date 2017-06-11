@@ -172,7 +172,7 @@ function slick_temp(i) {
             "<div class=\"coming_soon_hover_style\"></div>"+
             "<div class=\"coming_soon_hover_CAndL\"></div>"+
             "<div class=\"coming_soon_hover_pubdate\"></div>"+
-            "<button>预售</button>"+
+            // "<button>预售</button>"+
           "</div>"+
         "</div>"+
       "</div>";
