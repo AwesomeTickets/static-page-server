@@ -81,26 +81,26 @@ $(document).ready(function() {
 		/* get history list, movieOnShowId--code, state, seats */
 
 		// 这是动态拿数据的，count为0.
-		// let history = await getHistory(phone_num);
+		let history = await getHistory(phone_num);
 
 		// 这是模拟的静态数据，用这个来模拟样式
-		let history = {
-	     "count": 2,
-	     "data": [
-	         {
-	             "code": "1111111111",
-	             "valid": true,
-	             "seats": [[7, 8], [7, 9], [7, 10], [7, 11]],
-	             "movieOnShowId": 111
-	         },
-	         {
-	             "code": "2222222222",
-	             "valid": false,
-	             "seats": [[8, 8], [8, 9], [8, 10], [8, 11]],
-	             "movieOnShowId": 222
-	         }
-	     ]
-		 }
+		// let history = {
+	  //    "count": 2,
+	  //    "data": [
+	  //        {
+	  //            "code": "1111111111",
+	  //            "valid": true,
+	  //            "seats": [[7, 8], [7, 9], [7, 10], [7, 11]],
+	  //            "movieOnShowId": 111
+	  //        },
+	  //        {
+	  //            "code": "2222222222",
+	  //            "valid": false,
+	  //            "seats": [[8, 8], [8, 9], [8, 10], [8, 11]],
+	  //            "movieOnShowId": 222
+	  //        }
+	  //    ]
+		//  }
 
 		user_phone.innerHTML = `hello, ${phone_num}`;
 		drop_button.onclick = function() {

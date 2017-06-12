@@ -1,3 +1,4 @@
+import "babel-polyfill";
 $(document).ready(function () {
   const global_api = {
     movie_info: `${global_url}/resource/movie/`,
@@ -5,6 +6,7 @@ $(document).ready(function () {
     cinema_hall: `${global_url}/resource/cinema-hall/`,
     sms: `${global_url}/resource/sms/`,
     ticket: `${global_url}/resource/ticket`,
+    checkLogin: `${global_url}/resource/session/check`
   }
 
   const cinemaHallId = location.href.split('?')[1].split('&')[0].split('=')[1],
@@ -61,7 +63,22 @@ $(document).ready(function () {
     phone_check_init();
   })();
 
-  function phone_check_init() {
+  function checkLogin() {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: global_api.checkLogin,
+        type: "GET",
+        xhrFields: {
+          withCredentials: true
+        },
+        success: function(data) {
+          resolve(data);
+        },
+      });
+    });
+  }
+
+  async function phone_check_init() {
     phone_check_container.innerHTML = "";
 
     var phone_container = document.createElement("div");
@@ -72,9 +89,11 @@ $(document).ready(function () {
     phone_hint.innerText = "订票手机号";
     phone_container.appendChild(phone_hint);
 
+    let loginData = await checkLogin();
+
     var phone_num = document.createElement("div");
     phone_num.id = 'phone_num';
-    phone_num.innerText = "135 1234 5678";  // get from cookie here
+    phone_num.innerText = loginData.phoneNum;  // get from cookie here
     phone_container.appendChild(phone_num);
 
     phone_check_container.appendChild(phone_container);
