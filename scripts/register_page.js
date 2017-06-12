@@ -2,7 +2,6 @@ $(document).ready(function() {
   const global_api = {
     check_phone_num_state: `${global_url}/resource/user/`,
     get_sms: `${global_url}/resource/sms/`,
-    check_sms: `${global_url}/resource/sms/`,
     register: `${global_url}/resource/user/`,
     login: `${global_url}/resource/session/`,
     drop: `${global_url}/resource/session/drop`,
@@ -172,8 +171,9 @@ $(document).ready(function() {
     confirm_btn.innerText = '注册';
     confirm_btn.onclick = function() {
       // 确认验证码函数
-      check_sms(document.getElementById('sms_input').value,
-        document.getElementById('reg_phone_input_in').value);
+      register_req(document.getElementById('reg_phone_input_in').value,
+          document.getElementById('sms_input').value, document.getElementById("pw_input").value
+        );
     }
 
     resent_btn.onclick = function() {
@@ -208,15 +208,6 @@ $(document).ready(function() {
     }
   }
 
-  function check_sms(sms, phone) {
-    $.post(global_api.check_sms+phone+ "/check/",{code:sms}, function(result,textStatus) {
-        if (parseInt(result.phoneNum) == parseInt(phone)) {
-          register_req(phone, sms, document.getElementById('pw_input').value);
-        }
-      }).error(function (xhr,errorText,errorType) {
-        document.getElementById("input_err_hint").innerText = "验证码错误";
-      });
-  }
 
 
 // sent the register request
@@ -229,6 +220,8 @@ $(document).ready(function() {
         document.getElementById('input_err_hint').innerText = "请设置8位以上数字和字母组合!";
       } else if (err.responseText.split(',')[0].split(':')[1] == 403) {
         document.getElementById('input_err_hint').innerText = "该号码已经注册，请直接登陆";
+      } else if (err.responseText.split(',')[0].split(':')[1] == 102) {
+        document.getElementById('input_err_hint').innerText = "验证码错误，请核实后重新输入";
       }
     });
   }
