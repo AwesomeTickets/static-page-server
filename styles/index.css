@@ -65,7 +65,7 @@ html, body {
   display: inline-block;
 }
 
-#head_login,
+#head_get_ticket,
 #head_user {
   display: inline-block;
   float: right;
@@ -75,9 +75,9 @@ html, body {
   z-index: 2;
 }
 
-#head_login {
+#head_get_ticket {
   cursor: pointer;
-  margin: 24px 56px 0 0;
+  margin: 26px 56px 0 0;
 }
 
 #head_user {
