@@ -91,6 +91,11 @@ gulp.task('jade', function() {
 		.pipe(connect.reload());
 })
 
+gulp.task('ico', function() {
+	gulp.src('favicon.ico')
+		.pipe(gulp.dest('site'));
+})
+
 gulp.task('watch', function() {
 	// gulp.watch('index.jade', ['index']);
 	gulp.watch('layouts/*.jade', ['jade']);
@@ -99,5 +104,5 @@ gulp.task('watch', function() {
 	// gulp.watch('style.scss', ['sass']);
 });
 
-gulp.task('default', ['webserver', 'clean', 'sass', 'css', 'js', 'staticFiles', 'staticSlick', 'staticPicsExport', 'staticPicsAssets', 'staticFonts', 'index', 'jade', 'watch']);
-gulp.task('build', ['sass', 'css', 'js', 'staticFiles', 'staticSlick', 'staticPicsExport', 'staticPicsAssets', 'staticFonts', 'index', 'jade']);
+gulp.task('default', ['webserver', 'clean', 'sass', 'css', 'js', 'staticFiles', 'staticSlick', 'staticPicsExport', 'staticPicsAssets', 'staticFonts', 'index', 'jade', 'ico', 'watch']);
+gulp.task('build', ['sass', 'css', 'js', 'staticFiles', 'staticSlick', 'staticPicsExport', 'staticPicsAssets', 'staticFonts', 'index', 'jade', 'ico']);
