@@ -6,6 +6,10 @@ html, body {
   height: 100%;
 }
 
+button, input, select, option, textarea {
+  outline: none;
+}
+
 /*顶栏样式开始*/
 #head_bar {
   width: 100%;
