@@ -11,7 +11,7 @@
 
 #booking_info_container {
   background-color: #FAFAFA;
-  position: absolute;
+  float: left;
 }
 
 #movie_info_poster {
@@ -76,10 +76,9 @@
 }
 
 #phone_check_container {
-  position: relative;
-  left: 480px;
-  margin-left: 30px;
+  padding-left: 50px;
   padding-top: 10px;
+  float: left;
 }
 
 .nonclick_btn {
@@ -121,9 +120,7 @@
   font-family: PingFangSC-Regular;
   font-size: 14px;
   color: #999999;
-  position: absolute;
-  top: 38px;
-  left: 5px;
+  padding-top: 20px;
 }
 
 #ticket_key{
@@ -131,9 +128,7 @@
   font-size: 24px;
   color: #E84A3A;
   letter-spacing: 1.2px;
-  position: absolute;
-  top: 30px;
-  left: 57px;
+  padding-top: 10px;
 }
 
 #phone_container div {
