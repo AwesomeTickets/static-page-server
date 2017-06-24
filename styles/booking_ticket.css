@@ -10,22 +10,18 @@
 }
 
 #booking_info_container {
-  width: 480px;
-  height: 128px;
   background-color: #FAFAFA;
-  padding: 5px;
   position: absolute;
 }
 
 #movie_info_poster {
-  width: 80px;
-  height: 112px;
-  position: absolute;
+  margin: 8px 4px 8px 8px;
 }
 
 #movie_info_poster img {
   width: 80px;
   height: 112px;
+  border-radius: 2px;
 }
 
 #movie_info_text {
@@ -34,31 +30,28 @@
 }
 
 #movie_info_time {
-  position: absolute;
-  width: 116px;
-  height: 112px;
+  margin: 8px 4px 8px 4px;
+  padding: 16px;
 }
 
 #movie_info_date {
+  text-align: center;
   font-family: PingFangSC-Regular;
   font-size: 20px;
   color: #484848;
-  margin-top: 14px;
 }
 
 #movie_info_show_time {
+  text-align: center;
   font-family: PingFangSC-Regular;
   font-size: 20px;
   color: #484848;
-  margin-top: 14px;
-  margin-left: 6px;
+  margin-top: 8px;
 }
 
 #movie_info_loc {
-  position: absolute;
-  left: 130px;
-  width: 260px;
-  height: 112px;
+  margin: 0px 4px 0px 4px;
+  padding: 16px;
 }
 
 #movie_info_cinema {
@@ -83,11 +76,10 @@
 }
 
 #phone_check_container {
-  width: 290px;
-  height: 130px;
   position: relative;
   left: 480px;
   margin-left: 30px;
+  padding-top: 10px;
 }
 
 .nonclick_btn {

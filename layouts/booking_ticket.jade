@@ -10,17 +10,20 @@ block content
     img(src="/static/pictures/assets/getTicket_img_cellphone.png")
   div#input_hint
   div#booking_ticket_container
-    div#booking_info_container
-      div#movie_info_poster
-        img#movie_info_poster_img(src='')
-      div#movie_info_text
-        div#movie_info_time
-          div#movie_info_date date
-          div#movie_info_show_time time
-        div#movie_info_loc
-          div#movie_info_cinema cinema
-          div#movie_info_cinema_hall cinema_hall
-          div#movie_info_seats seats
+    table#booking_info_container
+      tr
+        td
+          div#movie_info_poster
+            img#movie_info_poster_img(src='')
+        td
+          div#movie_info_time
+            div#movie_info_date date
+            div#movie_info_show_time time
+        td
+          div#movie_info_loc
+            div#movie_info_cinema cinema
+            div#movie_info_cinema_hall cinema_hall
+            div#movie_info_seats seats
     div#phone_check_container
 
 block scripts

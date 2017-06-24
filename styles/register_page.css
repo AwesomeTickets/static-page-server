@@ -1,4 +1,4 @@
-body{
+body, #head_bar_count {
   background-color: #FAFAFA;
 }
 
@@ -10,8 +10,8 @@ body{
 #reg_container {
   background-color: #fff;
   width: 320px;
-  padding-bottom: 48px;
-  margin-top: 32px;
+  padding-bottom: 45px;
+  margin-top: 50px;
 }
 
 #head_img {
