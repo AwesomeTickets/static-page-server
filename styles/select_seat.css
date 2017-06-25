@@ -302,9 +302,11 @@
   color: #484848;
 }
 
-input.form-control:focus {
+div.form-group input.form-control:focus {
   border-color: #E76456 !important;
+  box-shadow: 0 0 0 !important;
 }
+
 
 #login_error {
   color: #E84A3A;
