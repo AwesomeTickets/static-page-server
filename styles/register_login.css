@@ -58,6 +58,10 @@ body, #head_bar_count {
   color: #484848;
 }
 
+input:focus {
+  border-color: #E76456 !important;
+}
+
 #login_error {
   color: #E84A3A;
   font-size: 14px;

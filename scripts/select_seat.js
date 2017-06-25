@@ -46,8 +46,11 @@ $(document).ready(function() {
     login_dialog = document.getElementById('login_dialog'),
     login_button = document.getElementById('login_button'),
     login_close = document.getElementById('login_close'),
+    login_error = document.getElementById('login_error'),
     login_phone = $('.form-group')[0].childNodes[1],
-    login_password = $('.form-group')[1].childNodes[1];
+    login_phone_text = $('.form-group')[0].childNodes[0],
+    login_password = $('.form-group')[1].childNodes[1],
+    login_password_text = $('.form-group')[1].childNodes[0];
 
   // 获取电影信息
   function get_movie_info() {
@@ -556,7 +559,29 @@ $(document).ready(function() {
       success: function(data) {
         getInfo(event);
       },
+      error: function(xhr, status, error) {
+        login_error.innerHTML = '手机号或密码错误。'
+      },
     });
+  }
+
+  login_phone_text.style.color = '#E76456';
+  login_phone.onfocus = function() {
+    login_error.innerHTML = '';
+    login_phone_text.style.color = '#E76456';
+  }
+
+  login_phone.onblur = function() {
+    login_phone_text.style.color = '';
+  }
+
+  login_password.onfocus = function() {
+    login_error.innerHTML = '';
+    login_password_text.style.color = '#E76456';
+  }
+
+  login_password.onblur = function() {
+    login_password_text.style.color = '';
   }
 
   // 注册

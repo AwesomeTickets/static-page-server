@@ -8,7 +8,9 @@ $(document).ready(function() {
   const login_button = document.getElementById('login_button'),
     login_error = document.getElementById('login_error'),
     login_phone = $('.form-group')[0].childNodes[1],
-    login_password = $('.form-group')[1].childNodes[1];
+    login_phone_text = $('.form-group')[0].childNodes[0],
+    login_password = $('.form-group')[1].childNodes[1],
+    login_password_text = $('.form-group')[1].childNodes[0];
 
   function sign_in(phone, password) {
     login_error.innerHTML = '';
@@ -36,15 +38,25 @@ $(document).ready(function() {
   login_button.onclick = async function(event) {
     event.preventDefault();
     let login_action = await sign_in(login_phone.value, login_password.value);
-    console.log('login_action: ', login_action);
   }
 
+  login_phone_text.style.color = '#E76456';
   login_phone.onfocus = function() {
     login_error.innerHTML = '';
+    login_phone_text.style.color = '#E76456';
+  }
+
+  login_phone.onblur = function() {
+    login_phone_text.style.color = '';
   }
 
   login_password.onfocus = function() {
     login_error.innerHTML = '';
+    login_password_text.style.color = '#E76456';
+  }
+
+  login_password.onblur = function() {
+    login_password_text.style.color = '';
   }
 
   // 注册

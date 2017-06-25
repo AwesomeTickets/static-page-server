@@ -302,15 +302,20 @@
   color: #484848;
 }
 
+input.form-control:focus {
+  border-color: #E76456 !important;
+}
+
 #login_error {
   color: #E84A3A;
   font-size: 14px;
   height: 30px;
+  margin-top: -10px;
 }
 
 #login_button {
   position: relative;
-  top: -20px;
+  top: -3px;
   width: 240px;
   height: 48px;
   background: #E84A3A;

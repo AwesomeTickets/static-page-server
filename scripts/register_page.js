@@ -82,7 +82,7 @@ $(document).ready(function() {
     $.get(global_api.get_sms + num, function(data) {
 
     }).error(function(err) {
-      console.log("get sms fail");
+      // console.log("get sms fail");
     });
   }
 
